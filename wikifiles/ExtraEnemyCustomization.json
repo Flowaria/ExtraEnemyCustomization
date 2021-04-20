@@ -1,0 +1,255 @@
+{
+	//Cache Every Material in-game (For Material Custom)
+	//Better leave it as false unless you know what you doing.
+	"CacheAllMaterials": false,
+	//Make every model act as Shadow
+	"ShadowModels": [
+		{
+			"Enabled": true, //Enable/Disable this Customization Setting
+			"Target": {
+				"Mode": "PersistentID", //PersistentID, NameEquals, NameContains, Everything
+				"persistentIDs": [
+					29,
+					30
+				], //PersistentIDs for PersistentID Mode
+				"nameParam": "" //NameParameter for NameEquals and NameContains Mode
+			},
+			"IncludeEggSack": false, //WARNING: Shadow Eggsack is completely Invisible, not even a single shadow!
+			"RequireTagForDetection": true
+		}
+	],
+	//Modify the Striker based enemy tentacle Type
+	"StrikerTentacles": [
+		{
+			"Enabled": true,
+			"Target": {
+				"Mode": "Everything",
+				"persistentIDs": [],
+				"nameParam": ""
+			},
+			"TentacleTypes": [
+				"StrikerBig"
+				//Possible Value List:
+				//None - 0
+				//Striker - 1
+				//StrikerBig - 2
+				//Tank - 3
+				//TankDecoration - 4 //CANT HIT PLAYER
+				//Static - 5 //CANT HIT PLAYER
+				//StaticBig - 6 //CANT HIT PLAYER
+				//BioScan - 7 //CANT HIT PLAYER
+				//WrapAroundPlayer - 8
+				//TankDragMove - 9 //CANT HIT PLAYER
+				//Shadow - 10
+				//NOTE: If enemy have multiple Tentacles, You can list multiple Types so each of them have different Type
+				//Example) "Shadow", "Tank", "Striker" will gives you Tank that shoot three different type of Tentacles
+			]
+		}
+	],
+	//Shooter Projectile Firing Custom
+	"ShooterFires": [
+		{
+			"Enabled": true,
+			"Target": {
+				"Mode": "PersistentID",
+				"persistentIDs": [
+					26
+				],
+				"nameParam": ""
+			},
+			"ProjectileType": 50,
+			//TargetingTiny - 3
+			//TargetingSmall - 0
+			//TargetingMedium - 1
+			//TargetingLarge - 2
+			//SemiTargetingQuick - 6
+			//InfectionBomb - 7
+			//GlueFlying - 4 //DONT
+			//GlueLanded - 5 //DONT
+			//Or other custom IDs! (check ProjectileDefinitions Section)
+			"BurstCount": 50,
+			"BurstDelay": 3.5,
+			"ShotDelayMin": 0.005,
+			"ShotDelayMax": 0.01,
+			"InitialFireDelay": 0.0,
+			"ShotSpreadXMin": -45.0,
+			"ShotSpreadXMax": 45.0,
+			"ShotSpreadYMin": -20.0,
+			"ShotSpreadYMax": 20.0
+		}
+	],
+	"ProjectileDefinitions": [
+		{
+			"ID": 50, //Do not overlap with existing one (0~7), It also should be between 0~255 (byte type)
+			"BaseProjectile": "TargetingSmall", //It should be from existing projectile
+			"Speed": 4.5,
+			"HomingStrength": 0.01,
+			"LightColor": {
+				"r": 0.0,
+				"g": 0.8,
+				"b": 0.8,
+				"a": 1.0
+			},
+			"LightRange": 1.0,
+			"Damage": 25.0, //DMG on Hit 25 means 100% in default PlayerDataBlock
+			"Infection": 0.0 //Add Infection On Hit as percentage (0.1 = 10% 0.25 = 25% and so on)
+		}
+	],
+	//EAB_FogSphere Fog Custom
+	"FogSpheres": [
+		{
+			"Enabled": true,
+			"Target": {
+				"Mode": "PersistentID",
+				"persistentIDs": [
+					36
+				],
+				"nameParam": ""
+			},
+			"ColorMin": {
+				"r": 0.0,
+				"g": 0.0,
+				"b": 0.0,
+				"a": 1.0
+			},
+			"ColorMax": {
+				"r": 0.0,
+				"g": 0.0,
+				"b": 0.0,
+				"a": 1.0
+			},
+			"IntensityMin": 1.0,
+			"IntensityMax": 20.0,
+			"RangeMin": 5.0,
+			"RangeMax": 120.0,
+			"DensityMin": 0.0,
+			"DensityMax": 5.0,
+			"DensityAmountMin": 0.0,
+			"DensityAmountMax": 5.0,
+			"Duration": 30.0
+		}
+	],
+	//Material Customization
+	"Materials": [
+		{
+			"Enabled": true, //Slimy RapidFire Shooter (Head)
+			"Target": {
+				"Mode": "NameEquals",
+				"persistentIDs": [],
+				"nameParam": "Shooter_Big_RapidFire"
+			},
+			"MaterialSets": [
+				{
+					//Head Part
+					"From": "shooter_RapidFire", //Material Name that enemy originally have
+					"To": "mtr_StrikerChild" //Material Name that will be changed to
+				},
+				{
+					//Body Part
+					"From": "shooter_wave",
+					"To": "mtr_StrikerChild"
+				}
+			]
+		},
+		{
+			"Enabled": true, //Make Charger Unoiled
+			"Target": {
+				"Mode": "NameContains",
+				"persistentIDs": [],
+				"nameParam": "Bullrush"
+			},
+			"MaterialSets": [
+				{
+					//Head Part (Kinda works)
+					"From": "mtr_striker_bullrush_head",
+					"To": "mtr_striker_wave"
+				},
+				{
+					//Body Part
+					"From": "mtr_striker_bullrush",
+					"To": "mtr_striker_wave"
+				}
+			]
+		},
+		{
+			"Enabled": true, //Make Every Shooter Oiled, Except Rapid Shooter
+			"Target": {
+				"Mode": "PersistentID",
+				"persistentIDs": [
+					26, //Hibernate
+					18, //Big
+					11 //Wave
+				],
+				"nameParam": ""
+			},
+			"MaterialSets": [
+				{
+					//Hibernate Shooter
+					"From": "shooter_hibernate",
+					"To": "mtr_striker_bullrush"
+				},
+				{
+					//Big Shooter
+					"From": "shooterBig",
+					"To": "mtr_striker_bullrush"
+				},
+				{
+					//Wave Shooter
+					"From": "shooter_wave",
+					"To": "mtr_striker_bullrush"
+				}
+			]
+		},
+		{
+			"Enabled": true, //Make Birthers Oiled?
+			"Target": {
+				"Mode": "NameContains",
+				"persistentIDs": [],
+				"nameParam": "Birther"
+			},
+			"MaterialSets": [
+				{
+					"From": "birther",
+					"To": "mtr_striker_bullrush"
+				}
+			]
+		}
+		/*Possible Mat List (Only Enemy Materials)
+		mtr_head_henk
+		birther
+		mtr_cocoon
+		mtr_dest_arm_shtr
+		mtr_dest_chest_sides
+		mtr_dest_half_shtr
+		mtr_dest_head_1
+		mtr_hip_side
+		mtr_hips_hole
+		mtr_hole_shtr
+		mtr_leg_shtr
+		scout
+		shooter
+		shooterBig
+		shooter_RapidFire
+		shooter_hibernate
+		shooter_wave
+		mtr_tank
+		mtr_gib_meat_trailer
+		mtr_striker
+		mtr_StrikerChild
+		mtr_chest_hole
+		mtr_chest_side_fix
+		mtr_dest_arm
+		mtr_dest_leg
+		mtr_half
+		mtr_headshot
+		mtr_hip
+		mtr_stomache_fix
+		mtr_striker_bullrush
+		mtr_striker_bullrush_head
+		mtr_striker_hibernate
+		mtr_striker_wave
+		striker
+		strikerBig
+		*/
+	]
+}
