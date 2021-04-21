@@ -30,8 +30,8 @@ namespace ExtraEnemyCustomization
             LogInstance?.Log(LogLevel.Error, str);
         }
 
-        public static void DevMessage(string format, params object[] args) => DevMessage(string.Format(format, args));
-        public static void DevMessage(string str)
+        public static void Debug(string format, params object[] args) => Debug(string.Format(format, args));
+        public static void Debug(string str)
         {
             if (UsingDevMessage)
                 LogInstance?.LogDebug(str);

@@ -10,15 +10,20 @@ namespace ExtraEnemyCustomization.Customizations
     {
         public List<LimbData> Limbs = new List<LimbData>();
 
-        public override void PostSpawn(EnemyAgent agent)
+        public override string GetProcessName()
         {
-            Logger.DevMessage($"Trying to Apply LimbCustom to Enemy: {agent.name}");
+            return "Limb";
+        }
 
+        public override bool HasPostspawnBody => true;
+
+        public override void Postspawn(EnemyAgent agent)
+        {
             var allLimbData = Limbs.SingleOrDefault(x => x.LimbName.Equals("All", StringComparison.OrdinalIgnoreCase));
 
             foreach (var limb in agent.Damage.DamageLimbs)
             {
-                Logger.DevMessage($" - Found Limb: {limb.name}");
+                LogDev($" - Found Limb: {limb.name}");
 
                 var limbCustomData = Limbs.SingleOrDefault(x=>x.LimbName.Equals(limb.name));
                 if(limbCustomData == null)
@@ -30,7 +35,7 @@ namespace ExtraEnemyCustomization.Customizations
                     limbCustomData = allLimbData;
                 }
 
-                Logger.DevMessage($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValueMode: {limbCustomData.HealthValueMode}, HealthValue: {limbCustomData.HealthValue}");
+                LogDev($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValueMode: {limbCustomData.HealthValueMode}, HealthValue: {limbCustomData.HealthValue}");
 
                 limb.m_healthMax *= limbCustomData.HealthValue;
                 limb.m_health *= limbCustomData.HealthValue;

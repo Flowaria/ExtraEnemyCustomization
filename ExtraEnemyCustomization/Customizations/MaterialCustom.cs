@@ -19,15 +19,20 @@ namespace ExtraEnemyCustomization.Customizations
 
         public MaterialSwapSet[] MaterialSets = new MaterialSwapSet[0];
 
-        public override void PreSpawn(EnemyAgent agent)
+        public override string GetProcessName()
         {
-            Logger.DevMessage($"[MaterialCustom] Trying to Replace Material of {agent.name}");
+            return "Material";
+        }
 
+        public override bool HasPrespawnBody => true;
+
+        public override void Prespawn(EnemyAgent agent)
+        {
             var charMats = agent.GetComponentInChildren<CharacterMaterialHandler>().m_materialRefs;
             foreach (var mat in charMats)
             {
                 var matName = mat.m_material.name;
-                Logger.DevMessage($"[MaterialCustom] - Debug Info, Material Found: {matName}");
+                LogDev($" - Debug Info, Material Found: {matName}");
 
                 var swapSet = MaterialSets.SingleOrDefault(x=>x.From.Equals(matName));
                 if (swapSet == null)
@@ -39,12 +44,10 @@ namespace ExtraEnemyCustomization.Customizations
                     continue;
                 }
 
-                Logger.DevMessage($"[MaterialCustom] - Trying to Replace Material, Before: {matName} After: {newMat.name}");
+                LogDev($" - Trying to Replace Material, Before: {matName} After: {newMat.name}");
                 mat.m_material = newMat;
-                Logger.DevMessage("[MaterialCustom] - Replaced!");
+                LogDev(" - Replaced!");
             }
-
-            Logger.DevMessage("[MaterialCustom] Finished Searching!");
         }
     }
 

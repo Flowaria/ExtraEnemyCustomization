@@ -19,8 +19,14 @@ namespace ExtraEnemyCustomization.Customizations
         public float ShotSpreadYMin = -20.0f;
         public float ShotSpreadYMax = 20.0f;
 
+        public override string GetProcessName()
+        {
+            return "ShooterFire";
+        }
 
-        public override void PostSpawn(EnemyAgent agent)
+        public override bool HasPostspawnBody => true;
+
+        public override void Postspawn(EnemyAgent agent)
         {
             var projectileSetting = agent.GetComponentInChildren<EAB_ProjectileShooter>(true);
             if(projectileSetting != null)

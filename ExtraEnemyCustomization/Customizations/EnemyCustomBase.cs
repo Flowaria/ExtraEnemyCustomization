@@ -11,8 +11,27 @@ namespace ExtraEnemyCustomization.Customizations
     {
         public bool Enabled = true;
         public TargetSetting Target;
-        public virtual void PreSpawn(EnemyAgent agent) { }
-        public virtual void PostSpawn(EnemyAgent agent) { }
+        public virtual void Prespawn(EnemyAgent agent) { }
+        public virtual void Postspawn(EnemyAgent agent) { }
+        public abstract string GetProcessName();
+
+        public virtual bool HasPrespawnBody { get { return false; } }
+        public virtual bool HasPostspawnBody { get { return false; } }
+
+        public void LogDev(string str)
+        {
+            Logger.Debug($"[{GetProcessName()}] {str}");
+        }
+
+        public void LogError(string str)
+        {
+            Logger.Error($"[{GetProcessName()}] {str}");
+        }
+
+        public void LogWarning(string str)
+        {
+            Logger.Warning($"[{GetProcessName()}] {str}");
+        }
     }
 
     public class TargetSetting

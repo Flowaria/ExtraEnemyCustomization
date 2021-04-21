@@ -64,27 +64,27 @@ namespace ExtraEnemyCustomization
             _CustomizationBuffer.AddRange(Materials);
             _CustomizationBuffer.AddRange(Limbs);
 
-            Logger.DevMessage("ShadowModel Custom Settings:");
+            Logger.Debug("ShadowModel Custom Settings:");
             foreach(var shadowCustom in ShadowModels)
             {
-                Logger.DevMessage($"- {shadowCustom.Target.ToDebugString()}");
-                Logger.DevMessage($"- CustomInfo, reqTagForDetect: {shadowCustom.RequireTagForDetection}, includeEgg: {shadowCustom.IncludeEggSack}");
+                Logger.Debug($"- {shadowCustom.Target.ToDebugString()}");
+                Logger.Debug($"- CustomInfo, reqTagForDetect: {shadowCustom.RequireTagForDetection}, includeEgg: {shadowCustom.IncludeEggSack}");
             }
 
-            Logger.DevMessage("StrikerTentacles Custom Settings:");
+            Logger.Debug("StrikerTentacles Custom Settings:");
             foreach(var tenCustom in StrikerTentacles)
             {
-                Logger.DevMessage($"- {tenCustom.Target.ToDebugString()}");
-                Logger.DevMessage($"- CustomInfo, TypePattern: [{string.Join(", ", tenCustom.TentacleTypes)}]");
+                Logger.Debug($"- {tenCustom.Target.ToDebugString()}");
+                Logger.Debug($"- CustomInfo, TypePattern: [{string.Join(", ", tenCustom.TentacleTypes)}]");
             }
 
-            Logger.DevMessage("Material Custom Settings:");
+            Logger.Debug("Material Custom Settings:");
             foreach(var matCustom in Materials)
             {
-                Logger.DevMessage($"- {matCustom.Target.ToDebugString()}");
+                Logger.Debug($"- {matCustom.Target.ToDebugString()}");
                 foreach (var swapSet in matCustom.MaterialSets)
                 {
-                    Logger.DevMessage($"- SwapSetInfo, FromMat: {swapSet.From}, ToMat: {swapSet.To}");
+                    Logger.Debug($"- SwapSetInfo, FromMat: {swapSet.From}, ToMat: {swapSet.To}");
                 }
             }
         }
@@ -96,9 +96,11 @@ namespace ExtraEnemyCustomization
                 if (!custom.Enabled)
                     continue;
 
-                if(custom.Target.IsMatch(agent))
+                if(custom.Target.IsMatch(agent) && custom.HasPrespawnBody)
                 {
-                    custom.PreSpawn(agent);
+                    custom.LogDev($"Appling Prespawn effect to {agent.name}");
+                    custom.Prespawn(agent);
+                    custom.LogDev($"Finished!");
                 }
             }
         }
@@ -110,9 +112,11 @@ namespace ExtraEnemyCustomization
                 if (!custom.Enabled)
                     continue;
 
-                if (custom.Target.IsMatch(agent))
+                if (custom.Target.IsMatch(agent) && custom.HasPostspawnBody)
                 {
-                    custom.PostSpawn(agent);
+                    custom.LogDev($"Appling Postspawn effect to {agent.name}");
+                    custom.Postspawn(agent);
+                    custom.LogDev($"Finished!");
                 }
             }
         }

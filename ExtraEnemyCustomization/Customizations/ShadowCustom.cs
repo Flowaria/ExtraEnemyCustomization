@@ -11,10 +11,15 @@ namespace ExtraEnemyCustomization.Customizations
         public bool IncludeEggSack = false;
         public bool RequireTagForDetection = true;
 
-        public override void PostSpawn(EnemyAgent agent)
+        public override string GetProcessName()
         {
-            Logger.DevMessage($"[ShadowCustom] Applying Shadow Effect to {agent.name}");
+            return "Shadow";
+        }
 
+        public override bool HasPostspawnBody => true;
+
+        public override void Postspawn(EnemyAgent agent)
+        {
             agent.RequireTagForDetection = RequireTagForDetection;
             agent.MovingCuller.m_disableAnimatorCullingWhenRenderingShadow = true;
 
@@ -26,7 +31,7 @@ namespace ExtraEnemyCustomization.Customizations
             {
                 if (!IncludeEggSack && comp.gameObject.name.Contains("Egg"))
                 {
-                    Logger.DevMessage("[ShadowCustom] - Ignored EggSack Object!");
+                    LogDev(" - Ignored EggSack Object!");
                     comp.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
                     comp.enabled = true;
                     continue;
@@ -42,8 +47,6 @@ namespace ExtraEnemyCustomization.Customizations
                     skinmeshrenderer.updateWhenOffscreen = true;
                 }
             }
-
-            Logger.DevMessage("[ShadowCustom] Applied!");
         }
     }
 }

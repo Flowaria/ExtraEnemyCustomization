@@ -21,7 +21,14 @@ namespace ExtraEnemyCustomization.Customizations
         public float DensityAmountMax = 5.0f;
         public float Duration = 30.0f;
 
-        public override void PostSpawn(EnemyAgent agent)
+        public override string GetProcessName()
+        {
+            return "FogSphere";
+        }
+
+        public override bool HasPostspawnBody => true;
+
+        public override void Postspawn(EnemyAgent agent)
         {
             var eabFog = agent.GetComponentInChildren<EAB_FogSphere>(true);
             var fog = eabFog.m_fogSpherePrefab.GetComponent<FogSphereHandler>();

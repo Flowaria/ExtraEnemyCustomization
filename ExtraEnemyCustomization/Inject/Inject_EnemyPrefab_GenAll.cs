@@ -14,7 +14,7 @@ namespace ExtraEnemyCustomization.Inject
     {
         static void Prefix()
         {
-            Logger.DevMessage("== List of Material that can be used for Materials Parameters ==");
+            Logger.Debug("== List of Material that can be used for Materials Parameters ==");
 
             var fullmats = Resources.FindObjectsOfTypeAll(Il2CppType.Of<Material>());
             foreach (var obj in fullmats)
@@ -33,10 +33,10 @@ namespace ExtraEnemyCustomization.Inject
                 }
 
                 MaterialCustom.AddToCache(matName, mat);
-                Logger.DevMessage(matName);
+                Logger.Debug(matName);
             }
 
-            Logger.DevMessage("== End of List ==");
+            Logger.Debug("== End of List ==");
         }
     }
 }

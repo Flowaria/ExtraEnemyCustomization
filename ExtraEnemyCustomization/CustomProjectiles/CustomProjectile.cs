@@ -24,13 +24,19 @@ namespace ExtraEnemyCustomization.CustomProjectiles
         {
             if (Enum.IsDefined(typeof(ProjectileType), projectileInfo.ID))
             {
-                Logger.Error($"ProjectileID Conflict with Official ID!: {projectileInfo.ID}");
+                Logger.Error($"ProjectileID Conflict with Official ID!, ProjID: {projectileInfo.ID}");
                 return;
             }
 
             if (_ProjectilePrefabs.ContainsKey(projectileInfo.ID))
             {
-                Logger.Error($"ProjectileID Conflict!: {projectileInfo.ID}");
+                Logger.Error($"ProjectileID Conflict!, ProjID: {projectileInfo.ID}");
+                return;
+            }
+
+            if (!Enum.IsDefined(typeof(ProjectileType), projectileInfo.BaseProjectile))
+            {
+                Logger.Error($"BaseProjectile should be one of the from official!, ProjID: {projectileInfo.ID}");
                 return;
             }
 
@@ -40,24 +46,30 @@ namespace ExtraEnemyCustomization.CustomProjectiles
             var projectileBase = newPrefab.GetComponent<ProjectileBase>();
             if(projectileBase != null)
             {
-                Logger.DevMessage($"Changed Base");
                 projectileBase.m_maxDamage = projectileInfo.Damage;
                 projectileBase.m_maxInfection = projectileInfo.Infection;
 
                 var targeting = projectileBase.TryCast<ProjectileTargeting>();
                 if(targeting != null)
                 {
-                    Logger.DevMessage($"Changed Targeting");
                     targeting.Speed = projectileInfo.Speed;
                     targeting.TargetStrength = projectileInfo.HomingStrength;
                     targeting.LightColor = projectileInfo.LightColor;
                     targeting.LightRange = projectileInfo.LightRange;
                 }
+                else
+                {
+                    Logger.Warning($"ProjectileBase is not a ProjectileTargeting, Ignore few settings, ProjID: {projectileInfo.ID}");
+                }
+            }
+            else
+            {
+                Logger.Error($"Projectile Base Prefab Doesn't have ProjectileBase, Are you sure?, ProjID: {projectileInfo.ID}");
             }
             newPrefab.active = false;
             newPrefab.name = "GaneratedProjectilePrefab_" + projectileInfo.ID;
             _ProjectilePrefabs.Add(projectileInfo.ID, newPrefab);
-            Logger.DevMessage($"Added Projectile!: {projectileInfo.ID}");
+            Logger.Debug($"Added Projectile!: {projectileInfo.ID}");
         }
 
         public static GameObject GetProjectile(byte id)
