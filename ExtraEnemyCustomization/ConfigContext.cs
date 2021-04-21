@@ -100,7 +100,7 @@ namespace ExtraEnemyCustomization
 
                 if(custom.Target.IsMatch(agent) && custom.HasPrespawnBody)
                 {
-                    custom.LogDev($"Appling Prespawn effect to {agent.name}");
+                    custom.LogDev($"Applying Prespawn effect to {agent.name}");
                     custom.Prespawn(agent);
                     custom.LogDev($"Finished!");
                 }
@@ -116,7 +116,7 @@ namespace ExtraEnemyCustomization
 
                 if (custom.Target.IsMatch(agent) && custom.HasPostspawnBody)
                 {
-                    custom.LogDev($"Appling Postspawn effect to {agent.name}");
+                    custom.LogDev($"Applying Postspawn effect to {agent.name}");
                     custom.Postspawn(agent);
                     custom.LogDev($"Finished!");
                 }
