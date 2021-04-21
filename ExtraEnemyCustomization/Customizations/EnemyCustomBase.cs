@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public abstract class EnemyCustomizationBase
+    public abstract class EnemyCustomBase
     {
         public bool Enabled = true;
         public TargetSetting Target;

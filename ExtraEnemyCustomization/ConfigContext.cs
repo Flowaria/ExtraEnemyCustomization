@@ -42,16 +42,17 @@ namespace ExtraEnemyCustomization
         public static ConfigContext Current { private set; get; }
 
         public bool CacheAllMaterials = false;
-        public ShadowCustomization[] ShadowModels = new ShadowCustomization[0];
-        public StrikerTentacleCustomization[] StrikerTentacles = new StrikerTentacleCustomization[0];
-        public ShooterFireCustomization[] ShooterFires = new ShooterFireCustomization[0];
-        public FogSphereCustomization[] FogSpheres = new FogSphereCustomization[0];
-        public MaterialCustomization[] Materials = new MaterialCustomization[0];
+        public ShadowCustom[] ShadowModels = new ShadowCustom[0];
+        public StrikerTentacleCustom[] StrikerTentacles = new StrikerTentacleCustom[0];
+        public ShooterFireCustom[] ShooterFires = new ShooterFireCustom[0];
+        public FogSphereCustom[] FogSpheres = new FogSphereCustom[0];
+        public MaterialCustom[] Materials = new MaterialCustom[0];
+        public LimbCustom[] Limbs = new LimbCustom[0];
 
         public CustomProjectile[] ProjectileDefinitions = new CustomProjectile[0];
 
         [JsonIgnore]
-        private List<EnemyCustomizationBase> _CustomizationBuffer = new List<EnemyCustomizationBase>();
+        private List<EnemyCustomBase> _CustomizationBuffer = new List<EnemyCustomBase>();
 
         private void GenerateBuffer()
         {
@@ -61,6 +62,7 @@ namespace ExtraEnemyCustomization
             _CustomizationBuffer.AddRange(ShooterFires);
             _CustomizationBuffer.AddRange(FogSpheres);
             _CustomizationBuffer.AddRange(Materials);
+            _CustomizationBuffer.AddRange(Limbs);
 
             Logger.DevMessage("ShadowModel Custom Settings:");
             foreach(var shadowCustom in ShadowModels)

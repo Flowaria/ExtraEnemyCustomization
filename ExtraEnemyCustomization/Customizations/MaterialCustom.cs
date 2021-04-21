@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public class MaterialCustomization : EnemyCustomizationBase
+    public class MaterialCustom : EnemyCustomBase
     {
         private static Dictionary<string, Material> _MatDict = new Dictionary<string, Material>();
 

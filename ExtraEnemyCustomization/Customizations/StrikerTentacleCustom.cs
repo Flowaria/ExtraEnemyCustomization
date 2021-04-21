@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public class StrikerTentacleCustomization : EnemyCustomizationBase
+    public class StrikerTentacleCustom : EnemyCustomBase
     {
         public GPUCurvyType[] TentacleTypes = new GPUCurvyType[0];
 

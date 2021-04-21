@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public class ShooterFireCustomization : EnemyCustomizationBase
+    public class ShooterFireCustom : EnemyCustomBase
     {
         public ProjectileType ProjectileType = ProjectileType.TargetingLarge;
         public int BurstCount = 20;

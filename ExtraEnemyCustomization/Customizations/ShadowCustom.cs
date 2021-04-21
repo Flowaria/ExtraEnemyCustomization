@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public class ShadowCustomization : EnemyCustomizationBase
+    public class ShadowCustom : EnemyCustomBase
     {
         public bool IncludeEggSack = false;
         public bool RequireTagForDetection = true;

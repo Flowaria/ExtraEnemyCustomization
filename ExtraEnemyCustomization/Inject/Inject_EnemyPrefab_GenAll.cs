@@ -32,7 +32,7 @@ namespace ExtraEnemyCustomization.Inject
                         continue;
                 }
 
-                MaterialCustomization.AddToCache(matName, mat);
+                MaterialCustom.AddToCache(matName, mat);
                 Logger.DevMessage(matName);
             }
 

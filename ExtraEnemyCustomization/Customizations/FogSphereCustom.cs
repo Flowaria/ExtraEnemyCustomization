@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
 {
-    public class FogSphereCustomization : EnemyCustomizationBase
+    public class FogSphereCustom : EnemyCustomBase
     {
         public GPUCurvyType[] TentacleTypes = new GPUCurvyType[0];
         public Color ColorMin = Color.white;
