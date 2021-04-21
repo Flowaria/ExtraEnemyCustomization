@@ -42,12 +42,13 @@ namespace ExtraEnemyCustomization
         public static ConfigContext Current { private set; get; }
 
         public bool CacheAllMaterials = false;
-        public ShadowCustom[] ShadowModels = new ShadowCustom[0];
-        public StrikerTentacleCustom[] StrikerTentacles = new StrikerTentacleCustom[0];
-        public ShooterFireCustom[] ShooterFires = new ShooterFireCustom[0];
-        public FogSphereCustom[] FogSpheres = new FogSphereCustom[0];
-        public MaterialCustom[] Materials = new MaterialCustom[0];
-        public LimbCustom[] Limbs = new LimbCustom[0];
+        public ShadowCustom[] ShadowModelCustom = new ShadowCustom[0];
+        public StrikerTentacleCustom[] StrikerTentacleCustom = new StrikerTentacleCustom[0];
+        public ShooterFireCustom[] ShooterFireCustom = new ShooterFireCustom[0];
+        public BirthingCustom[] BirthingCustom = new BirthingCustom[0];
+        public FogSphereCustom[] FogSphereCustom = new FogSphereCustom[0];
+        public MaterialCustom[] MaterialCustom = new MaterialCustom[0];
+        public LimbCustom[] LimbCustom = new LimbCustom[0];
 
         public CustomProjectile[] ProjectileDefinitions = new CustomProjectile[0];
 
@@ -57,29 +58,30 @@ namespace ExtraEnemyCustomization
         private void GenerateBuffer()
         {
             _CustomizationBuffer.Clear();
-            _CustomizationBuffer.AddRange(ShadowModels);
-            _CustomizationBuffer.AddRange(StrikerTentacles);
-            _CustomizationBuffer.AddRange(ShooterFires);
-            _CustomizationBuffer.AddRange(FogSpheres);
-            _CustomizationBuffer.AddRange(Materials);
-            _CustomizationBuffer.AddRange(Limbs);
+            _CustomizationBuffer.AddRange(ShadowModelCustom);
+            _CustomizationBuffer.AddRange(StrikerTentacleCustom);
+            _CustomizationBuffer.AddRange(ShooterFireCustom);
+            _CustomizationBuffer.AddRange(BirthingCustom);
+            _CustomizationBuffer.AddRange(FogSphereCustom);
+            _CustomizationBuffer.AddRange(MaterialCustom);
+            _CustomizationBuffer.AddRange(LimbCustom);
 
             Logger.Debug("ShadowModel Custom Settings:");
-            foreach(var shadowCustom in ShadowModels)
+            foreach(var shadowCustom in ShadowModelCustom)
             {
                 Logger.Debug($"- {shadowCustom.Target.ToDebugString()}");
                 Logger.Debug($"- CustomInfo, reqTagForDetect: {shadowCustom.RequireTagForDetection}, includeEgg: {shadowCustom.IncludeEggSack}");
             }
 
             Logger.Debug("StrikerTentacles Custom Settings:");
-            foreach(var tenCustom in StrikerTentacles)
+            foreach(var tenCustom in StrikerTentacleCustom)
             {
                 Logger.Debug($"- {tenCustom.Target.ToDebugString()}");
                 Logger.Debug($"- CustomInfo, TypePattern: [{string.Join(", ", tenCustom.TentacleTypes)}]");
             }
 
             Logger.Debug("Material Custom Settings:");
-            foreach(var matCustom in Materials)
+            foreach(var matCustom in MaterialCustom)
             {
                 Logger.Debug($"- {matCustom.Target.ToDebugString()}");
                 foreach (var swapSet in matCustom.MaterialSets)
