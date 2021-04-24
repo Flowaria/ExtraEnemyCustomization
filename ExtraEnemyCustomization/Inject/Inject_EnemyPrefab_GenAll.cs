@@ -1,18 +1,15 @@
 ﻿using Enemies;
 using ExtraEnemyCustomization.Customizations;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace ExtraEnemyCustomization.Inject
 {
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.GenerateAllEnemyPrefabs))]
-    static class Inject_EnemyPrefab_GenAll
+    internal static class Inject_EnemyPrefab_GenAll
     {
-        static void Prefix()
+        private static void Prefix()
         {
             Logger.Debug("== List of Material that can be used for Materials Parameters ==");
 

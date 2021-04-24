@@ -1,9 +1,5 @@
 ﻿using Enemies;
 using GameData;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
 {
@@ -17,7 +13,6 @@ namespace ExtraEnemyCustomization.Customizations
         public float MinDelayUntilNextBirth = 1.0f;
         public float MaxDelayUntilNextBirth = 14.0f;
 
-
         public override string GetProcessName()
         {
             return "Birthing";
@@ -28,7 +23,7 @@ namespace ExtraEnemyCustomization.Customizations
         public override void Postspawn(EnemyAgent agent)
         {
             var eabBirth = agent.GetComponentInChildren<EAB_Birthing>(true);
-            if(eabBirth != null)
+            if (eabBirth != null)
             {
                 eabBirth.m_groupDataBlock = GameDataBlockBase<EnemyGroupDataBlock>.GetBlock(EnemyGroupToSpawn);
                 eabBirth.m_childrenCost = ChildrenCost;

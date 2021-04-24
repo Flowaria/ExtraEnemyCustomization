@@ -1,8 +1,6 @@
 ﻿using Enemies;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
@@ -13,7 +11,7 @@ namespace ExtraEnemyCustomization.Customizations
 
         public static void AddToCache(string matName, Material mat)
         {
-            if(!_MatDict.ContainsKey(matName))
+            if (!_MatDict.ContainsKey(matName))
                 _MatDict.Add(matName, mat);
         }
 
@@ -34,7 +32,7 @@ namespace ExtraEnemyCustomization.Customizations
                 var matName = mat.m_material.name;
                 LogDev($" - Debug Info, Material Found: {matName}");
 
-                var swapSet = MaterialSets.SingleOrDefault(x=>x.From.Equals(matName));
+                var swapSet = MaterialSets.SingleOrDefault(x => x.From.Equals(matName));
                 if (swapSet == null)
                     continue;
 

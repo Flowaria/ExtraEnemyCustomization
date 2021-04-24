@@ -1,9 +1,7 @@
 ﻿using Enemies;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace ExtraEnemyCustomization.Customizations
@@ -14,7 +12,6 @@ namespace ExtraEnemyCustomization.Customizations
 
         [JsonIgnore]
         private FireSetting[] _SortedFireSettings = null;
-        
 
         public override string GetProcessName()
         {
@@ -26,14 +23,14 @@ namespace ExtraEnemyCustomization.Customizations
         public override void Postspawn(EnemyAgent agent)
         {
             var projectileSetting = agent.GetComponentInChildren<EAB_ProjectileShooter>(true);
-            if(projectileSetting != null)
+            if (projectileSetting != null)
             {
-                if(FireSettings.Length > 1)
+                if (FireSettings.Length > 1)
                 {
                     var mgr = agent.gameObject.AddComponent<ShooterDistanceConfigManager>();
                     mgr.EAB_Shooter = projectileSetting;
 
-                    if(_SortedFireSettings == null)
+                    if (_SortedFireSettings == null)
                     {
                         _SortedFireSettings = FireSettings.OrderByDescending(f => f.FromDistance).ToArray();
                     }
@@ -82,7 +79,6 @@ namespace ExtraEnemyCustomization.Customizations
 
         private FireSetting _currentSetting = null;
         private float _timerToUpdate = 0.0f;
-        private float _lastSettingFromDistance = 0.0f;
 
         public ShooterDistanceConfigManager(IntPtr ptr) : base(ptr)
         {

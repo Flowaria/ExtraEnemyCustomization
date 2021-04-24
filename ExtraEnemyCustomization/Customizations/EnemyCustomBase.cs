@@ -2,9 +2,7 @@
 using Enemies;
 using GameData;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ExtraEnemyCustomization.Customizations
 {
@@ -13,8 +11,15 @@ namespace ExtraEnemyCustomization.Customizations
         public string DebugName = string.Empty;
         public bool Enabled = true;
         public TargetSetting Target;
-        public virtual void Prespawn(EnemyAgent agent) { }
-        public virtual void Postspawn(EnemyAgent agent) { }
+
+        public virtual void Prespawn(EnemyAgent agent)
+        {
+        }
+
+        public virtual void Postspawn(EnemyAgent agent)
+        {
+        }
+
         public abstract string GetProcessName();
 
         public virtual bool HasPrespawnBody { get { return false; } }

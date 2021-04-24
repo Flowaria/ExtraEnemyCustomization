@@ -2,14 +2,10 @@
 using BepInEx.IL2CPP;
 using ExtraEnemyCustomization.Customizations;
 using HarmonyLib;
-using System;
 using UnhollowerRuntimeLib;
-using UnityEngine;
 
 namespace ExtraEnemyCustomization
 {
-    
-
     [BepInPlugin("GTFO.EECustomization", "ExtraEnemyCustomization", "1.0.0.0")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]

@@ -6,9 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 
 namespace ExtraEnemyCustomization
 {
@@ -16,14 +13,14 @@ namespace ExtraEnemyCustomization
     {
         public static void Initialize()
         {
-            if(ConfigManager.HasCustomContent)
+            if (ConfigManager.HasCustomContent)
             {
                 try
                 {
                     var path = Path.Combine(ConfigManager.CustomPath, "ExtraEnemyCustomization.json");
                     Current = JsonConvert.DeserializeObject<ConfigContext>(File.ReadAllText(path));
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Logger.Error($"Error Occured While reading ExtraEnemyCustomization.json file: {e}");
                     Current = new ConfigContext();
@@ -67,21 +64,21 @@ namespace ExtraEnemyCustomization
             _CustomizationBuffer.AddRange(LimbCustom);
 
             Logger.Debug("ShadowModel Custom Settings:");
-            foreach(var shadowCustom in ShadowModelCustom)
+            foreach (var shadowCustom in ShadowModelCustom)
             {
                 Logger.Debug($"- {shadowCustom.Target.ToDebugString()}");
                 Logger.Debug($"- CustomInfo, reqTagForDetect: {shadowCustom.RequireTagForDetection}, includeEgg: {shadowCustom.IncludeEggSack}");
             }
 
             Logger.Debug("StrikerTentacles Custom Settings:");
-            foreach(var tenCustom in StrikerTentacleCustom)
+            foreach (var tenCustom in StrikerTentacleCustom)
             {
                 Logger.Debug($"- {tenCustom.Target.ToDebugString()}");
                 Logger.Debug($"- CustomInfo, TypePattern: [{string.Join(", ", tenCustom.TentacleTypes)}]");
             }
 
             Logger.Debug("Material Custom Settings:");
-            foreach(var matCustom in MaterialCustom)
+            foreach (var matCustom in MaterialCustom)
             {
                 Logger.Debug($"- {matCustom.Target.ToDebugString()}");
                 foreach (var swapSet in matCustom.MaterialSets)
@@ -93,12 +90,12 @@ namespace ExtraEnemyCustomization
 
         public void Customize_Prespawn(EnemyAgent agent)
         {
-            foreach(var custom in _CustomizationBuffer)
+            foreach (var custom in _CustomizationBuffer)
             {
                 if (!custom.Enabled)
                     continue;
 
-                if(custom.Target.IsMatch(agent) && custom.HasPrespawnBody)
+                if (custom.Target.IsMatch(agent) && custom.HasPrespawnBody)
                 {
                     custom.LogDev($"Applying Prespawn effect to {agent.name}");
                     custom.Prespawn(agent);

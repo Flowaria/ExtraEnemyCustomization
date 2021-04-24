@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ExtraEnemyCustomization.Customizations
 {
@@ -25,10 +24,10 @@ namespace ExtraEnemyCustomization.Customizations
             {
                 LogDev($" - Found Limb: {limb.name}");
 
-                var limbCustomData = Limbs.SingleOrDefault(x=>x.LimbName.Equals(limb.name));
-                if(limbCustomData == null)
+                var limbCustomData = Limbs.SingleOrDefault(x => x.LimbName.Equals(limb.name));
+                if (limbCustomData == null)
                 {
-                    if(allLimbData == null)
+                    if (allLimbData == null)
                     {
                         continue;
                     }

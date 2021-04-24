@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace ExtraEnemyCustomization.CustomProjectiles
@@ -44,13 +43,13 @@ namespace ExtraEnemyCustomization.CustomProjectiles
             var newPrefab = GameObject.Instantiate(basePrefab);
             GameObject.DontDestroyOnLoad(newPrefab);
             var projectileBase = newPrefab.GetComponent<ProjectileBase>();
-            if(projectileBase != null)
+            if (projectileBase != null)
             {
                 projectileBase.m_maxDamage = projectileInfo.Damage;
                 projectileBase.m_maxInfection = projectileInfo.Infection;
 
                 var targeting = projectileBase.TryCast<ProjectileTargeting>();
-                if(targeting != null)
+                if (targeting != null)
                 {
                     targeting.Speed = projectileInfo.Speed;
                     targeting.TargetStrength = projectileInfo.HomingStrength;
@@ -74,7 +73,7 @@ namespace ExtraEnemyCustomization.CustomProjectiles
 
         public static GameObject GetProjectile(byte id)
         {
-            if(_ProjectilePrefabs.TryGetValue(id, out var prefab))
+            if (_ProjectilePrefabs.TryGetValue(id, out var prefab))
             {
                 return prefab;
             }
