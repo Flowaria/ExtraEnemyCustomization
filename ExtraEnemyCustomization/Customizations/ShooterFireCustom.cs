@@ -36,7 +36,7 @@ namespace ExtraEnemyCustomization.Customizations
                     }
                     mgr.FireSettings = _SortedFireSettings;
                 }
-                else
+                else if (FireSettings.Length == 1)
                 {
                     FireSettings[0].ApplyToEAB(projectileSetting);
                 }
