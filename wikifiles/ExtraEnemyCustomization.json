@@ -6,6 +6,7 @@
 	"ShadowModelCustom": [
 		{
 			"Enabled": false, //Enable/Disable this Customization Setting
+			"DebugName": "Shadow 29/30", //Debug name to use for Console Log. Also good for organize stuffs //NOTE: you can remove this field if you don't like it
 			"Target": {
 				"Mode": "PersistentID", //PersistentID, NameEquals, NameContains, Everything
 				"persistentIDs": [
@@ -22,6 +23,7 @@
 	"StrikerTentacleCustom": [
 		{
 			"Enabled": false,
+			"DebugName": "AllStrikerBigTentacle",
 			"Target": {
 				"Mode": "Everything",
 				"persistentIDs": [],
@@ -50,6 +52,7 @@
 	"ShooterFireCustom": [
 		{
 			"Enabled": true,
+			"DebugName": "Hibernate-TwoDistance",
 			"Target": {
 				"Mode": "PersistentID",
 				"persistentIDs": [
@@ -57,33 +60,66 @@
 				],
 				"nameParam": ""
 			},
-			"ProjectileType": 50,
-			//TargetingTiny - 3
-			//TargetingSmall - 0
-			//TargetingMedium - 1
-			//TargetingLarge - 2
-			//SemiTargetingQuick - 6
-			//InfectionBomb - 7
-			//GlueFlying - 4 //DONT
-			//GlueLanded - 5 //DONT
-			//Or other custom IDs! (check ProjectileDefinitions Section)
-			"BurstCount": 50, //How many Projectile should be fired for single attack?
-			"BurstDelay": 3.5, //Interval Between firing
-			"ShotDelayMin": 0.005, //Min Shot delay for each projectile
-			"ShotDelayMax": 0.01, //Max Shot delay for each projectile
-			"InitialFireDelay": 0.0,
-			"ShotSpreadXMin": -45.0, //Min X degree spread value (Left-Right)
-			"ShotSpreadXMax": 45.0, //Max X
-			"ShotSpreadYMin": -20.0, //Min Y degree spread value (Up-Down)
-			"ShotSpreadYMax": 20.0 // Max Y
+			"FireSettings": [
+				{
+					"FromDistance": -1.0, //Swap to this FireSetting when target is over this distance
+					"ProjectileType": 50,
+					//TargetingTiny - 3
+					//TargetingSmall - 0
+					//TargetingMedium - 1
+					//TargetingLarge - 2
+					//SemiTargetingQuick - 6
+					//InfectionBomb - 7
+					//GlueFlying - 4 //DONT
+					//GlueLanded - 5 //DONT
+					//Or other custom IDs! (check ProjectileDefinitions Section)
+					"BurstCount": 2, //How many Projectile should be fired for single attack?
+					"BurstDelay": 0.8, //Interval Between firing
+					"ShotDelayMin": 0.005, //Min Shot delay for each projectile
+					"ShotDelayMax": 0.01, //Max Shot delay for each projectile
+					"InitialFireDelay": 0.0,
+					"ShotSpreadXMin": -45.0, //Min X degree spread value (Left-Right)
+					"ShotSpreadXMax": 45.0, //Max X
+					"ShotSpreadYMin": -20.0, //Min Y degree spread value (Up-Down)
+					"ShotSpreadYMax": 20.0 // Max Y
+				},
+				{
+					"FromDistance": 9.0, //Swap to this FireSetting when target distance over this value
+					"ProjectileType": 51,
+					"BurstCount": 15,
+					"BurstDelay": 3.0,
+					"ShotDelayMin": 0.005,
+					"ShotDelayMax": 0.01,
+					"InitialFireDelay": 0.0,
+					"ShotSpreadXMin": -45.0,
+					"ShotSpreadXMax": 45.0,
+					"ShotSpreadYMin": -20.0,
+					"ShotSpreadYMax": 20.0
+				}
+			]
 		}
 	],
 	"ProjectileDefinitions": [
 		{
 			"ID": 50, //Do not overlap with existing one (0~7), It also should be between 0~255 (byte type)
 			"BaseProjectile": "TargetingSmall", //It should be from existing projectile
-			"Speed": 4.5, //Speed of Projectile, meter/s I guess
-			"HomingStrength": 0.01, //How strong it should be Homing to Target?
+			"Speed": 8.5, //Speed of Projectile, meter/s I guess
+			"HomingStrength": 5.0, //How strong it should be Homing to Target?
+			"LightColor": {
+				"r": 0.8,
+				"g": 0.0,
+				"b": 0.8,
+				"a": 1.0
+			},
+			"LightRange": 1.0,
+			"Damage": 0.1, //DMG on Hit 25 means 100% in default PlayerDataBlock
+			"Infection": 0.0 //Add Infection On Hit as percentage (0.1 = 10% 0.25 = 25% and so on)
+		},
+		{
+			"ID": 51, //Less Homing Projectile
+			"BaseProjectile": "TargetingSmall",
+			"Speed": 6.5,
+			"HomingStrength": 1.5,
 			"LightColor": {
 				"r": 0.0,
 				"g": 0.8,
@@ -91,14 +127,15 @@
 				"a": 1.0
 			},
 			"LightRange": 1.0,
-			"Damage": 25.0, //DMG on Hit 25 means 100% in default PlayerDataBlock
-			"Infection": 0.0 //Add Infection On Hit as percentage (0.1 = 10% 0.25 = 25% and so on)
+			"Damage": 0.5,
+			"Infection": 0.0
 		}
 	],
 	//EAB_FogSphere Fog Custom
 	"FogSphereCustom": [
 		{
 			"Enabled": true,
+			"DebugName": "BirtherFog_Gradual",
 			"Target": {
 				"Mode": "PersistentID",
 				"persistentIDs": [
@@ -133,6 +170,7 @@
 	"MaterialCustom": [
 		{
 			"Enabled": true, //Slimy RapidFire Shooter (Head)
+			"DebugName": "HybridToChild",
 			"Target": {
 				"Mode": "NameEquals",
 				"persistentIDs": [],
@@ -152,7 +190,8 @@
 			]
 		},
 		{
-			"Enabled": false, //Make Charger Unoiled
+			"Enabled": true, //Make Charger Unoiled
+			"DebugName": "UnoiledCharger",
 			"Target": {
 				"Mode": "NameContains",
 				"persistentIDs": [],
@@ -173,6 +212,7 @@
 		},
 		{
 			"Enabled": true, //Make Every Shooter Oiled, Except Rapid Shooter
+			"DebugName": "OiledShooter",
 			"Target": {
 				"Mode": "PersistentID",
 				"persistentIDs": [
@@ -202,6 +242,7 @@
 		},
 		{
 			"Enabled": true, //Make Birthers Oiled?
+			"DebugName": "OiledBirther",
 			"Target": {
 				"Mode": "NameContains",
 				"persistentIDs": [],
@@ -257,6 +298,7 @@
 	"LimbCustom": [
 		{
 			"Enabled": true, //Make Birther's head be Weakspot (x10)
+			"DebugName": "Birther-MoreLimbs",
 			"Target": {
 				"Mode": "NameContains",
 				"persistentIDs": [],
@@ -299,6 +341,7 @@
 	"BirthingCustom": [
 		{
 			"Enabled": true, //Make Birther Boss spawn bullrushs!
+			"DebugName": "Birthing-Bullrushs",
 			"Target": {
 				"Mode": "NameContains",
 				"persistentIDs": [],

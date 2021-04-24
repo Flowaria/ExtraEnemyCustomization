@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using BepInEx.Logging;
+using Enemies;
 using GameData;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace ExtraEnemyCustomization.Customizations
 {
     public abstract class EnemyCustomBase
     {
+        public string DebugName = string.Empty;
         public bool Enabled = true;
         public TargetSetting Target;
         public virtual void Prespawn(EnemyAgent agent) { }
@@ -20,17 +22,25 @@ namespace ExtraEnemyCustomization.Customizations
 
         public void LogDev(string str)
         {
-            Logger.Debug($"[{GetProcessName()}] {str}");
+            LogFormat(LogLevel.Debug, str);
         }
 
         public void LogError(string str)
         {
-            Logger.Error($"[{GetProcessName()}] {str}");
+            LogFormat(LogLevel.Error, str);
         }
 
         public void LogWarning(string str)
         {
-            Logger.Warning($"[{GetProcessName()}] {str}");
+            LogFormat(LogLevel.Warning, str);
+        }
+
+        private void LogFormat(LogLevel level, string str)
+        {
+            if (!string.IsNullOrEmpty(DebugName))
+                Logger.LogInstance.Log(level, $"[{GetProcessName()}-{DebugName}] {str}");
+            else
+                Logger.LogInstance.Log(level, $"[{GetProcessName()}] {str}");
         }
     }
 
