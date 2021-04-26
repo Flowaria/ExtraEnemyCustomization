@@ -2,12 +2,24 @@
 using System;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.CustomProjectiles.Inject
+namespace ExtraEnemyCustomization.Customizations.CustomProjectiles.Inject
 {
-    [HarmonyPatch(typeof(ProjectileManager), nameof(ProjectileManager.SpawnProjectileType))]
-    internal class Inject_ProjectileManager_SpawnType
+    [HarmonyPatch(typeof(ProjectileManager))]
+    class Inject_ProjectileManager
     {
-        private static bool Prefix(ref GameObject __result, ref ProjectileType type, Vector3 pos, Quaternion rot)
+        [HarmonyPostfix]
+        [HarmonyPatch(nameof(ProjectileManager.LoadAssets))]
+        static void Post_LoadAsset()
+        {
+            foreach (var proj in ConfigManager.Current.ProjectileCustom.ProjectileDefinitions)
+            {
+                CustomProjectile.GenerateProjectile(proj);
+            }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(ProjectileManager.SpawnProjectileType))]
+        static bool Pre_SpawnProjectile(ref GameObject __result, ref ProjectileType type, Vector3 pos, Quaternion rot)
         {
             if (Enum.IsDefined(typeof(ProjectileType), (byte)type))
             {

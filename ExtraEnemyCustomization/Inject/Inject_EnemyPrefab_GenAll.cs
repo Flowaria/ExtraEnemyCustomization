@@ -23,7 +23,7 @@ namespace ExtraEnemyCustomization.Inject
                 if (string.IsNullOrEmpty(matName))
                     continue;
 
-                if (!ConfigContext.Current.CacheAllMaterials)
+                if (!ConfigManager.Current.ModelCustom.CacheAllMaterials)
                 {
                     if (!shaderName.Contains("EnemyFlesh"))
                         continue;

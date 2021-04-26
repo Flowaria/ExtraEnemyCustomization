@@ -15,11 +15,7 @@ namespace ExtraEnemyCustomization.Inject
                 Logger.Error($"Agent is null! : {__result.name}");
                 return;
             }
-            if (agent.m_isSetup)
-            {
-                return;
-            }
-            ConfigContext.Current.Customize_Prespawn(__result.GetComponent<EnemyAgent>());
+            ConfigManager.Current.Customize_Prespawn(__result.GetComponent<EnemyAgent>());
         }
     }
 }

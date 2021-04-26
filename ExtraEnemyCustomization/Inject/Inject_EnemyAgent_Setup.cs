@@ -8,7 +8,11 @@ namespace ExtraEnemyCustomization.Inject
     {
         private static void Postfix(EnemyAgent __instance)
         {
-            ConfigContext.Current.Customize_Postspawn(__instance);
+            if (__instance.name.EndsWith(")")) //No Replicator Number = Fake call
+            {
+                return;
+            }
+            ConfigManager.Current.Customize_Postspawn(__instance);
         }
     }
 }

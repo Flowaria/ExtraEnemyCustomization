@@ -1,4 +1,5 @@
 ﻿using Enemies;
+using ExtraEnemyCustomization.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,11 @@ namespace ExtraEnemyCustomization.Customizations
                     limbCustomData = allLimbData;
                 }
 
-                LogDev($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValueMode: {limbCustomData.HealthValueMode}, HealthValue: {limbCustomData.HealthValue}");
-
-                limb.m_healthMax *= limbCustomData.HealthValue;
-                limb.m_health *= limbCustomData.HealthValue;
+                LogDev($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValue: {limbCustomData.Health}");
+                var newHealth = limbCustomData.Health.GetAbsValue(limb.m_healthMax);
+                limb.m_health = newHealth;
+                limb.m_healthMax = newHealth;
+               
 
                 var isCustom = (limbCustomData.LimbType == LimbDamageType.ArmorCustom || limbCustomData.LimbType == LimbDamageType.WeakspotCustom);
                 var healthData = agent.EnemyBalancingData.Health;
@@ -72,8 +74,7 @@ namespace ExtraEnemyCustomization.Customizations
         public string LimbName = "Head";
         public LimbDamageType LimbType = LimbDamageType.Weakspot;
         public float CustomMulti = 1.0f;
-        public HealthValueMode HealthValueMode = HealthValueMode.Rel;
-        public float HealthValue = 1.0f;
+        public ValueBase Health = ValueBase.Unchanged;
     }
 
     public enum LimbDamageType
@@ -83,10 +84,5 @@ namespace ExtraEnemyCustomization.Customizations
         WeakspotCustom,
         Armor,
         ArmorCustom
-    }
-
-    public enum HealthValueMode
-    {
-        Rel, Abs
     }
 }

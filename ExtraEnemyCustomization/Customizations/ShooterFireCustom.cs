@@ -1,4 +1,6 @@
 ﻿using Enemies;
+using ExtraEnemyCustomization.Customizations.Abilities;
+using ExtraEnemyCustomization.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -27,14 +29,26 @@ namespace ExtraEnemyCustomization.Customizations
             {
                 if (FireSettings.Length > 1)
                 {
-                    var mgr = agent.gameObject.AddComponent<ShooterDistanceConfigManager>();
-                    mgr.EAB_Shooter = projectileSetting;
+                    var clone = new EAB_ProjectileShooter()
+                    {
+                        m_burstCount = projectileSetting.m_burstCount,
+                        m_burstDelay = projectileSetting.m_burstDelay,
+                        m_shotDelayMin = projectileSetting.m_shotDelayMin,
+                        m_shotDelayMax = projectileSetting.m_shotDelayMax,
+                        m_initialFireDelay = projectileSetting.m_initialFireDelay,
+                        m_shotSpreadX = projectileSetting.m_shotSpreadX,
+                        m_shotSpreadY = projectileSetting.m_shotSpreadY
+                    };
+
+                    var ability = agent.gameObject.AddComponent<ShooterDistSettingAbility>();
+                    ability.DefaultValue = clone;
+                    ability.EAB_Shooter = projectileSetting;
 
                     if (_SortedFireSettings == null)
                     {
                         _SortedFireSettings = FireSettings.OrderByDescending(f => f.FromDistance).ToArray();
                     }
-                    mgr.FireSettings = _SortedFireSettings;
+                    ability.FireSettings = _SortedFireSettings;
                 }
                 else if (FireSettings.Length == 1)
                 {
@@ -48,59 +62,35 @@ namespace ExtraEnemyCustomization.Customizations
     {
         public float FromDistance = -1.0f;
 
+        public bool OverrideProjectileType = true;
         public ProjectileType ProjectileType = ProjectileType.TargetingLarge;
-        public int BurstCount = 20;
-        public float BurstDelay = 3.0f;
-        public float ShotDelayMin = 0.05f;
-        public float ShotDelayMax = 0.3f;
-        public float InitialFireDelay = 0.0f;
-        public float ShotSpreadXMin = -45.0f;
-        public float ShotSpreadXMax = 45.0f;
-        public float ShotSpreadYMin = -20.0f;
-        public float ShotSpreadYMax = 20.0f;
+        public ValueBase BurstCount = ValueBase.Unchanged;
+        public ValueBase BurstDelay = ValueBase.Unchanged;
+        public ValueBase ShotDelayMin = ValueBase.Unchanged;
+        public ValueBase ShotDelayMax = ValueBase.Unchanged;
+        public ValueBase InitialFireDelay = ValueBase.Unchanged;
+        public ValueBase ShotSpreadXMin = ValueBase.Unchanged;
+        public ValueBase ShotSpreadXMax = ValueBase.Unchanged;
+        public ValueBase ShotSpreadYMin = ValueBase.Unchanged;
+        public ValueBase ShotSpreadYMax = ValueBase.Unchanged;
 
-        public void ApplyToEAB(EAB_ProjectileShooter eab)
+        public void ApplyToEAB(EAB_ProjectileShooter eab, EAB_ProjectileShooter defValue = null)
         {
-            eab.m_type = ProjectileType;
-            eab.m_burstCount = BurstCount;
-            eab.m_burstDelay = BurstDelay;
-            eab.m_shotDelayMin = ShotDelayMin;
-            eab.m_shotDelayMax = ShotDelayMax;
-            eab.m_initialFireDelay = InitialFireDelay;
-            eab.m_shotSpreadX = new Vector2(ShotSpreadXMin, ShotSpreadXMax);
-            eab.m_shotSpreadY = new Vector2(ShotSpreadYMin, ShotSpreadYMax);
-        }
-    }
+            if (OverrideProjectileType)
+                eab.m_type = ProjectileType;
 
-    public class ShooterDistanceConfigManager : MonoBehaviour
-    {
-        public EAB_ProjectileShooter EAB_Shooter;
-        public FireSetting[] FireSettings;
-
-        private FireSetting _currentSetting = null;
-        private float _timerToUpdate = 0.0f;
-
-        public ShooterDistanceConfigManager(IntPtr ptr) : base(ptr)
-        {
-        }
-
-        private void Update()
-        {
-            if (Clock.Time < _timerToUpdate)
-                return;
-
-            _timerToUpdate = Clock.Time + 0.5f;
-
-            if (!EAB_Shooter.m_owner.AI.IsTargetValid)
-                return;
-
-            var distance = EAB_Shooter.m_owner.AI.Target.m_distance;
-            var newSetting = FireSettings.FirstOrDefault(x => x.FromDistance <= distance);
-            if (newSetting != _currentSetting)
+            if (defValue == null)
             {
-                newSetting.ApplyToEAB(EAB_Shooter);
-                _currentSetting = newSetting;
+                defValue = eab;
             }
+
+            eab.m_burstCount = BurstCount.GetAbsValue(defValue.m_burstCount);
+            eab.m_burstDelay = BurstDelay.GetAbsValue(defValue.m_burstDelay);
+            eab.m_shotDelayMin = ShotDelayMin.GetAbsValue(defValue.m_shotDelayMin);
+            eab.m_shotDelayMax = ShotDelayMax.GetAbsValue(defValue.m_shotDelayMax);
+            eab.m_initialFireDelay = InitialFireDelay.GetAbsValue(defValue.m_initialFireDelay);
+            eab.m_shotSpreadX = new Vector2(ShotSpreadXMin.GetAbsValue(defValue.m_shotSpreadX.x), ShotSpreadXMax.GetAbsValue(defValue.m_shotSpreadX.y));
+            eab.m_shotSpreadY = new Vector2(ShotSpreadYMin.GetAbsValue(defValue.m_shotSpreadY.x), ShotSpreadYMax.GetAbsValue(defValue.m_shotSpreadY.y));
         }
     }
 }

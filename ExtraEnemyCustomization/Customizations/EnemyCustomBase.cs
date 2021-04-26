@@ -12,6 +12,11 @@ namespace ExtraEnemyCustomization.Customizations
         public bool Enabled = true;
         public TargetSetting Target;
 
+        public virtual void Initialize()
+        {
+
+        }
+
         public virtual void Prespawn(EnemyAgent agent)
         {
         }
@@ -54,28 +59,21 @@ namespace ExtraEnemyCustomization.Customizations
         public TargetMode Mode = TargetMode.PersistentID;
         public uint[] persistentIDs = new uint[1] { 0 };
         public string nameParam = string.Empty;
+        public bool nameIgnoreCase = false;
 
         public bool IsMatch(EnemyAgent agent)
         {
             var enemyData = GameDataBlockBase<EnemyDataBlock>.GetBlock(agent.EnemyDataID);
+            var comparisonMode = nameIgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
-            switch (Mode)
+            return Mode switch
             {
-                case TargetMode.PersistentID:
-                    return persistentIDs.Contains(agent.EnemyDataID);
-
-                case TargetMode.NameEquals:
-                    return enemyData?.name?.Equals(nameParam) ?? false;
-
-                case TargetMode.NameContains:
-                    return enemyData?.name?.Contains(nameParam) ?? false;
-
-                case TargetMode.Everything:
-                    return true;
-
-                default:
-                    return false;
-            }
+                TargetMode.PersistentID => persistentIDs.Contains(agent.EnemyDataID),
+                TargetMode.NameEquals => enemyData?.name?.Equals(nameParam, comparisonMode) ?? false,
+                TargetMode.NameContains => enemyData?.name?.Contains(nameParam, comparisonMode) ?? false,
+                TargetMode.Everything => true,
+                _ => false,
+            };
         }
 
         public string ToDebugString()

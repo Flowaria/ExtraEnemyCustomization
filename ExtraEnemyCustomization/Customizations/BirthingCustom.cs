@@ -1,4 +1,5 @@
 ﻿using Enemies;
+using ExtraEnemyCustomization.Utils;
 using GameData;
 
 namespace ExtraEnemyCustomization.Customizations
@@ -6,12 +7,12 @@ namespace ExtraEnemyCustomization.Customizations
     public class BirthingCustom : EnemyCustomBase
     {
         public uint EnemyGroupToSpawn;
-        public float ChildrenCost = 1.0f;
-        public int ChildrenPerBirth = 10;
-        public int ChildrenPerBirthMin = 3;
-        public int ChildrenMax = 20;
-        public float MinDelayUntilNextBirth = 1.0f;
-        public float MaxDelayUntilNextBirth = 14.0f;
+        public ValueBase ChildrenCost = ValueBase.Unchanged;
+        public ValueBase ChildrenPerBirth = ValueBase.Unchanged;
+        public ValueBase ChildrenPerBirthMin = ValueBase.Unchanged;
+        public ValueBase ChildrenMax = ValueBase.Unchanged;
+        public ValueBase MinDelayUntilNextBirth = ValueBase.Unchanged;
+        public ValueBase MaxDelayUntilNextBirth = ValueBase.Unchanged;
 
         public override string GetProcessName()
         {
@@ -26,13 +27,13 @@ namespace ExtraEnemyCustomization.Customizations
             if (eabBirth != null)
             {
                 eabBirth.m_groupDataBlock = GameDataBlockBase<EnemyGroupDataBlock>.GetBlock(EnemyGroupToSpawn);
-                eabBirth.m_childrenCost = ChildrenCost;
-                eabBirth.m_childrenPerBirth = ChildrenPerBirth;
-                eabBirth.m_childrenAllowedSpawn = ChildrenPerBirth;
-                eabBirth.m_childrenPerBirthMin = ChildrenPerBirthMin;
-                eabBirth.m_childrenMax = ChildrenMax;
-                eabBirth.m_minDelayUntilNextBirth = MinDelayUntilNextBirth;
-                eabBirth.m_maxDelayUntilNextBirth = MaxDelayUntilNextBirth;
+                eabBirth.m_childrenCost = ChildrenCost.GetAbsValue(eabBirth.m_childrenCost);
+                eabBirth.m_childrenPerBirth = ChildrenPerBirth.GetAbsValue(eabBirth.m_childrenPerBirth);
+                eabBirth.m_childrenAllowedSpawn = ChildrenPerBirth.GetAbsValue(eabBirth.m_childrenAllowedSpawn);
+                eabBirth.m_childrenPerBirthMin = ChildrenPerBirthMin.GetAbsValue(eabBirth.m_childrenPerBirthMin);
+                eabBirth.m_childrenMax = ChildrenMax.GetAbsValue(eabBirth.m_childrenMax);
+                eabBirth.m_minDelayUntilNextBirth = MinDelayUntilNextBirth.GetAbsValue(eabBirth.m_minDelayUntilNextBirth);
+                eabBirth.m_maxDelayUntilNextBirth = MaxDelayUntilNextBirth.GetAbsValue(eabBirth.m_maxDelayUntilNextBirth);
             }
         }
     }

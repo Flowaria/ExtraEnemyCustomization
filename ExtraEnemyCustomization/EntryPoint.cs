@@ -1,12 +1,15 @@
 ﻿using BepInEx;
 using BepInEx.IL2CPP;
 using ExtraEnemyCustomization.Customizations;
+using ExtraEnemyCustomization.Customizations.Abilities;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 
 namespace ExtraEnemyCustomization
 {
-    [BepInPlugin("GTFO.EECustomization", "ExtraEnemyCustomization", "1.0.0.0")]
+    //TODO: Refactor the CustomBase to support Phase Setting
+
+    [BepInPlugin("GTFO.EECustomization", "ExtraEnemyCustomization", "0.3.1")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]
     public class EntryPoint : BasePlugin
@@ -15,14 +18,15 @@ namespace ExtraEnemyCustomization
 
         public override void Load()
         {
-            ClassInjector.RegisterTypeInIl2Cpp<ShooterDistanceConfigManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<ShooterDistSettingAbility>();
+            ClassInjector.RegisterTypeInIl2Cpp<HealthRegenAbility>();
 
             Logger.LogInstance = Log;
 
             var harmony = new Harmony("EECustomization.Harmony");
             harmony.PatchAll();
 
-            ConfigContext.Initialize();
+            ConfigManager.Initialize();
         }
     }
 }

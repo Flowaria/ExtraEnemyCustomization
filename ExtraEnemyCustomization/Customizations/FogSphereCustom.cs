@@ -5,7 +5,6 @@ namespace ExtraEnemyCustomization.Customizations
 {
     public class FogSphereCustom : EnemyCustomBase
     {
-        public GPUCurvyType[] TentacleTypes = new GPUCurvyType[0];
         public Color ColorMin = Color.white;
         public Color ColorMax = Color.clear;
         public float IntensityMin = 1.0f;

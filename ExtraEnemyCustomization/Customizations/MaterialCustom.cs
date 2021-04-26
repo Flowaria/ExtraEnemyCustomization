@@ -7,7 +7,7 @@ namespace ExtraEnemyCustomization.Customizations
 {
     public class MaterialCustom : EnemyCustomBase
     {
-        private static Dictionary<string, Material> _MatDict = new Dictionary<string, Material>();
+        private readonly static Dictionary<string, Material> _MatDict = new Dictionary<string, Material>();
 
         public static void AddToCache(string matName, Material mat)
         {
