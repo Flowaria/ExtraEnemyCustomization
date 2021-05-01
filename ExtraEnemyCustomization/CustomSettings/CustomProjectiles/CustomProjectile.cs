@@ -1,10 +1,10 @@
-﻿using ExtraEnemyCustomization.Utils;
+﻿using EECustom.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations.CustomProjectiles
+namespace EECustom.CustomSettings.CustomProjectiles
 {
     public class CustomProjectile
     {

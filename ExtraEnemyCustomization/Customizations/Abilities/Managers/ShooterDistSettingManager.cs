@@ -1,12 +1,13 @@
-﻿using System;
+﻿using EECustom.Customizations.ShooterFires;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations.Abilities
+namespace EECustom.Customizations.Abilities.Managers
 {
-    public class ShooterDistSettingAbility : MonoBehaviour
+    public class ShooterDistSettingManager : MonoBehaviour
     {
         public EAB_ProjectileShooter DefaultValue;
         public EAB_ProjectileShooter EAB_Shooter;
@@ -15,7 +16,7 @@ namespace ExtraEnemyCustomization.Customizations.Abilities
         private FireSetting _currentSetting = null;
         private float _timerToUpdate = 0.0f;
 
-        public ShooterDistSettingAbility(IntPtr ptr) : base(ptr)
+        public ShooterDistSettingManager(IntPtr ptr) : base(ptr)
         {
         }
 

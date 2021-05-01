@@ -1,7 +1,7 @@
 ﻿using Enemies;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.Abilities
 {
     public class FogSphereCustom : EnemyCustomBase
     {

@@ -1,11 +1,11 @@
-﻿using ExtraEnemyCustomization.Extensions;
+﻿using EECustom.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Utils
+namespace EECustom.Utils
 {
     public class ValueBaseConverter : JsonConverter
     {

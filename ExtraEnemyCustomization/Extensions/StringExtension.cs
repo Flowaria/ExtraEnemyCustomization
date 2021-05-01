@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Extensions
+namespace EECustom.Extensions
 {
     public static class StringExtension
     {

@@ -1,8 +1,8 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Utils;
 using GameData;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.Abilities
 {
     public class BirthingCustom : EnemyCustomBase
     {

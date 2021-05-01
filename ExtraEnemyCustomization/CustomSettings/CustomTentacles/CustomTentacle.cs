@@ -1,11 +1,11 @@
-﻿using ExtraEnemyCustomization.Utils;
+﻿using EECustom.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations.CustomTentacles
+namespace EECustom.CustomSettings.CustomTentacles
 {
     public class CustomTentacle
     {

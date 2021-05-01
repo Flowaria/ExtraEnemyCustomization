@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Utils
+namespace EECustom.Utils
 {
     public static class JSON
     {

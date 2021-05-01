@@ -1,8 +1,9 @@
-﻿using ExtraEnemyCustomization.Customizations;
+﻿using EECustom.Customizations;
+using EECustom.Customizations.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ExtraEnemyCustomization.Configs
+namespace EECustom.Configs
 {
     public class ModelCustomConfigData : ConfigData
     {
@@ -11,6 +12,7 @@ namespace ExtraEnemyCustomization.Configs
         public ShadowCustom[] ShadowCustom = new ShadowCustom[0];
         public MaterialCustom[] MaterialCustom = new MaterialCustom[0];
         public LimbCustom[] LimbCustom = new LimbCustom[0];
+        public ModelRefCustom[] ModelRefCustom = new ModelRefCustom[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {
@@ -18,6 +20,7 @@ namespace ExtraEnemyCustomization.Configs
             list.AddRange(ShadowCustom);
             list.AddRange(MaterialCustom);
             list.AddRange(LimbCustom);
+            list.AddRange(ModelRefCustom);
             return list.ToArray();
         }
     }

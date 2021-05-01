@@ -11,13 +11,17 @@
     <PluginsFolder>$(GameFolder)/BepInEx/plugins</PluginsFolder>
     <TargetFramework>netstandard2.1</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <Version>0.3.1</Version>
+    <Version>0.3.5</Version>
+    <RootNamespace>EECustom</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="$(BIELibsFolder)/*.dll" Private="false" />
-    <Reference Include="$(UnhollowedLibsFolder)/*.dll" Private="false" />
+    <Reference Include="$(BIELibsFolder)/BepInEx.*.dll" Private="false" />
+    <Reference Include="$(BIELibsFolder)/0Harmony.dll" Private="false" />
+    <Reference Include="$(BIELibsFolder)/UnhollowerBaseLib.dll" Private="false" />
+    <Reference Include="$(BIELibsFolder)/UnhollowerRuntimeLib.dll" Private="false" />
     <Reference Include="$(PluginsFolder)/MTFO.dll" Private="false" />
+    <Reference Include="$(UnhollowedLibsFolder)/*.dll" Private="false" />
     <Reference Remove="$(UnhollowedLibsFolder)/Newtonsoft.Json.dll" />
     <Reference Remove="$(UnhollowedLibsFolder)/netstandard.dll" />
   </ItemGroup>

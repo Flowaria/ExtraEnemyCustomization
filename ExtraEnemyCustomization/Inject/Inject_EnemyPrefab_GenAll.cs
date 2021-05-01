@@ -1,10 +1,10 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Customizations;
+using EECustom.Customizations;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Inject
+namespace EECustom.Inject
 {
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.GenerateAllEnemyPrefabs))]
     internal static class Inject_EnemyPrefab_GenAll

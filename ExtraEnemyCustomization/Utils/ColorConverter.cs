@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Utils
+namespace EECustom.Utils
 {
     public class ColorConverter : JsonConverter
     {

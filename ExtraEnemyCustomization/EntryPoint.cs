@@ -1,18 +1,16 @@
 ﻿using BepInEx;
 using BepInEx.IL2CPP;
-using ExtraEnemyCustomization.Customizations;
-using ExtraEnemyCustomization.Customizations.Abilities;
+using EECustom.Customizations.Abilities.Managers;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 
-namespace ExtraEnemyCustomization
+namespace EECustom
 {
     //TODO: Refactor the CustomBase to support Phase Setting
-    //TODO: EnemyModelRefs Customization
     //TODO: AlertType Customization: ScoutScream, Propagation, PropagationDistance (also with OnlySameArea / AllAreaInZone)
     //TODO: Scout WaveSetting Custom
 
-    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.3.2")]
+    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.3.5")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]
     public class EntryPoint : BasePlugin
@@ -21,8 +19,8 @@ namespace ExtraEnemyCustomization
 
         public override void Load()
         {
-            ClassInjector.RegisterTypeInIl2Cpp<ShooterDistSettingAbility>();
-            ClassInjector.RegisterTypeInIl2Cpp<HealthRegenAbility>();
+            ClassInjector.RegisterTypeInIl2Cpp<ShooterDistSettingManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<HealthRegenManager>();
 
             Logger.LogInstance = Log;
 

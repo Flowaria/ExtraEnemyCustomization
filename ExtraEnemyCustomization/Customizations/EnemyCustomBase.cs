@@ -4,7 +4,7 @@ using GameData;
 using System;
 using System.Linq;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations
 {
     public abstract class EnemyCustomBase
     {

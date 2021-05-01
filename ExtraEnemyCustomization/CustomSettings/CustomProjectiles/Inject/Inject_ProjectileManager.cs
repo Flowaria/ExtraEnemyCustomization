@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations.CustomProjectiles.Inject
+namespace EECustom.CustomSettings.CustomProjectiles.Inject
 {
     [HarmonyPatch(typeof(ProjectileManager))]
     class Inject_ProjectileManager

@@ -1,7 +1,7 @@
 ﻿using Enemies;
 using HarmonyLib;
 
-namespace ExtraEnemyCustomization.Inject
+namespace EECustom.Inject
 {
     [HarmonyPatch(typeof(EnemyAgent), nameof(EnemyAgent.Setup))]
     internal static class Inject_EnemyAgent_Setup

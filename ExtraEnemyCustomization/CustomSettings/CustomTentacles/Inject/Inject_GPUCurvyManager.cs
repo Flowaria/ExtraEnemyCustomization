@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Customizations.CustomTentacles.Inject
+namespace EECustom.CustomSettings.CustomTentacles.Inject
 {
     [HarmonyPatch(typeof(GPUCurvyManager))]
     class Inject_GPUCurvyManager

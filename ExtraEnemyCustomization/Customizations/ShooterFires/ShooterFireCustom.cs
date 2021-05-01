@@ -1,12 +1,13 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Customizations.Abilities;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Customizations.Abilities;
+using EECustom.Customizations.Abilities.Managers;
+using EECustom.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.ShooterFires
 {
     public class ShooterFireCustom : EnemyCustomBase
     {
@@ -40,7 +41,7 @@ namespace ExtraEnemyCustomization.Customizations
                         m_shotSpreadY = projectileSetting.m_shotSpreadY
                     };
 
-                    var ability = agent.gameObject.AddComponent<ShooterDistSettingAbility>();
+                    var ability = agent.gameObject.AddComponent<ShooterDistSettingManager>();
                     ability.DefaultValue = clone;
                     ability.EAB_Shooter = projectileSetting;
 

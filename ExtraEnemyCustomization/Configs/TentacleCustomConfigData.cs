@@ -1,10 +1,11 @@
-﻿using ExtraEnemyCustomization.Customizations;
-using ExtraEnemyCustomization.Customizations.CustomTentacles;
+﻿using EECustom.Customizations;
+using EECustom.Customizations.StrikerTentacles;
+using EECustom.CustomSettings.CustomTentacles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Configs
+namespace EECustom.Configs
 {
     public class TentacleCustomConfigData : ConfigData
     {

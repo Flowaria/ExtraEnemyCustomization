@@ -1,7 +1,7 @@
 ﻿using Enemies;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.Models
 {
     public class ShadowCustom : EnemyCustomBase
     {

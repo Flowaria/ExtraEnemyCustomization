@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Inject
+namespace EECustom.Inject
 {
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.BuildEnemyPrefab))]
     internal static class Inject_EnemyPrefab_Setup

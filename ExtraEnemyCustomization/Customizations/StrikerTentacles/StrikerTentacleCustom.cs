@@ -1,8 +1,8 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Utils;
 using System;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.StrikerTentacles
 {
 	using EaseFunc = Func<float, float, float, float, float>;
 
@@ -46,9 +46,9 @@ namespace ExtraEnemyCustomization.Customizations
                     var setting = TentacleSettings[i % TentacleSettings.Length];
                     tentacle.m_easingIn = setting.GetInEaseFunction();
                     tentacle.m_easingOut = setting.GetOutEaseFunction();
-                    tentacle.m_attackInDuration = setting.InDuration;
-                    tentacle.m_attackOutDuration = setting.OutDuration;
-                    tentacle.m_attackHangDuration = setting.HangDuration;
+                    tentacle.m_attackInDuration = setting.InDuration.GetAbsValue(tentacle.m_attackInDuration);
+                    tentacle.m_attackOutDuration = setting.OutDuration.GetAbsValue(tentacle.m_attackOutDuration);
+                    tentacle.m_attackHangDuration = setting.HangDuration.GetAbsValue(tentacle.m_attackHangDuration);
                     LogDev($" - Applied Tentacle Setting!, index: {i}");
                 }
             }
@@ -60,9 +60,9 @@ namespace ExtraEnemyCustomization.Customizations
 		public eEasingType InEaseType = eEasingType.EaseInExpo;
         public eEasingType OutEaseType = eEasingType.EaseOutCirc;
 
-		public float InDuration = 0.75f;
-		public float OutDuration = 0.25f;
-		public float HangDuration = 0.5f;
+		public ValueBase InDuration = ValueBase.Unchanged;
+		public ValueBase OutDuration = ValueBase.Unchanged;
+		public ValueBase HangDuration = ValueBase.Unchanged;
 
 		public EaseFunc GetInEaseFunction()
         {

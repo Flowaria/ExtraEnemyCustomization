@@ -5,14 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Customizations.Inject
+namespace EECustom.Utils.Inject
 {
-    public static class PlayerDamageEvents
-    {
-        public static Action<PlayerAgent, Agent, float> OnDamage = null;
-        public static Action<PlayerAgent, Agent, float> OnMeleeDamage = null;
-        public static Action<PlayerAgent, Agent, float> OnTentacleDamage = null;
-    }
+    
 
     [HarmonyPatch(typeof(Dam_PlayerDamageLocal))]
     class Inject_PlayerAgent_ReceiveDamages

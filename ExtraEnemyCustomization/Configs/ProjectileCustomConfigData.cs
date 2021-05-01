@@ -1,10 +1,11 @@
-﻿using ExtraEnemyCustomization.Customizations;
-using ExtraEnemyCustomization.Customizations.CustomProjectiles;
+﻿using EECustom.Customizations;
+using EECustom.Customizations.ShooterFires;
+using EECustom.CustomSettings.CustomProjectiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Configs
+namespace EECustom.Configs
 {
     public class ProjectileCustomConfigData : ConfigData
     {

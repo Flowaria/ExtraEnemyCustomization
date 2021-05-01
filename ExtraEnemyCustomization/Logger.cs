@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 
-namespace ExtraEnemyCustomization
+namespace EECustom
 {
     public static class Logger
     {

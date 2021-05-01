@@ -1,14 +1,14 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Configs;
-using ExtraEnemyCustomization.Customizations;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Configs;
+using EECustom.Customizations;
+using EECustom.Utils;
 using MTFO.Managers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ExtraEnemyCustomization
+namespace EECustom
 {
     public class ConfigManager
     {
@@ -37,6 +37,10 @@ namespace ExtraEnemyCustomization
                     Logger.Debug("Loading Tentacle.json...");
                     if (TryLoadConfig(basePath, "Tentacle.json", out TentacleCustomConfigData tentacleConfig))
                         Current.TentacleCustom = tentacleConfig;
+
+                    Logger.Debug("Loading Scout.json...");
+                    if (TryLoadConfig(basePath, "Scout.json", out ScoutCustomConfigData scoutConfig))
+                        Current.ScoutCustom = scoutConfig;
                 }
                 catch (Exception e)
                 {
@@ -75,12 +79,13 @@ namespace ExtraEnemyCustomization
                 return false;
             }
         }
-        public static ConfigManager Current { private set; get; }
+        public static ConfigManager Current { get; private set; }
         
         public ModelCustomConfigData ModelCustom { get; private set; } = new ModelCustomConfigData();
         public AbilityCustomConfigData AbilityCustom { get; private set; } = new AbilityCustomConfigData();
         public ProjectileCustomConfigData ProjectileCustom { get; private set; } = new ProjectileCustomConfigData();
         public TentacleCustomConfigData TentacleCustom { get; private set; } = new TentacleCustomConfigData();
+        public ScoutCustomConfigData ScoutCustom { get; private set; } = new ScoutCustomConfigData();
 
         private readonly List<EnemyCustomBase> _CustomizationBuffer = new List<EnemyCustomBase>();
 

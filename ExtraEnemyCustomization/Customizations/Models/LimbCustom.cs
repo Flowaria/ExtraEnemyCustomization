@@ -1,10 +1,10 @@
 ﻿using Enemies;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.Models
 {
     public class LimbCustom : EnemyCustomBase
     {

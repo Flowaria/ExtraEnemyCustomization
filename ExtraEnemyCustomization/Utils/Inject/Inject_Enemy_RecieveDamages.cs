@@ -5,13 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Customizations.Inject
+namespace EECustom.Utils.Inject
 {
-    public static class EnemyDamageEvents
-    {
-        public static Action<EnemyAgent, Agent, float> OnDamage;
-    }
-
     [HarmonyPatch(typeof(Dam_EnemyDamageBase))]
     class Inject_Enemy_RecieveDamages
     {

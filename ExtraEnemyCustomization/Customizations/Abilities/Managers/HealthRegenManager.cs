@@ -1,15 +1,15 @@
 ﻿using Agents;
 using Enemies;
-using ExtraEnemyCustomization.Customizations.Inject;
+using EECustom.Utils;
 using SNetwork;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ExtraEnemyCustomization.Customizations.Abilities
+namespace EECustom.Customizations.Abilities.Managers
 {
-    public class HealthRegenAbility : MonoBehaviour
+    public class HealthRegenManager : MonoBehaviour
     {
         public Dam_EnemyDamageBase DamageBase;
 
@@ -26,7 +26,7 @@ namespace ExtraEnemyCustomization.Customizations.Abilities
 
         private Action<EnemyAgent, Agent, float> _OnDamageDel;
 
-        public HealthRegenAbility(IntPtr ptr) : base(ptr)
+        public HealthRegenManager(IntPtr ptr) : base(ptr)
         {
         }
 
@@ -114,7 +114,7 @@ namespace ExtraEnemyCustomization.Customizations.Abilities
             }
         }
 
-        void OnTakeDamage(float dmg)
+        void OnTakeDamage(float _)
         {
             _RegenInitialTimer = Clock.Time + RegenData.DelayUntilRegenStart;
             _IsRegening = true;

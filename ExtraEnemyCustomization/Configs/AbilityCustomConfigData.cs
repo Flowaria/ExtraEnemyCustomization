@@ -1,9 +1,9 @@
-﻿using ExtraEnemyCustomization.Customizations;
+﻿using EECustom.Customizations;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Configs
+namespace EECustom.Configs
 {
     public class AbilityCustomConfigData : ConfigData
     {

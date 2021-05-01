@@ -1,13 +1,12 @@
 ﻿using Agents;
 using Enemies;
-using ExtraEnemyCustomization.Customizations.Inject;
-using ExtraEnemyCustomization.Utils;
+using EECustom.Utils;
 using Player;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExtraEnemyCustomization.Customizations
+namespace EECustom.Customizations.Abilities
 {
     public class InfectionAttackCustom : EnemyCustomBase
     {
@@ -58,7 +57,7 @@ namespace ExtraEnemyCustomization.Customizations
             }
         }
 
-        public void ApplyInfection(InfectionAttackData data, PlayerAgent player, Agent inflictor)
+        public void ApplyInfection(InfectionAttackData data, PlayerAgent player, Agent _)
         {
             var infectionAbs = data.Infection.GetAbsValue(PlayerData.MaxInfection);
             if (infectionAbs == 0.0f)
