@@ -8,8 +8,11 @@ using UnhollowerRuntimeLib;
 namespace ExtraEnemyCustomization
 {
     //TODO: Refactor the CustomBase to support Phase Setting
+    //TODO: EnemyModelRefs Customization
+    //TODO: AlertType Customization: ScoutScream, Propagation, PropagationDistance (also with OnlySameArea / AllAreaInZone)
+    //TODO: Scout WaveSetting Custom
 
-    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.3.1")]
+    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.3.2")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]
     public class EntryPoint : BasePlugin

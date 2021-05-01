@@ -19,6 +19,7 @@
     <Reference Include="$(UnhollowedLibsFolder)/*.dll" Private="false" />
     <Reference Include="$(PluginsFolder)/MTFO.dll" Private="false" />
     <Reference Remove="$(UnhollowedLibsFolder)/Newtonsoft.Json.dll" />
+    <Reference Remove="$(UnhollowedLibsFolder)/netstandard.dll" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,7 +14,6 @@ namespace ExtraEnemyCustomization.Customizations
 
         public virtual void Initialize()
         {
-
         }
 
         public virtual void Prespawn(EnemyAgent agent)

@@ -14,12 +14,6 @@ namespace ExtraEnemyCustomization.Customizations.Inject
         public static Action<PlayerAgent, Agent, float> OnTentacleDamage = null;
     }
 
-    [HarmonyPatch(typeof(Dam_PlayerDamageBase), nameof(Dam_PlayerDamageBase.ReceiveMeleeDamage))]
-    class Inject_PlayerAgent_ReceiveDamages_Melee
-    {
-        
-    }
-
     [HarmonyPatch(typeof(Dam_PlayerDamageLocal))]
     class Inject_PlayerAgent_ReceiveDamages
     {
