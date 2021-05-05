@@ -1,47 +1,65 @@
 ﻿using EECustom.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EECustom.Utils
 {
-    public class ValueBaseConverter : JsonConverter
+    public class ValueBaseConverter : JsonConverter<ValueBase>
     {
+        public override bool HandleNull => false;
+
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(ValueBase);
         }
 
-        public override bool CanWrite
+        public override ValueBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            get { return false; }
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null)
-                return existingValue;
-
-            JToken token = JToken.Load(reader);
             switch (reader.TokenType)
             {
-                case JsonToken.Integer:
-                    return new ValueBase(token.ToObject<int>(), ValueMode.Abs);
+                case JsonTokenType.Number:
+                    return new ValueBase(reader.GetSingle(), ValueMode.Abs);
 
-                case JsonToken.Float:
-                    return new ValueBase(token.ToObject<float>(), ValueMode.Abs);
+                case JsonTokenType.StartObject:
 
-                case JsonToken.StartObject:
-                    JObject jobject = JObject.Load(reader);
-                    var value = jobject["Value"]?.ToObject<float>() ?? 1.0f;
-                    var mode = jobject["Mode"]?.ToObject<ValueMode>() ?? ValueMode.Rel;
-                    var fromDef = jobject["FromDefault"]?.ToObject<bool>() ?? true;
-                    return new ValueBase(value, mode, fromDef);
+                    var valueBase = new ValueBase();
+                    while (reader.Read())
+                    {
+                        if (reader.TokenType == JsonTokenType.EndObject)
+                            return valueBase;
 
-                case JsonToken.String:
-                    var strValue = ((string)reader.Value).Trim();
+                        if (reader.TokenType != JsonTokenType.PropertyName)
+                            throw new JsonException("Expected PropertyName token");
+
+                        var propName = reader.GetString();
+                        reader.Read();
+
+
+                        switch (propName.ToLower())
+                        {
+                            case "value":
+                                valueBase.Value = reader.GetSingle();
+                                break;
+
+                            case "mode":
+                                if(Enum.TryParse<ValueMode>(reader.GetString(), out var valueMode))
+                                {
+                                    valueBase.Mode = valueMode;
+                                }
+                                break;
+
+                            case "fromdefault":
+                                valueBase.FromDefault = reader.GetBoolean();
+                                break;
+                        }
+                    }
+                    throw new JsonException("Expected EndObject token");
+
+                case JsonTokenType.String:
+                    var strValue = reader.GetString().Trim();
                     var fromDefaultFlag = false;
 
                     if (strValue.EndsWith("of default", StringComparison.OrdinalIgnoreCase))
@@ -65,16 +83,14 @@ namespace EECustom.Utils
                     {
                         return new ValueBase(parsedValue, ValueMode.Abs);
                     }
-                    Logger.Error($"Cannot parse ValueBase string: {strValue}! Are you sure it's in right format? (returning exstingValue)");
-                    return existingValue;
+                    throw new JsonException($"Cannot parse ValueBase string: {strValue}! Are you sure it's in right format?");
 
                 default:
-                    Logger.Error($"ValueBaseJson type: {reader.TokenType} is not implemented! returning existingValue!");
-                    return existingValue;
+                    throw new JsonException($"ValueBaseJson type: {reader.TokenType} is not implemented!");
             }
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, ValueBase value, JsonSerializerOptions options)
         {
             throw new NotImplementedException();
         }

@@ -2,7 +2,7 @@
 using EECustom.Utils;
 using System;
 
-namespace EECustom.Customizations.StrikerTentacles
+namespace EECustom.Customizations.Strikers
 {
 	using EaseFunc = Func<float, float, float, float, float>;
 

@@ -3,6 +3,7 @@ using EECustom.Customizations;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using EECustom.Customizations.Models;
 
 namespace EECustom.Inject
 {

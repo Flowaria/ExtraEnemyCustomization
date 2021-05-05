@@ -1,5 +1,5 @@
 ﻿using EECustom.Customizations;
-using EECustom.Customizations.ShooterFires;
+using EECustom.Customizations.Shooters;
 using EECustom.CustomSettings.CustomProjectiles;
 using System;
 using System.Collections.Generic;

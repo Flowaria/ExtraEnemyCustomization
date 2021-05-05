@@ -3,7 +3,6 @@ using EECustom.Configs;
 using EECustom.Customizations;
 using EECustom.Utils;
 using MTFO.Managers;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -96,9 +95,11 @@ namespace EECustom
             _CustomizationBuffer.AddRange(AbilityCustom.GetAllSettings());
             _CustomizationBuffer.AddRange(ProjectileCustom.GetAllSettings());
             _CustomizationBuffer.AddRange(TentacleCustom.GetAllSettings());
+            _CustomizationBuffer.AddRange(ScoutCustom.GetAllSettings());
             foreach (var custom in _CustomizationBuffer)
             {
                 custom.Initialize();
+                custom.LogDev("Init!");
             }
         }
 

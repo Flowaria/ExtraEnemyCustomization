@@ -1,4 +1,4 @@
-﻿using EECustom.Customizations.ShooterFires;
+﻿using EECustom.Customizations.Shooters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

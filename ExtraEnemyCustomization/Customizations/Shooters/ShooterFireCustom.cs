@@ -2,12 +2,12 @@
 using EECustom.Customizations.Abilities;
 using EECustom.Customizations.Abilities.Managers;
 using EECustom.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using UnityEngine;
+using System.Text.Json.Serialization;
 
-namespace EECustom.Customizations.ShooterFires
+namespace EECustom.Customizations.Shooters
 {
     public class ShooterFireCustom : EnemyCustomBase
     {

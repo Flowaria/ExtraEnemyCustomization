@@ -1,52 +1,75 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using UnityEngine;
 
 namespace EECustom.Utils
 {
-    public class ColorConverter : JsonConverter
+    public class ColorConverter : JsonConverter<Color>
     {
+        public override bool HandleNull => false;
+
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(Color);
         }
 
-        public override bool CanWrite
+        public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            get { return false; }
-        }
+            var color = new Color();
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
             switch (reader.TokenType)
             {
-                case JsonToken.StartObject:
-                    JObject jobject = JObject.Load(reader);
-                    var r = jobject["r"]?.ToObject<float>() ?? 1.0f;
-                    var g = jobject["g"]?.ToObject<float>() ?? 1.0f;
-                    var b = jobject["b"]?.ToObject<float>() ?? 1.0f;
-                    var a = jobject["a"]?.ToObject<float>() ?? 1.0f;
-                    return new Color(r, g, b, a);
+                case JsonTokenType.StartObject:
+                    while (reader.Read())
+                    {
+                        if (reader.TokenType == JsonTokenType.EndObject)
+                            return color;
 
-                case JsonToken.String:
-                    var strValue = ((string)reader.Value).Trim();
-                    if(ColorUtility.TryParseHtmlString(strValue, out var color))
+                        if (reader.TokenType != JsonTokenType.PropertyName)
+                            throw new JsonException("Expected PropertyName token");
+
+                        var propName = reader.GetString();
+                        reader.Read();
+
+
+                        switch(propName.ToLower())
+                        {
+                            case "r":
+                                color.r = reader.GetSingle();
+                                break;
+
+                            case "g":
+                                color.g = reader.GetSingle();
+                                break;
+
+                            case "b":
+                                color.b = reader.GetSingle();
+                                break;
+
+                            case "a":
+                                color.a = reader.GetSingle();
+                                break;
+                        }
+                    }
+                    throw new JsonException("Expected EndObject token");
+
+                case JsonTokenType.String:
+                    var strValue = reader.GetString().Trim();
+                    if (ColorUtility.TryParseHtmlString(strValue, out color))
                     {
                         return color;
                     }
-                    Logger.Error($"Cannot parse color string: {strValue}! Are you sure it's in right format? (returning exstingValue)");
-                    return existingValue;
+                    throw new JsonException($"Color format is not right: {strValue}");
 
                 default:
-                    Logger.Error($"ColorJson type: {reader.TokenType} is not implemented! returning existingValue!");
-                    return existingValue;
+                    throw new JsonException($"ColorJson type: {reader.TokenType} is not implemented!");
             }
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using EECustom.Utils;
+using Enemies;
 using UnityEngine;
 
 namespace EECustom.Customizations.Models

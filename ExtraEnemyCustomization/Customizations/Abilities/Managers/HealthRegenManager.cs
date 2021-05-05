@@ -59,8 +59,6 @@ namespace EECustom.Customizations.Abilities.Managers
 
             if (_AlwaysRegen || _IsDecay)
             {
-                
-
                 OnTakeDamage(0.0f);
             }
         }

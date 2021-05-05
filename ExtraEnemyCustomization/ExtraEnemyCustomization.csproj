@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ValidateGamePath">
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ValidateGamePath">
 
   <Import Project="GameFolder.props" Condition="Exists('./GameFolder.props')" />
   <Target Name="ValidateGamePath">
@@ -27,11 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedAssembly Include="$(OutputPath)/Newtonsoft.Json.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ILRepack.Lib.MSBuild" Version="2.1.16.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0-preview.1.21102.12" />
   </ItemGroup>
 </Project>
