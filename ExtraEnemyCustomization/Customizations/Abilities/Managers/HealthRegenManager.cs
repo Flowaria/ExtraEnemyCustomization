@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using EECustom.Events;
 
 namespace EECustom.Customizations.Abilities.Managers
 {
@@ -112,7 +113,7 @@ namespace EECustom.Customizations.Abilities.Managers
             }
         }
 
-        void OnTakeDamage(float _)
+        void OnTakeDamage(float damage)
         {
             _RegenInitialTimer = Clock.Time + RegenData.DelayUntilRegenStart;
             _IsRegening = true;
