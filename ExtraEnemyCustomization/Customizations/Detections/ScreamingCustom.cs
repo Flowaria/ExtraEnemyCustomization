@@ -7,6 +7,8 @@ namespace EECustom.Customizations.Detections
 {
     public class ScreamingCustom : EnemyCustomBase
     {
+        //TODO: Implement me Daddy
+
         public DetectedBehaviourType DetectedBehaviour = DetectedBehaviourType.DoPropagateScream;
         public bool ImmortalDuringScream = true;
 
@@ -18,7 +20,7 @@ namespace EECustom.Customizations.Detections
         public override bool HasPostspawnBody => true;
         public override void Postspawn(EnemyAgent agent)
         {
-            //
+            
         }
     }
 
