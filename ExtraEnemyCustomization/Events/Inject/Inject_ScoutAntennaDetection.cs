@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Utils.Inject
+namespace EECustom.Events.Inject
 {
     [HarmonyPatch(typeof(ScoutAntennaDetection), nameof(ScoutAntennaDetection.OnSpawn))]
     class Inject_ScoutAntennaDetection

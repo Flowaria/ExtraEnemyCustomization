@@ -4,6 +4,7 @@ using HarmonyLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using EECustom.Customizations.Models;
+using EECustom.Managers;
 
 namespace EECustom.Inject
 {

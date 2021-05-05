@@ -16,13 +16,6 @@ namespace EECustom.Customizations.Strikers
             return "Tentacle";
         }
 
-        public override bool HasPrespawnBody => false;
-
-        public override void Prespawn(EnemyAgent agent)
-        {
-            
-        }
-
         public override bool HasPostspawnBody => true;
         public override void Postspawn(EnemyAgent agent)
         {
@@ -38,7 +31,7 @@ namespace EECustom.Customizations.Strikers
                 {
                     var tenType = TentacleTypes[i % TentacleTypes.Length];
                     tentacle.m_GPUCurvyType = tenType;
-                    LogDev($" - Applied Tentacle Type!, index: {i} type: {tenType}");
+                    LogVerbose($" - Applied Tentacle Type!, index: {i} type: {tenType}");
                 }
 
                 if (isSettingEnabled)
@@ -49,7 +42,7 @@ namespace EECustom.Customizations.Strikers
                     tentacle.m_attackInDuration = setting.InDuration.GetAbsValue(tentacle.m_attackInDuration);
                     tentacle.m_attackOutDuration = setting.OutDuration.GetAbsValue(tentacle.m_attackOutDuration);
                     tentacle.m_attackHangDuration = setting.HangDuration.GetAbsValue(tentacle.m_attackHangDuration);
-                    LogDev($" - Applied Tentacle Setting!, index: {i}");
+                    LogVerbose($" - Applied Tentacle Setting!, index: {i}");
                 }
             }
         }

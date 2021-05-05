@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using EECustom.Managers;
+using Enemies;
 using HarmonyLib;
 
 namespace EECustom.Inject

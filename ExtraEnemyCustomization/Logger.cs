@@ -6,6 +6,7 @@ namespace EECustom
     {
         public static ManualLogSource LogInstance;
         public static bool UsingDevMessage = true;
+        public static bool UsingVerbose = false;
 
         public static void Log(string format, params object[] args) => Log(string.Format(format, args));
 
@@ -34,6 +35,13 @@ namespace EECustom
         {
             if (UsingDevMessage)
                 LogInstance?.LogDebug(str);
+        }
+
+        public static void Verbose(string format, params object[] args) => Verbose(string.Format(format, args));
+        public static void Verbose(string str)
+        {
+            if (UsingDevMessage && UsingVerbose)
+                LogInstance?.LogDebug($"{str} (Verbose)");
         }
     }
 }

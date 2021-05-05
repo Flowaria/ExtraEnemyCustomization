@@ -1,11 +1,12 @@
-﻿using EECustom.Utils;
+﻿using EECustom.Events;
+using EECustom.Utils;
 using Enemies;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace EECustom.Customizations.Scouts
+namespace EECustom.Customizations.Detections
 {
     public class FeelerCustom : EnemyCustomBase
     {
@@ -14,19 +15,17 @@ namespace EECustom.Customizations.Scouts
         public ValueBase TendrilStepAngle = ValueBase.Unchanged;
         public ValueBase TendrilMinYSpread = ValueBase.Unchanged;
         public ValueBase TendrilMaxYSpread = ValueBase.Unchanged;
+        public ValueBase TendrilOutTimer = ValueBase.Unchanged;
 
         public ValueBase Distance = ValueBase.Unchanged;
         public ValueBase StepDistance = ValueBase.Unchanged;
-        public ValueBase FoldTime = ValueBase.Unchanged;
         public ValueBase RetractTime = ValueBase.Unchanged;
         public ValueBase RetractTimeDetected = ValueBase.Unchanged;
-        public Color NormalColor = Color.white;
+        public Color NormalColor = Color.black;
         public Color DetectColor = Color.red;
-
-        //TODO: Implement me Daddy
         public override string GetProcessName()
         {
-            return "ScoutFeeler";
+            return "Feeler";
         }
 
         public override bool HasPostspawnBody => true;
@@ -61,13 +60,13 @@ namespace EECustom.Customizations.Scouts
             detection.m_dirAngStep = TendrilStepAngle.GetAbsValue(detection.m_dirAngStep);
             detection.m_dirAngSpread_Min = TendrilMinYSpread.GetAbsValue(detection.m_dirAngSpread_Min);
             detection.m_dirAngSpread_Max = TendrilMaxYSpread.GetAbsValue(detection.m_dirAngSpread_Max);
+            detection.m_timerWaitOut = TendrilOutTimer.GetAbsValue(detection.m_timerWaitOut);
         }
 
         private void OnAntennaSpawn(EnemyAgent agent, ScoutAntennaDetection detection, ScoutAntenna ant)
         {
             ant.m_colorDefault = NormalColor;
             ant.m_colorDetection = DetectColor;
-            ant.m_moveOutTime = FoldTime.GetAbsValue(ant.m_moveOutTime);
             ant.m_moveInTime = RetractTime.GetAbsValue(ant.m_moveInTime);
             ant.m_moveInTimeDetected = RetractTimeDetected.GetAbsValue(ant.m_moveInTimeDetected);
             ant.m_maxDistance = Distance.GetAbsValue(ant.m_maxDistance);

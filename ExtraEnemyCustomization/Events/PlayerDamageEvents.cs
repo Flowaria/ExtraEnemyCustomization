@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Utils
+namespace EECustom.Events
 {
     public static class PlayerDamageEvents
     {

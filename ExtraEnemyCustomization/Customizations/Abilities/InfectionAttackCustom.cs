@@ -5,6 +5,7 @@ using Player;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EECustom.Events;
 
 namespace EECustom.Customizations.Abilities
 {

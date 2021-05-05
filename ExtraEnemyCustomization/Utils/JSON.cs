@@ -10,13 +10,15 @@ namespace EECustom.Utils
     {
         private readonly static JsonSerializerOptions _Setting = new JsonSerializerOptions()
         {
-            ReadCommentHandling = JsonCommentHandling.Skip
+            ReadCommentHandling = JsonCommentHandling.Skip,
+            IncludeFields = true
         };
 
         static JSON()
         {
             _Setting.Converters.Add(new ValueBaseConverter());
             _Setting.Converters.Add(new ColorConverter());
+            _Setting.Converters.Add(new JsonStringEnumConverter());
         }
 
         public static T Deserialize<T>(string json)

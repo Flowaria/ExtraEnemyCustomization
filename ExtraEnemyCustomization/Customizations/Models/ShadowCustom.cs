@@ -29,7 +29,7 @@ namespace EECustom.Customizations.Models
             {
                 if (!IncludeEggSack && comp.gameObject.name.Contains("Egg"))
                 {
-                    LogDev(" - Ignored EggSack Object!");
+                    LogVerbose(" - Ignored EggSack Object!");
                     comp.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
                     comp.enabled = true;
                     continue;

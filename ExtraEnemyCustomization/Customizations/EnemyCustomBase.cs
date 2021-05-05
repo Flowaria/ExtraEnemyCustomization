@@ -29,9 +29,14 @@ namespace EECustom.Customizations
         public virtual bool HasPrespawnBody { get { return false; } }
         public virtual bool HasPostspawnBody { get { return false; } }
 
+        public void LogVerbose(string str)
+        {
+            LogFormatDebug(str, true);
+        }
+
         public void LogDev(string str)
         {
-            LogFormat(LogLevel.Debug, str);
+            LogFormatDebug(str, false);
         }
 
         public void LogError(string str)
@@ -50,6 +55,20 @@ namespace EECustom.Customizations
                 Logger.LogInstance.Log(level, $"[{GetProcessName()}-{DebugName}] {str}");
             else
                 Logger.LogInstance.Log(level, $"[{GetProcessName()}] {str}");
+        }
+
+        private void LogFormatDebug(string str, bool verbose)
+        {
+            string prefix;
+            if (!string.IsNullOrEmpty(DebugName))
+                prefix = $"[{GetProcessName()}-{DebugName}]";
+            else
+                prefix = $"[{GetProcessName()}]";
+
+            if (verbose)
+                Logger.Verbose($"{prefix} {str}");
+            else
+                Logger.Debug($"{prefix} {str}");
         }
     }
 

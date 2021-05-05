@@ -23,7 +23,7 @@ namespace EECustom.Customizations.Models
 
             foreach (var limb in agent.Damage.DamageLimbs)
             {
-                LogDev($" - Found Limb: {limb.name}");
+                LogVerbose($" - Found Limb: {limb.name}");
 
                 var limbCustomData = Limbs.SingleOrDefault(x => x.LimbName.Equals(limb.name));
                 if (limbCustomData == null)
@@ -35,7 +35,7 @@ namespace EECustom.Customizations.Models
                     limbCustomData = allLimbData;
                 }
 
-                LogDev($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValue: {limbCustomData.Health}");
+                LogVerbose($" - Applying Setting to Limb, LimbType: {limbCustomData.LimbType}, CustomMult: {limbCustomData.CustomMulti}, HealthValue: {limbCustomData.Health}");
                 var newHealth = limbCustomData.Health.GetAbsValue(limb.m_healthMax);
                 limb.m_health = newHealth;
                 limb.m_healthMax = newHealth;

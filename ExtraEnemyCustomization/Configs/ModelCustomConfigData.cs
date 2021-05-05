@@ -13,6 +13,7 @@ namespace EECustom.Configs
         public MaterialCustom[] MaterialCustom = new MaterialCustom[0];
         public LimbCustom[] LimbCustom = new LimbCustom[0];
         public ModelRefCustom[] ModelRefCustom = new ModelRefCustom[0];
+        public MarkerCustom[] MarkerCustom = new MarkerCustom[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {
@@ -21,6 +22,7 @@ namespace EECustom.Configs
             list.AddRange(MaterialCustom);
             list.AddRange(LimbCustom);
             list.AddRange(ModelRefCustom);
+            list.AddRange(MarkerCustom);
             return list.ToArray();
         }
     }

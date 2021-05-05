@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Utils.Inject
+namespace EECustom.Events.Inject
 {
     
 
