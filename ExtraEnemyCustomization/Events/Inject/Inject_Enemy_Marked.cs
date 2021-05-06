@@ -11,7 +11,7 @@ namespace EECustom.Events.Inject
     {
         static void Postfix(EnemyAgent __instance)
         {
-            EnemyMarkerEvents.OnMarked.Invoke(__instance, __instance.m_tagMarker);
+            EnemyMarkerEvents.OnMarked?.Invoke(__instance, __instance.m_tagMarker);
         }
     }
 }
