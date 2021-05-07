@@ -11,7 +11,7 @@ namespace EECustom
     //TODO: Refactor the CustomBase to support Phase Setting
     //TODO: Scout WaveSetting Custom
 
-    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.3.5")]
+    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.4.0")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]
     public class EntryPoint : BasePlugin
