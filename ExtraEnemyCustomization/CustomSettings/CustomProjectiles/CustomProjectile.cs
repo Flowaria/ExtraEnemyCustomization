@@ -43,7 +43,7 @@ namespace EECustom.CustomSettings.CustomProjectiles
 
             var basePrefab = ProjectileManager.Current.m_projectilePrefabs[(int)projInfo.BaseProjectile];
             var newPrefab = GameObject.Instantiate(basePrefab);
-            GameObject.DontDestroyOnLoad(newPrefab);
+            UnityEngine.Object.DontDestroyOnLoad(newPrefab);
             var projectileBase = newPrefab.GetComponent<ProjectileBase>();
             if (projectileBase != null)
             {
@@ -67,8 +67,8 @@ namespace EECustom.CustomSettings.CustomProjectiles
             {
                 Logger.Error($"Projectile Base Prefab Doesn't have ProjectileBase, Are you sure?, ProjID: {projInfo.ID}, Name: {projInfo.DebugName}");
             }
-            newPrefab.active = false;
-            newPrefab.name = "GaneratedProjectilePrefab_" + projInfo.ID;
+            newPrefab.SetActive(false);
+            newPrefab.name = "GeneratedProjectilePrefab_" + projInfo.ID;
             _ProjectilePrefabs.Add(projInfo.ID, newPrefab);
             Logger.Debug($"Added Projectile!: {projInfo.ID} ({projInfo.DebugName})");
         }
