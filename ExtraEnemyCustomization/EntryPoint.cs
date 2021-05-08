@@ -35,8 +35,7 @@ namespace EECustom
             harmony.PatchAll();
 
             ConfigManager.Initialize();
-
-            
+            SpriteManager.Initialize();
         }
     }
 }

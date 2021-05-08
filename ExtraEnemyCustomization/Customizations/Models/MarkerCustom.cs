@@ -22,18 +22,24 @@ namespace EECustom.Customizations.Models
 
         [JsonIgnore]
         private Sprite _Sprite = null;
+        [JsonIgnore]
+        private bool _PrespawnOnce = false;
 
         public override string GetProcessName()
         {
             return "Marker";
         }
 
-        public override void Initialize()
+        public override bool HasPrespawnBody => true;
+        public override void Prespawn(EnemyAgent agent)
         {
-            if (!string.IsNullOrEmpty(SpriteName))
+            if (!_PrespawnOnce)
             {
-                SpriteManager.TryCacheSprite(SpriteName);
-                _Sprite = SpriteManager.TryGetSprite(SpriteName);
+                if (!string.IsNullOrEmpty(SpriteName) && !SpriteManager.TryGetSpriteCache(SpriteName, 64.0f, out _Sprite))
+                {
+                    _Sprite = SpriteManager.GenerateSprite(SpriteName);
+                }
+                _PrespawnOnce = true;
             }
         }
 
@@ -54,20 +60,21 @@ namespace EECustom.Customizations.Models
             {
                 var renderer = marker.m_enemySubObj.GetComponentInChildren<SpriteRenderer>();
                 renderer.sprite = _Sprite;
-                if (BlinkIn)
-                {
-                    CoroutineManager.BlinkIn(marker.m_enemySubObj.gameObject, 0.0f);
-                    CoroutineManager.BlinkIn(marker.m_enemySubObj.gameObject, 0.2f);
-                }
+            }
 
-                if (Blink)
-                {
-                    if (BlinkMinDelay < 0.0f || BlinkMaxDelay < BlinkMinDelay)
-                        return;
+            if (BlinkIn)
+            {
+                CoroutineManager.BlinkIn(marker.m_enemySubObj.gameObject, 0.0f);
+                CoroutineManager.BlinkIn(marker.m_enemySubObj.gameObject, 0.2f);
+            }
 
+            if (Blink)
+            {
+                if (BlinkMinDelay >= 0.0f && BlinkMinDelay < BlinkMaxDelay)
+                {
                     float duration = Mathf.Min(BlinkDuration, agent.EnemyBalancingData.TagTime);
                     float time = 0.4f + UnityEngine.Random.RandomRange(BlinkMinDelay, BlinkMaxDelay);
-                    for (; time <= BlinkDuration; time += UnityEngine.Random.RandomRange(BlinkMinDelay, BlinkMaxDelay))
+                    for (; time <= duration; time += UnityEngine.Random.RandomRange(BlinkMinDelay, BlinkMaxDelay))
                     {
                         CoroutineManager.BlinkIn(marker.m_enemySubObj.gameObject, time);
                     }

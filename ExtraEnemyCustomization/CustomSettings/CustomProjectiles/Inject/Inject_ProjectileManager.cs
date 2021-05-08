@@ -36,7 +36,7 @@ namespace EECustom.CustomSettings.CustomProjectiles.Inject
             }
 
             var gameObject = GameObject.Instantiate(projectilePrefab, pos, rot, ProjectileManager.Current.m_root.transform);
-            gameObject.active = true;
+            gameObject.SetActive(true);
             __result = gameObject;
             return false;
         }

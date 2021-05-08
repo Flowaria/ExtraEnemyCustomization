@@ -42,7 +42,7 @@ namespace EECustom.Customizations.Abilities.Managers
                 _OnDamageDel = new Action<EnemyAgent, Agent, float>((EnemyAgent a1, Agent a2, float dmg) => {
                     if (a1.GlobalID == DamageBase.Owner.GlobalID)
                     {
-                        OnTakeDamage(dmg);
+                        OnTakeDamage();
                     }
                 });
 
@@ -60,7 +60,7 @@ namespace EECustom.Customizations.Abilities.Managers
 
             if (_AlwaysRegen || _IsDecay)
             {
-                OnTakeDamage(0.0f);
+                OnTakeDamage();
             }
         }
 
@@ -113,7 +113,7 @@ namespace EECustom.Customizations.Abilities.Managers
             }
         }
 
-        void OnTakeDamage(float damage)
+        void OnTakeDamage()
         {
             _RegenInitialTimer = Clock.Time + RegenData.DelayUntilRegenStart;
             _IsRegening = true;
