@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public abstract class ConfigData
+    public abstract class CustomizationConfig
     {
         public abstract EnemyCustomBase[] GetAllSettings();
     }

@@ -25,7 +25,7 @@ namespace EECustom.Customizations.Abilities.Managers
         private float _RegenCapAbsValue = 0.0f;
         private float _RegenAmountAbsValue = 0.0f;
 
-        private Action<EnemyAgent, Agent, float> _OnDamageDel;
+        private Action<EnemyAgent, Agent> _OnDamageDel;
 
         public HealthRegenManager(IntPtr ptr) : base(ptr)
         {
@@ -39,7 +39,7 @@ namespace EECustom.Customizations.Abilities.Managers
             if (!_AlwaysRegen)
             {
                 //DamageBase.add_CallOnTakeDamage(new Action<float>(OnTakeDamage)); This doesn't work for some reason rofl
-                _OnDamageDel = new Action<EnemyAgent, Agent, float>((EnemyAgent a1, Agent a2, float dmg) => {
+                _OnDamageDel = new Action<EnemyAgent, Agent>((EnemyAgent a1, Agent a2) => {
                     if (a1.GlobalID == DamageBase.Owner.GlobalID)
                     {
                         OnTakeDamage();

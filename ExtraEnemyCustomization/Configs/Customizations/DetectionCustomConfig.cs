@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public class DetectionCustomConfigData : ConfigData
+    public class DetectionCustomConfig : CustomizationConfig
     {
         public ScreamingCustom[] ScreamingCustom = new ScreamingCustom[0];
         public FeelerCustom[] FeelerCustom = new FeelerCustom[0];

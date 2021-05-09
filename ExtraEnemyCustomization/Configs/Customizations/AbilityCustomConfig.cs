@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public class AbilityCustomConfigData : ConfigData
+    public class AbilityCustomConfig : CustomizationConfig
     {
         public BirthingCustom[] BirthingCustom = new BirthingCustom[0];
         public FogSphereCustom[] FogSphereCustom = new FogSphereCustom[0];

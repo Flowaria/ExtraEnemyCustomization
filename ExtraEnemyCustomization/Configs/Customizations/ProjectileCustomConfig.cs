@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public class ProjectileCustomConfigData : ConfigData
+    public class ProjectileCustomConfig : CustomizationConfig
     {
         public ShooterFireCustom[] ShooterFireCustom = new ShooterFireCustom[0];
         public CustomProjectile[] ProjectileDefinitions = new CustomProjectile[0];

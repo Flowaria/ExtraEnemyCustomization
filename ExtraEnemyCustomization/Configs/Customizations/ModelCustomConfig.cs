@@ -3,9 +3,9 @@ using EECustom.Customizations.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public class ModelCustomConfigData : ConfigData
+    public class ModelCustomConfig : CustomizationConfig
     {
         public bool CacheAllMaterials = false;
 

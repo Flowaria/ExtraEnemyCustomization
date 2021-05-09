@@ -6,6 +6,7 @@ using MTFO.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using EECustom.Configs.Customizations;
 
 namespace EECustom.Managers
 {
@@ -24,23 +25,23 @@ namespace EECustom.Managers
                     BasePath = Path.Combine(MTFO.Managers.ConfigManager.CustomPath, "ExtraEnemyCustomization");
 
                     Logger.Debug("Loading Model.json...");
-                    if (TryLoadConfig(BasePath, "Model.json", out ModelCustomConfigData modelConfig))
+                    if (TryLoadConfig(BasePath, "Model.json", out ModelCustomConfig modelConfig))
                         Current.ModelCustom = modelConfig;
 
                     Logger.Debug("Loading Ability.json...");
-                    if (TryLoadConfig(BasePath, "Ability.json", out AbilityCustomConfigData abilityConfig))
+                    if (TryLoadConfig(BasePath, "Ability.json", out AbilityCustomConfig abilityConfig))
                         Current.AbilityCustom = abilityConfig;
 
                     Logger.Debug("Loading Projectile.json...");
-                    if (TryLoadConfig(BasePath, "Projectile.json", out ProjectileCustomConfigData projConfig))
+                    if (TryLoadConfig(BasePath, "Projectile.json", out ProjectileCustomConfig projConfig))
                         Current.ProjectileCustom = projConfig;
 
                     Logger.Debug("Loading Tentacle.json...");
-                    if (TryLoadConfig(BasePath, "Tentacle.json", out TentacleCustomConfigData tentacleConfig))
+                    if (TryLoadConfig(BasePath, "Tentacle.json", out TentacleCustomConfig tentacleConfig))
                         Current.TentacleCustom = tentacleConfig;
 
                     Logger.Debug("Loading Detection.json...");
-                    if (TryLoadConfig(BasePath, "Detection.json", out DetectionCustomConfigData detectionConfig))
+                    if (TryLoadConfig(BasePath, "Detection.json", out DetectionCustomConfig detectionConfig))
                         Current.DetectionCustom = detectionConfig;
                 }
                 catch (Exception e)
@@ -82,11 +83,11 @@ namespace EECustom.Managers
         }
         public static ConfigManager Current { get; private set; }
         
-        public ModelCustomConfigData ModelCustom { get; private set; } = new ModelCustomConfigData();
-        public AbilityCustomConfigData AbilityCustom { get; private set; } = new AbilityCustomConfigData();
-        public ProjectileCustomConfigData ProjectileCustom { get; private set; } = new ProjectileCustomConfigData();
-        public TentacleCustomConfigData TentacleCustom { get; private set; } = new TentacleCustomConfigData();
-        public DetectionCustomConfigData DetectionCustom { get; private set; } = new DetectionCustomConfigData();
+        public ModelCustomConfig ModelCustom { get; private set; } = new ModelCustomConfig();
+        public AbilityCustomConfig AbilityCustom { get; private set; } = new AbilityCustomConfig();
+        public ProjectileCustomConfig ProjectileCustom { get; private set; } = new ProjectileCustomConfig();
+        public TentacleCustomConfig TentacleCustom { get; private set; } = new TentacleCustomConfig();
+        public DetectionCustomConfig DetectionCustom { get; private set; } = new DetectionCustomConfig();
 
         private readonly List<EnemyCustomBase> _CustomizationBuffer = new List<EnemyCustomBase>();
 
@@ -102,6 +103,7 @@ namespace EECustom.Managers
             {
                 custom.Initialize();
                 custom.LogDev("Init!");
+                custom.LogVerbose(custom.Target.ToDebugString());
             }
         }
 

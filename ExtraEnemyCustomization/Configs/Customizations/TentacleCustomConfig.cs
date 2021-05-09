@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.Configs
+namespace EECustom.Configs.Customizations
 {
-    public class TentacleCustomConfigData : ConfigData
+    public class TentacleCustomConfig : CustomizationConfig
     {
         public StrikerTentacleCustom[] StrikerTentacleCustom = new StrikerTentacleCustom[0];
         public CustomTentacle[] TentacleDefinitions = new CustomTentacle[0];
