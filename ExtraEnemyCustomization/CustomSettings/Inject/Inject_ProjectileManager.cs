@@ -3,7 +3,7 @@ using HarmonyLib;
 using System;
 using UnityEngine;
 
-namespace EECustom.CustomSettings.CustomProjectiles.Inject
+namespace EECustom.CustomSettings.Inject
 {
     [HarmonyPatch(typeof(ProjectileManager))]
     class Inject_ProjectileManager
@@ -14,7 +14,7 @@ namespace EECustom.CustomSettings.CustomProjectiles.Inject
         {
             foreach (var proj in ConfigManager.Current.ProjectileCustom.ProjectileDefinitions)
             {
-                CustomProjectile.GenerateProjectile(proj);
+                CustomProjectileManager.GenerateProjectile(proj);
             }
         }
 
@@ -27,7 +27,7 @@ namespace EECustom.CustomSettings.CustomProjectiles.Inject
                 return true;
             }
 
-            var projectilePrefab = CustomProjectile.GetProjectile((byte)type);
+            var projectilePrefab = CustomProjectileManager.GetProjectile((byte)type);
             if (projectilePrefab == null)
             {
                 Logger.Error($"CANT FIND PREFAB WITH ID: {(int)type}");

@@ -1,25 +1,13 @@
-﻿using EECustom.Utils;
+﻿using EECustom.CustomSettings.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.Json.Serialization;
-using UnityEngine;
 
-namespace EECustom.CustomSettings.CustomTentacles
+namespace EECustom.CustomSettings
 {
-    public class CustomTentacle
+    public static class CustomTentacleManager
     {
-        [JsonIgnore]
         private static readonly Dictionary<int, GPUC_Setup> _TentacleSetups = new Dictionary<int, GPUC_Setup>();
-
-        public string DebugName = string.Empty;
-        public int ID = 15;
-        public GPUCurvyType BodyPrefab = GPUCurvyType.Striker;
-        public GPUCurvyType BodyMaterial = GPUCurvyType.Striker;
-        public GPUCurvyType HeadPrefab = GPUCurvyType.Striker;
-        public GPUCurvyType HeadMaterial = GPUCurvyType.Striker;
-        public GPUCurvyType Shape = GPUCurvyType.Striker;
-        public int MaxCount = 50;
 
         public static void GenerateTentacle(CustomTentacle tentInfo)
         {

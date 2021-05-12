@@ -1,6 +1,6 @@
 ﻿using EECustom.Customizations;
 using EECustom.Customizations.Shooters;
-using EECustom.CustomSettings.CustomProjectiles;
+using EECustom.CustomSettings.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;

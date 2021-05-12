@@ -1,25 +1,15 @@
-﻿using EECustom.Utils;
-using Newtonsoft.Json;
+﻿using EECustom.CustomSettings.DTO;
+using EECustom.Utils;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-namespace EECustom.CustomSettings.CustomProjectiles
+namespace EECustom.CustomSettings
 {
-    public class CustomProjectile
+    public static class CustomProjectileManager
     {
-        [JsonIgnore]
         private static readonly Dictionary<byte, GameObject> _ProjectilePrefabs = new Dictionary<byte, GameObject>();
-
-        public string DebugName = string.Empty;
-        public byte ID = 10;
-        public ProjectileType BaseProjectile = ProjectileType.TargetingSmall;
-        public ValueBase Speed = ValueBase.Unchanged;
-        public ValueBase HomingStrength = ValueBase.Unchanged;
-        public Color GlowColor = Color.yellow;
-        public ValueBase GlowRange = ValueBase.Unchanged;
-        public ValueBase Damage = ValueBase.Unchanged;
-        public ValueBase Infection = ValueBase.Unchanged;
 
         public static void GenerateProjectile(CustomProjectile projInfo)
         {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.CustomSettings.CustomTentacles.Inject
+namespace EECustom.CustomSettings.Inject
 {
     [HarmonyPatch(typeof(GPUCurvyManager))]
     class Inject_GPUCurvyManager

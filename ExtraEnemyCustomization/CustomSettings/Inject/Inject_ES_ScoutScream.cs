@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EECustom.CustomSettings.ScoutWaves.Inject
+namespace EECustom.CustomSettings.Inject
 {
     [HarmonyPatch(typeof(ES_ScoutScream), "CommonUpdate")]
     class Inject_ES_ScoutScream
