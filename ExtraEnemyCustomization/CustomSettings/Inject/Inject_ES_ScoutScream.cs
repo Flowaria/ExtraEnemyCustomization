@@ -20,7 +20,7 @@ namespace EECustom.CustomSettings.Inject
                 if (SNet.IsMaster)
                 {
                     var id = __instance.m_enemyAgent.EnemyDataID;
-                    //TRIGGER WAVE
+                    CustomScoutWaveManager.TriggerScoutWave(__instance.m_enemyAgent);
                 }
             }
         }

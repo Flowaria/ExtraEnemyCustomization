@@ -2,11 +2,11 @@
 using EECustom.Configs;
 using EECustom.Customizations;
 using EECustom.Utils;
-using MTFO.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using EECustom.Configs.Customizations;
+using EECustom.CustomSettings;
 
 namespace EECustom.Managers
 {
@@ -18,11 +18,11 @@ namespace EECustom.Managers
         {
             Current = new ConfigManager();
 
-            if (MTFO.Managers.ConfigManager.HasCustomContent)
+            if (MTFOUtil.IsLoaded && MTFOUtil.HasCustomContent)
             {
                 try
                 {
-                    BasePath = Path.Combine(MTFO.Managers.ConfigManager.CustomPath, "ExtraEnemyCustomization");
+                    BasePath = Path.Combine(MTFOUtil.CustomPath, "ExtraEnemyCustomization");
 
                     Logger.Debug("Loading Model.json...");
                     if (TryLoadConfig(BasePath, "Model.json", out ModelCustomConfig modelConfig))
@@ -43,6 +43,14 @@ namespace EECustom.Managers
                     Logger.Debug("Loading Detection.json...");
                     if (TryLoadConfig(BasePath, "Detection.json", out DetectionCustomConfig detectionConfig))
                         Current.DetectionCustom = detectionConfig;
+
+                    Logger.Debug("Loading ScoutWave.json");
+                    if (TryLoadConfig(BasePath, "ScoutWave.json", out ScoutWaveConfig scoutWaveConfig))
+                    {
+                        CustomScoutWaveManager.AddScoutSetting(scoutWaveConfig.Expeditions);
+                        CustomScoutWaveManager.AddTargetSetting(scoutWaveConfig.TargetSettings);
+                        CustomScoutWaveManager.AddWaveSetting(scoutWaveConfig.WaveSettings);
+                    }
                 }
                 catch (Exception e)
                 {

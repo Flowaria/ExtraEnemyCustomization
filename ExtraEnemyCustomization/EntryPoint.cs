@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using EECustom.Customizations.Abilities.Managers;
 using EECustom.Managers;
+using EECustom.Utils;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 
@@ -13,11 +14,10 @@ namespace EECustom
 
     [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.4.0")]
     [BepInProcess("GTFO.exe")]
-    [BepInDependency(MTFOGUID, BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency(MTFOUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency(MTFOPartialDataUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     public class EntryPoint : BasePlugin
     {
-        public const string MTFOGUID = "com.dak.MTFO";
-
         public override void Load()
         {
             ClassInjector.RegisterTypeInIl2Cpp<ShooterDistSettingManager>();
