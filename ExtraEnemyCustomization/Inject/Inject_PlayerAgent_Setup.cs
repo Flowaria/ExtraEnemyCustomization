@@ -7,10 +7,10 @@ using System.Text;
 
 namespace EECustom.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(PlayerAgent), nameof(PlayerAgent.Setup))]
     public class Inject_PlayerAgent_Setup
     {
+        [HarmonyWrapSafe]
         static void Postfix(PlayerAgent __instance)
         {
             PlayerData.MaxHealth = __instance.PlayerData.health;

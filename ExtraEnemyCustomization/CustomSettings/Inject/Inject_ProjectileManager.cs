@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace EECustom.CustomSettings.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(ProjectileManager))]
     class Inject_ProjectileManager
     {
         [HarmonyPostfix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(ProjectileManager.LoadAssets))]
         static void Post_LoadAsset()
         {
@@ -20,6 +20,7 @@ namespace EECustom.CustomSettings.Inject
         }
 
         [HarmonyPrefix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(ProjectileManager.SpawnProjectileType))]
         static bool Pre_SpawnProjectile(ref GameObject __result, ref ProjectileType type, Vector3 pos, Quaternion rot)
         {

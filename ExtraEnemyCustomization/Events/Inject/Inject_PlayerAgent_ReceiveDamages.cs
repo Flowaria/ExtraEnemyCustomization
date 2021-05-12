@@ -7,11 +7,11 @@ using System.Text;
 
 namespace EECustom.Events.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(Dam_PlayerDamageLocal))]
     class Inject_PlayerAgent_ReceiveDamages
     {
         [HarmonyPostfix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(Dam_PlayerDamageLocal.ReceiveMeleeDamage))]
         static void Post_Melee(pFullDamageData data, Dam_PlayerDamageBase __instance)
         {
@@ -24,6 +24,7 @@ namespace EECustom.Events.Inject
         }
 
         [HarmonyPostfix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(Dam_PlayerDamageLocal.ReceiveTentacleAttackDamage))]
         static void Post_Tentacle(pMediumDamageData data, Dam_PlayerDamageLocal __instance)
         {

@@ -6,11 +6,11 @@ using System.Text;
 
 namespace EECustom.CustomSettings.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(GPUCurvyManager))]
     class Inject_GPUCurvyManager
     {
         [HarmonyPostfix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(GPUCurvyManager.Setup))]
         static void Post_Setup()
         {
@@ -21,6 +21,7 @@ namespace EECustom.CustomSettings.Inject
         }
 
         [HarmonyPrefix]
+        [HarmonyWrapSafe]
         [HarmonyPatch(nameof(GPUCurvyManager.TryAllocateGPUCurvy))]
         static bool Pre_Allocate(GPUCurvyType type, ref GPUCurvy gpuCurvy)
         {

@@ -9,10 +9,10 @@ using System;
 
 namespace EECustom.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.GenerateAllEnemyPrefabs))]
     internal static class Inject_EnemyPrefab_GenAll
     {
+        [HarmonyWrapSafe]
         private static void Prefix()
         {
             Logger.Debug("== List of Material that can be used for Materials Parameters ==");

@@ -1,6 +1,6 @@
 ﻿using EECustom.Customizations;
 using EECustom.Customizations.Strikers;
-using EECustom.CustomSettings.CustomTentacles;
+using EECustom.CustomSettings.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;

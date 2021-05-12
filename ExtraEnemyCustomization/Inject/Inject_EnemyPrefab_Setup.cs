@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace EECustom.Inject
 {
-    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.BuildEnemyPrefab))]
     internal static class Inject_EnemyPrefab_Setup
     {
+        [HarmonyWrapSafe]
         private static void Postfix(GameObject __result)
         {
             var agent = __result.GetComponent<EnemyAgent>();

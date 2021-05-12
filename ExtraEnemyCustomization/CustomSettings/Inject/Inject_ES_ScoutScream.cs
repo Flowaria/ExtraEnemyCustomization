@@ -7,11 +7,12 @@ using System.Text;
 
 namespace EECustom.CustomSettings.Inject
 {
-    [HarmonyWrapSafe]
+    
     [HarmonyPatch(typeof(ES_ScoutScream), "CommonUpdate")]
     class Inject_ES_ScoutScream
     {
         //TODO: Check if it's work
+        [HarmonyWrapSafe]
         static void Postfix(ES_ScoutScream __instance)
         {
             if (__instance.m_state == ES_ScoutScream.ScoutScreamState.Response)
