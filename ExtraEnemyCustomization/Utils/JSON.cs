@@ -19,6 +19,12 @@ namespace EECustom.Utils
             _Setting.Converters.Add(new ValueBaseConverter());
             _Setting.Converters.Add(new ColorConverter());
             _Setting.Converters.Add(new JsonStringEnumConverter());
+
+            if (MTFOPartialDataUtil.IsLoaded && MTFOPartialDataUtil.Initialized)
+            {
+                _Setting.Converters.Add(MTFOPartialDataUtil.PersistentIDConverter);
+                Logger.Log("PartialData Support Found!");
+            }
         }
 
         public static T Deserialize<T>(string json)
