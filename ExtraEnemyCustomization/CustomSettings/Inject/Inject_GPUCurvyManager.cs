@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EECustom.CustomSettings.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(GPUCurvyManager))]
     class Inject_GPUCurvyManager
     {
@@ -15,7 +16,7 @@ namespace EECustom.CustomSettings.Inject
         {
             foreach (var tentDef in ConfigManager.Current.TentacleCustom.TentacleDefinitions)
             {
-                CustomTentacle.GenerateTentacle(tentDef);
+                CustomTentacleManager.GenerateTentacle(tentDef);
             }
         }
 
@@ -29,7 +30,7 @@ namespace EECustom.CustomSettings.Inject
                 return true;
             }
 
-            var setup = CustomTentacle.GetTentacle(id);
+            var setup = CustomTentacleManager.GetTentacle(id);
             if (setup.TryCanAllocate(out gpuCurvy))
             {
                 Logger.Error($"ALLOC {id}");

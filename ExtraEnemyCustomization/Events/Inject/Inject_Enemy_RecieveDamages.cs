@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace EECustom.Events.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(Dam_EnemyDamageBase))]
     class Inject_Enemy_RecieveDamages
     {

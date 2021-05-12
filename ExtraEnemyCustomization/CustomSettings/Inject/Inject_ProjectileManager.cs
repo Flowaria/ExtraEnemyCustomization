@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace EECustom.CustomSettings.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(ProjectileManager))]
     class Inject_ProjectileManager
     {

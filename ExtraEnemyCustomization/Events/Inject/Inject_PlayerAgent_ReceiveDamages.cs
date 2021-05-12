@@ -7,8 +7,7 @@ using System.Text;
 
 namespace EECustom.Events.Inject
 {
-    
-
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(Dam_PlayerDamageLocal))]
     class Inject_PlayerAgent_ReceiveDamages
     {

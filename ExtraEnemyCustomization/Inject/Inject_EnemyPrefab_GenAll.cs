@@ -5,9 +5,11 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using EECustom.Customizations.Models;
 using EECustom.Managers;
+using System;
 
 namespace EECustom.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.GenerateAllEnemyPrefabs))]
     internal static class Inject_EnemyPrefab_GenAll
     {
@@ -15,6 +17,7 @@ namespace EECustom.Inject
         {
             Logger.Debug("== List of Material that can be used for Materials Parameters ==");
 
+            //TODO: Replace this to AssetShardManager Code
             var fullmats = Resources.FindObjectsOfTypeAll(Il2CppType.Of<Material>());
             foreach (var obj in fullmats)
             {

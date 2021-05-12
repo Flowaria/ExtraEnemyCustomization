@@ -1,10 +1,12 @@
 ﻿using EECustom.Managers;
 using Enemies;
 using HarmonyLib;
+using System;
 using UnityEngine;
 
 namespace EECustom.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(EnemyPrefabManager), nameof(EnemyPrefabManager.BuildEnemyPrefab))]
     internal static class Inject_EnemyPrefab_Setup
     {

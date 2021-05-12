@@ -7,6 +7,7 @@ using System.Text;
 
 namespace EECustom.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(PlayerAgent), nameof(PlayerAgent.Setup))]
     public class Inject_PlayerAgent_Setup
     {

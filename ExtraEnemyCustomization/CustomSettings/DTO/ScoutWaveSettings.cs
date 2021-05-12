@@ -6,12 +6,6 @@ using System.Text;
 
 namespace EECustom.CustomSettings.DTO
 {
-    public class ScoutWaveSettings
-    {
-        private uint _DefaultWaveSettingID;
-        private uint _DefaultWavePopulationID;
-    }
-
     public class ExpeditionScoutSetting
     {
         public string[] Targets = new string[0]; //A* //*1 //A1
@@ -35,7 +29,7 @@ namespace EECustom.CustomSettings.DTO
     {
         public string Name;
 
-        public WaveSetting[] Waves = new WaveSetting[0];
+        public WaveSetting[,] Waves = new WaveSetting[0,0];
     }
 
     public struct WaveSetting

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace EECustom.Events.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(ScoutAntenna), nameof(ScoutAntenna.Init))]
     class Inject_ScoutAntenna
     {

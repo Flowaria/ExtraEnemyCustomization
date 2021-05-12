@@ -1,9 +1,11 @@
 ﻿using EECustom.Managers;
 using Enemies;
 using HarmonyLib;
+using System;
 
 namespace EECustom.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(EnemyAgent), nameof(EnemyAgent.Setup))]
     internal static class Inject_EnemyAgent_Setup
     {

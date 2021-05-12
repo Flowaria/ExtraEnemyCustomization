@@ -7,6 +7,7 @@ using System.Text;
 
 namespace EECustom.CustomSettings.Inject
 {
+    [HarmonyWrapSafe]
     [HarmonyPatch(typeof(ES_ScoutScream), "CommonUpdate")]
     class Inject_ES_ScoutScream
     {
@@ -15,7 +16,7 @@ namespace EECustom.CustomSettings.Inject
         {
             if (__instance.m_state == ES_ScoutScream.ScoutScreamState.Response)
             {
-                if(SNet.IsMaster)
+                if (SNet.IsMaster)
                 {
                     var id = __instance.m_enemyAgent.EnemyDataID;
                     //TRIGGER WAVE
