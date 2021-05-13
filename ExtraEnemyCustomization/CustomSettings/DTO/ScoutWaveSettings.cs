@@ -1,5 +1,6 @@
 ﻿using EECustom.Customizations;
 using GameData;
+using LevelGeneration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,7 +30,7 @@ namespace EECustom.CustomSettings.DTO
                     return true;
 
                 var targetExpStr = target.Trim().ToUpper();
-                if (targetExpStr.Length >= 2)
+                if (targetExpStr.Length < 2)
                     continue;
 
                 var settingTierStr = targetExpStr.Substring(0, 1);
@@ -90,10 +91,41 @@ namespace EECustom.CustomSettings.DTO
         public float[] WeightsOverride = new float[0];
     }
 
-    public struct WaveSetting
+    public class WaveSetting
     {
-        public uint WaveSettingID;
-        public uint WavePopulationID;
-        public float Delay;
+        public uint WaveSettingID = 0u;
+        public uint WavePopulationID = 0u;
+        public float Delay = 0.0f;
+        public bool StopWaveOnDeath = false;
+
+        public SpawnNodeSetting SpawnSetting = new SpawnNodeSetting()
+        {
+            SpawnType = WaveSpawnType.ClosestAlive,
+            NodeType = SpawnNodeType.Scout
+        };
+    }
+
+    public class SpawnNodeSetting
+    {
+        public WaveSpawnType SpawnType = WaveSpawnType.ClosestAlive;
+        public SpawnNodeType NodeType = SpawnNodeType.Scout;
+        public LG_LayerType Layer = LG_LayerType.MainLayer;
+        public eLocalZoneIndex LocalIndex = eLocalZoneIndex.Zone_0;
+        public int AreaIndex = 0;
+    }
+
+    public enum WaveSpawnType
+    {
+        ClosestAlive,
+        ClosestNoBetweenPlayers,
+        InNode,
+        InNodeZone
+    }
+
+    public enum SpawnNodeType
+    {
+        Scout,
+        FromArea,
+        FromElevatorArea
     }
 }

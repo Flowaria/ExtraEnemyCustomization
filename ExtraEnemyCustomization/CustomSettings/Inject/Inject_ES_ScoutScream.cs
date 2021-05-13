@@ -15,12 +15,15 @@ namespace EECustom.CustomSettings.Inject
         [HarmonyWrapSafe]
         static void Postfix(ES_ScoutScream __instance)
         {
-            if (__instance.m_state == ES_ScoutScream.ScoutScreamState.Response)
+            if (__instance.m_state == ES_ScoutScream.ScoutScreamState.Done)
             {
-                if (SNet.IsMaster)
+                if (__instance.m_stateDoneTimer >= 0.0f)
                 {
-                    var id = __instance.m_enemyAgent.EnemyDataID;
-                    CustomScoutWaveManager.TriggerScoutWave(__instance.m_enemyAgent);
+                    __instance.m_stateDoneTimer = -1.0f;
+                    if (SNet.IsMaster)
+                    {
+                        CustomScoutWaveManager.TriggerScoutWave(__instance.m_enemyAgent);
+                    }
                 }
             }
         }

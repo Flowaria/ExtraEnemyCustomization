@@ -12,7 +12,7 @@ namespace EECustom
     //TODO: Refactor the CustomBase to support Phase Setting
     //TODO: Scout WaveSetting Custom
 
-    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.4.0")]
+    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.5.0")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency(MTFOPartialDataUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]

@@ -1,7 +1,9 @@
 ﻿using AIGraph;
 using EECustom.CustomSettings.DTO;
+using EECustom.Events;
 using Enemies;
 using GameData;
+using LevelGeneration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +14,66 @@ namespace EECustom.CustomSettings
 {
     public static class CustomScoutWaveManager
     {
-        private static List<ExpeditionScoutSetting> _ScoutSettings = new List<ExpeditionScoutSetting>();
-        private static List<ScoutSettingCache> _ActiveScoutSettings = new List<ScoutSettingCache>();
-        private static Dictionary<string, ScoutTargetSetting> _TargetSettingDict = new Dictionary<string, ScoutTargetSetting>();
-        private static Dictionary<string, ScoutWaveSetting> _WaveSettingDict = new Dictionary<string, ScoutWaveSetting>();
+        private static readonly System.Random _Random = new System.Random();
+        private static readonly List<ExpeditionScoutSetting> _ScoutSettings = new List<ExpeditionScoutSetting>();
+        private static readonly List<ScoutSettingCache> _ActiveScoutSettings = new List<ScoutSettingCache>();
+        private static readonly Dictionary<string, ScoutTargetSetting> _TargetSettingDict = new Dictionary<string, ScoutTargetSetting>();
+        private static readonly Dictionary<string, ScoutWaveSetting> _WaveSettingDict = new Dictionary<string, ScoutWaveSetting>();
 
+        private static string _PreviousExpKey = string.Empty;
         private static ExpeditionData _PreviousExpData = null;
         private static uint _DefaultWaveSettingID;
         private static uint _DefaultWavePopulationID;
         private static eRundownTier _CurrentExpeditionTier;
         private static int _CurrentExpeditionIndex;
-        private static System.Random _Random = new System.Random();
+        private static bool _IsDefaultSettingBlocked = false;
+
+        static CustomScoutWaveManager()
+        {
+            LevelEvents.OnBuildStart += OnLevelStateUpdate;
+            LevelEvents.OnLevelCleanup += OnLevelStateUpdate;
+        }
+
+        private static void OnLevelStateUpdate()
+        {
+            var rawKey = RundownManager.ActiveExpeditionUniqueKey;
+            if (string.IsNullOrEmpty(rawKey))
+            {
+                Logger.Log("KEY WAS EMPTY");
+                return;
+            }
+
+            if (rawKey.Equals(_PreviousExpKey))
+            {
+                return;
+            }
+            _PreviousExpKey = rawKey;
+
+            var split = rawKey.Split("_");
+            if (split.Length != 4)
+            {
+                Logger.Warning($"Key split length was not 4?: Length: {split.Length} Raw: {rawKey}");
+                return;
+            }
+
+            if (!Enum.TryParse(split[2], out eRundownTier tier))
+            {
+                Logger.Warning($"Tier is not valid?: {split[2]}");
+                return;
+            }
+
+            if (!int.TryParse(split[3], out var index))
+            {
+                Logger.Warning($"Index was not a number?: {split[3]}");
+                return;
+            }
+
+            ExpeditionUpdate(tier, index, RundownManager.ActiveExpedition);
+        }
 
         public static void ExpeditionUpdate(eRundownTier tier, int expIndex, ExpeditionInTierData inTierData)
         {
-            Logger.Warning("EXP UPDATED1");
+            _IsDefaultSettingBlocked = false;
 
             //Revert Previous Expedition Data
             if (_PreviousExpData != null)
@@ -48,10 +95,12 @@ namespace EECustom.CustomSettings
                 if (!setting.IsMatch(_CurrentExpeditionTier, _CurrentExpeditionIndex))
                     continue;
 
-                foreach(var scoutSetting in setting.ScoutSettings)
+                foreach (var scoutSetting in setting.ScoutSettings)
                 {
                     var targetSetting = GetTargetSetting(scoutSetting.TargetSetting);
                     var waveSetting = GetWaveSetting(scoutSetting.WaveSetting);
+
+                    
 
                     if (targetSetting == null)
                         continue;
@@ -68,7 +117,12 @@ namespace EECustom.CustomSettings
                 }
             }
 
-            Logger.Warning("EXP UPDATED");
+            if(_ActiveScoutSettings.Count > 0)
+            {
+                _PreviousExpData.ScoutWaveSettings = 0u;
+                _PreviousExpData.ScoutWavePopulation = 0u;
+                _IsDefaultSettingBlocked = true;
+            }
         }
 
         public static void AddScoutSetting(params ExpeditionScoutSetting[] scoutSettings)
@@ -93,7 +147,7 @@ namespace EECustom.CustomSettings
             var key = waveSetting.Name.ToLower();
             if (!_WaveSettingDict.ContainsKey(key))
             {
-                _WaveSettingDict.Add(waveSetting.Name, waveSetting);
+                _WaveSettingDict.Add(key, waveSetting);
             }
         }
 
@@ -117,7 +171,7 @@ namespace EECustom.CustomSettings
             var key = targetSetting.Name.ToLower();
             if (!_TargetSettingDict.ContainsKey(key))
             {
-                _TargetSettingDict.Add(targetSetting.Name, targetSetting);
+                _TargetSettingDict.Add(key, targetSetting);
             }
         }
 
@@ -132,7 +186,11 @@ namespace EECustom.CustomSettings
 
         public static void TriggerScoutWave(EnemyAgent scoutAgent)
         {
+            if (!_IsDefaultSettingBlocked)
+                return;
+
             bool triggeredAny = false;
+            List<ushort> stopOnDeathWaves = new List<ushort>();
             foreach (var scoutSetting in _ActiveScoutSettings)
             {
                 var targetSetting = scoutSetting.TargetSetting;
@@ -157,13 +215,15 @@ namespace EECustom.CustomSettings
                     }
 
                     var index = PickWeightedRandom(weightValues);
-                    TriggerWaves(waveSetting.Waves[index], scoutAgent.CourseNode);
+                    TriggerWaves(waveSetting.Waves[index], scoutAgent.CourseNode, ref stopOnDeathWaves);
                     triggeredAny = true;
+                    break;
                 }
                 else if (waveVariantCount == 1)
                 {
-                    TriggerWaves(waveSetting.Waves[0], scoutAgent.CourseNode);
+                    TriggerWaves(waveSetting.Waves[0], scoutAgent.CourseNode, ref stopOnDeathWaves);
                     triggeredAny = true;
+                    break;
                 }
                 else
                 {
@@ -171,7 +231,23 @@ namespace EECustom.CustomSettings
                 }
             }
 
-            if (!triggeredAny)
+            if (triggeredAny)
+            {
+                if (stopOnDeathWaves.Count <= 0)
+                    return;
+
+                scoutAgent.add_OnDeadCallback(new Action(() =>
+                {
+                    foreach (var waveid in stopOnDeathWaves)
+                    {
+                        if (Mastermind.Current.TryGetEvent(waveid, out var e))
+                        {
+                            e.StopEvent();
+                        }
+                    }
+                }));
+            }
+            else
             {
                 TriggerDefaultWave(scoutAgent.CourseNode);
             }
@@ -219,24 +295,61 @@ namespace EECustom.CustomSettings
             throw new IndexOutOfRangeException("index was not picked?!");
         }
 
-        private static void TriggerWaves(WaveSetting[] waves, AIG_CourseNode sourceNode)
+        private static void TriggerWaves(WaveSetting[] waves, AIG_CourseNode sourceNode, ref List<ushort> stopOnDeathList)
         {
             foreach(var wave in waves)
             {
+                var waveSpawnType = wave.SpawnSetting.SpawnType switch
+                {
+                    WaveSpawnType.ClosestAlive => SurvivalWaveSpawnType.InRelationToClosestAlivePlayer,
+                    WaveSpawnType.ClosestNoBetweenPlayers => SurvivalWaveSpawnType.ClosestToSuppliedNodeButNoBetweenPlayers,
+                    WaveSpawnType.InNode => SurvivalWaveSpawnType.InSuppliedCourseNode,
+                    WaveSpawnType.InNodeZone => SurvivalWaveSpawnType.InSuppliedCourseNodeZone,
+                    _ => SurvivalWaveSpawnType.InRelationToClosestAlivePlayer,
+                };
+
+                var node = sourceNode;
+                switch (wave.SpawnSetting.NodeType)
+                {
+                    case SpawnNodeType.FromArea:
+                        if (Builder.CurrentFloor.TryGetZoneByLocalIndex(wave.SpawnSetting.Layer, wave.SpawnSetting.LocalIndex, out var zone))
+                        {
+                            if (wave.SpawnSetting.AreaIndex < zone.m_areas.Count)
+                            {
+                                node = zone.m_areas[wave.SpawnSetting.AreaIndex].m_courseNode;
+                            }
+                            else
+                            {
+                                node = zone.m_areas[0].m_courseNode;
+                            }
+                        }
+                        break;
+
+                    case SpawnNodeType.FromElevatorArea:
+                        node = Builder.GetElevatorArea().m_courseNode;
+                        break;
+                }
+
                 Mastermind.Current.TriggerSurvivalWave(
-                    refNode:            sourceNode,
+                    refNode:            node,
                     settingsID:         wave.WaveSettingID,
                     populationDataID:   wave.WavePopulationID,
-                    eventID:            out _,
-                    spawnType:          SurvivalWaveSpawnType.InRelationToClosestAlivePlayer,
+                    eventID:            out var eventID,
+                    spawnType:          waveSpawnType,
                     spawnDelay:         wave.Delay,
                     playScreamOnSpawn:  true
                     );
+
+                if(wave.StopWaveOnDeath)
+                {
+                    stopOnDeathList.Add(eventID);
+                }
             }
         }
 
         private static void TriggerDefaultWave(AIG_CourseNode sourceNode)
         {
+            Logger.Debug("Can't found good setting for scout, Spawning Default");
             Mastermind.Current.TriggerSurvivalWave(
                     refNode: sourceNode,
                     settingsID: _DefaultWaveSettingID,
