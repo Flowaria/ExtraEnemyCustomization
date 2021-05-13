@@ -1,8 +1,6 @@
 ﻿using Agents;
 using Enemies;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EECustom.Events
 {

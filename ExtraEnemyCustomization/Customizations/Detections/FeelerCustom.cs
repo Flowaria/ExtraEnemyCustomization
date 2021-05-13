@@ -2,8 +2,6 @@
 using EECustom.Utils;
 using Enemies;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace EECustom.Customizations.Detections
@@ -23,6 +21,7 @@ namespace EECustom.Customizations.Detections
         public ValueBase RetractTimeDetected = ValueBase.Unchanged;
         public Color NormalColor = Color.black;
         public Color DetectColor = Color.red;
+
         public override string GetProcessName()
         {
             return "Feeler";
@@ -34,7 +33,7 @@ namespace EECustom.Customizations.Detections
         {
             var onDetectionSpawn = new Action<EnemyAgent, ScoutAntennaDetection>((EnemyAgent eventAgent, ScoutAntennaDetection detection) =>
             {
-                if(eventAgent.GlobalID == agent.GlobalID)
+                if (eventAgent.GlobalID == agent.GlobalID)
                     OnDetectionSpawn(eventAgent, detection);
             });
 
@@ -46,7 +45,7 @@ namespace EECustom.Customizations.Detections
 
             ScoutAntennaSpawnEvent.OnDetectionSpawn += onDetectionSpawn;
             ScoutAntennaSpawnEvent.OnAntennaSpawn += onAntennaSpawn;
-            agent.add_OnDeadCallback(new Action(()=>
+            agent.add_OnDeadCallback(new Action(() =>
             {
                 ScoutAntennaSpawnEvent.OnDetectionSpawn -= onDetectionSpawn;
                 ScoutAntennaSpawnEvent.OnAntennaSpawn -= onAntennaSpawn;

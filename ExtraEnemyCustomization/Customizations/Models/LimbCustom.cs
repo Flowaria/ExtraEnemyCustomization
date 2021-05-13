@@ -1,5 +1,5 @@
-﻿using Enemies;
-using EECustom.Utils;
+﻿using EECustom.Utils;
+using Enemies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +39,6 @@ namespace EECustom.Customizations.Models
                 var newHealth = limbCustomData.Health.GetAbsValue(limb.m_healthMax);
                 limb.m_health = newHealth;
                 limb.m_healthMax = newHealth;
-               
 
                 var isCustom = (limbCustomData.LimbType == LimbDamageType.ArmorCustom || limbCustomData.LimbType == LimbDamageType.WeakspotCustom);
                 var healthData = agent.EnemyBalancingData.Health;

@@ -2,8 +2,6 @@
 using EECustom.Managers;
 using Enemies;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 using UnityEngine;
 
@@ -19,9 +17,9 @@ namespace EECustom.Customizations.Models
         public float BlinkMinDelay = 1.0f;
         public float BlinkMaxDelay = 5.0f;
 
-
         [JsonIgnore]
         private Sprite _Sprite = null;
+
         [JsonIgnore]
         private bool _PrespawnOnce = false;
 
@@ -31,6 +29,7 @@ namespace EECustom.Customizations.Models
         }
 
         public override bool HasPrespawnBody => true;
+
         public override void Prespawn(EnemyAgent agent)
         {
             if (!_PrespawnOnce)
@@ -44,6 +43,7 @@ namespace EECustom.Customizations.Models
         }
 
         public override bool HasPostspawnBody => true;
+
         public override void Postspawn(EnemyAgent agent)
         {
             EnemyMarkerEvents.RegisterOnMarked(agent, OnMarked);

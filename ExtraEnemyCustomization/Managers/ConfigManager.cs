@@ -1,12 +1,12 @@
-﻿using Enemies;
-using EECustom.Configs;
+﻿using EECustom.Configs;
+using EECustom.Configs.Customizations;
 using EECustom.Customizations;
+using EECustom.CustomSettings;
 using EECustom.Utils;
+using Enemies;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using EECustom.Configs.Customizations;
-using EECustom.CustomSettings;
 
 namespace EECustom.Managers
 {
@@ -68,14 +68,14 @@ namespace EECustom.Managers
         public static bool TryLoadConfig<T>(string basePath, string fileName, out T config)
         {
             var path = Path.Combine(basePath, fileName);
-            if(File.Exists(path))
+            if (File.Exists(path))
             {
                 try
                 {
                     config = JSON.Deserialize<T>(File.ReadAllText(path));
                     return true;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Logger.Error($"Exception Occured While reading {path} file: {e}");
                     config = default;
@@ -89,8 +89,9 @@ namespace EECustom.Managers
                 return false;
             }
         }
+
         public static ConfigManager Current { get; private set; }
-        
+
         public ModelCustomConfig ModelCustom { get; private set; } = new ModelCustomConfig();
         public AbilityCustomConfig AbilityCustom { get; private set; } = new AbilityCustomConfig();
         public ProjectileCustomConfig ProjectileCustom { get; private set; } = new ProjectileCustomConfig();

@@ -38,6 +38,7 @@ namespace EECustom
         }
 
         public static void Verbose(string format, params object[] args) => Verbose(string.Format(format, args));
+
         public static void Verbose(string str)
         {
             if (UsingDevMessage && UsingVerbose)

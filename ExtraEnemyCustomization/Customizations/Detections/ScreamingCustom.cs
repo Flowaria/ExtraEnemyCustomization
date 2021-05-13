@@ -1,7 +1,4 @@
 ﻿using Enemies;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EECustom.Customizations.Detections
 {
@@ -18,9 +15,9 @@ namespace EECustom.Customizations.Detections
         }
 
         public override bool HasPostspawnBody => true;
+
         public override void Postspawn(EnemyAgent agent)
         {
-            
         }
     }
 

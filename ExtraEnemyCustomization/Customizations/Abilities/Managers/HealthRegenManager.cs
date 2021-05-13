@@ -1,12 +1,9 @@
 ﻿using Agents;
+using EECustom.Events;
 using Enemies;
-using EECustom.Utils;
 using SNetwork;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using EECustom.Events;
 
 namespace EECustom.Customizations.Abilities.Managers
 {
@@ -39,7 +36,8 @@ namespace EECustom.Customizations.Abilities.Managers
             if (!_AlwaysRegen)
             {
                 //DamageBase.add_CallOnTakeDamage(new Action<float>(OnTakeDamage)); This doesn't work for some reason rofl
-                _OnDamageDel = new Action<EnemyAgent, Agent>((EnemyAgent a1, Agent a2) => {
+                _OnDamageDel = new Action<EnemyAgent, Agent>((EnemyAgent a1, Agent a2) =>
+                {
                     if (a1.GlobalID == DamageBase.Owner.GlobalID)
                     {
                         OnTakeDamage();
@@ -47,7 +45,8 @@ namespace EECustom.Customizations.Abilities.Managers
                 });
 
                 EnemyDamageEvents.OnDamage += _OnDamageDel;
-                DamageBase.Owner.add_OnDeadCallback(new Action(() => {
+                DamageBase.Owner.add_OnDeadCallback(new Action(() =>
+                {
                     EnemyDamageEvents.OnDamage -= _OnDamageDel;
                 }));
             }
@@ -72,7 +71,7 @@ namespace EECustom.Customizations.Abilities.Managers
             if (!_IsRegening)
                 return;
 
-            if(!_IsInitialTimerDone && _RegenInitialTimer <= Clock.Time)
+            if (!_IsInitialTimerDone && _RegenInitialTimer <= Clock.Time)
             {
                 _IsInitialTimerDone = true;
             }
@@ -85,15 +84,15 @@ namespace EECustom.Customizations.Abilities.Managers
                     return;
 
                 var newHealth = DamageBase.Health + _RegenAmountAbsValue;
-                if(!_IsDecay && newHealth >= _RegenCapAbsValue)
+                if (!_IsDecay && newHealth >= _RegenCapAbsValue)
                 {
                     newHealth = _RegenCapAbsValue;
-                    if(!_AlwaysRegen)
+                    if (!_AlwaysRegen)
                     {
                         _IsRegening = false;
                     }
                 }
-                else if(_IsDecay && newHealth <= _RegenCapAbsValue)
+                else if (_IsDecay && newHealth <= _RegenCapAbsValue)
                 {
                     newHealth = _RegenCapAbsValue;
                     if (!_AlwaysRegen)
@@ -113,7 +112,7 @@ namespace EECustom.Customizations.Abilities.Managers
             }
         }
 
-        void OnTakeDamage()
+        private void OnTakeDamage()
         {
             _RegenInitialTimer = Clock.Time + RegenData.DelayUntilRegenStart;
             _IsRegening = true;

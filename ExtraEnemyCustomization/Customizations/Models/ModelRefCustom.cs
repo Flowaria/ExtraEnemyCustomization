@@ -1,7 +1,4 @@
 ﻿using Enemies;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace EECustom.Customizations.Models
@@ -26,7 +23,7 @@ namespace EECustom.Customizations.Models
             foreach (var mRef in ModelRefs)
             {
                 Transform baseTransform = null;
-                switch(mRef.CopyFrom)
+                switch (mRef.CopyFrom)
                 {
                     case BaseModelRefType.Tentacle:
                         baseTransform = modelRef.m_tentacleAlign;
@@ -61,7 +58,7 @@ namespace EECustom.Customizations.Models
                         break;
 
                     default:
-                        if(!string.IsNullOrEmpty(mRef.CreateFromPath))
+                        if (!string.IsNullOrEmpty(mRef.CreateFromPath))
                             baseTransform = agent.transform.FindChild(mRef.CreateFromPath);
                         break;
                 }
@@ -82,8 +79,8 @@ namespace EECustom.Customizations.Models
 
                 var newAngle = newObj.transform.localRotation.eulerAngles + mRef.RotateOffset;
                 newObj.transform.localRotation.SetEulerRotation(newAngle);
-                
-                switch(mRef.Type)
+
+                switch (mRef.Type)
                 {
                     case BaseModelRefType.Tentacle:
                         changeCache.m_tentacleAlign = newObj.transform;

@@ -7,8 +7,6 @@ using LevelGeneration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
 
 namespace EECustom.CustomSettings
 {
@@ -100,8 +98,6 @@ namespace EECustom.CustomSettings
                     var targetSetting = GetTargetSetting(scoutSetting.TargetSetting);
                     var waveSetting = GetWaveSetting(scoutSetting.WaveSetting);
 
-                    
-
                     if (targetSetting == null)
                         continue;
 
@@ -117,7 +113,7 @@ namespace EECustom.CustomSettings
                 }
             }
 
-            if(_ActiveScoutSettings.Count > 0)
+            if (_ActiveScoutSettings.Count > 0)
             {
                 _PreviousExpData.ScoutWaveSettings = 0u;
                 _PreviousExpData.ScoutWavePopulation = 0u;
@@ -297,7 +293,7 @@ namespace EECustom.CustomSettings
 
         private static void TriggerWaves(WaveSetting[] waves, AIG_CourseNode sourceNode, ref List<ushort> stopOnDeathList)
         {
-            foreach(var wave in waves)
+            foreach (var wave in waves)
             {
                 var waveSpawnType = wave.SpawnSetting.SpawnType switch
                 {
@@ -331,16 +327,16 @@ namespace EECustom.CustomSettings
                 }
 
                 Mastermind.Current.TriggerSurvivalWave(
-                    refNode:            node,
-                    settingsID:         wave.WaveSettingID,
-                    populationDataID:   wave.WavePopulationID,
-                    eventID:            out var eventID,
-                    spawnType:          waveSpawnType,
-                    spawnDelay:         wave.Delay,
-                    playScreamOnSpawn:  true
+                    refNode: node,
+                    settingsID: wave.WaveSettingID,
+                    populationDataID: wave.WavePopulationID,
+                    eventID: out var eventID,
+                    spawnType: waveSpawnType,
+                    spawnDelay: wave.Delay,
+                    playScreamOnSpawn: true
                     );
 
-                if(wave.StopWaveOnDeath)
+                if (wave.StopWaveOnDeath)
                 {
                     stopOnDeathList.Add(eventID);
                 }

@@ -1,19 +1,14 @@
-﻿using Agents;
-using HarmonyLib;
-using Player;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HarmonyLib;
 
 namespace EECustom.Events.Inject
 {
     [HarmonyPatch(typeof(Dam_PlayerDamageLocal))]
-    class Inject_PlayerAgent_ReceiveDamages
+    internal class Inject_PlayerAgent_ReceiveDamages
     {
         [HarmonyPostfix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(Dam_PlayerDamageLocal.ReceiveMeleeDamage))]
-        static void Post_Melee(pFullDamageData data, Dam_PlayerDamageBase __instance)
+        private static void Post_Melee(pFullDamageData data, Dam_PlayerDamageBase __instance)
         {
             if (data.source.TryGet(out var inflictor))
             {
@@ -26,7 +21,7 @@ namespace EECustom.Events.Inject
         [HarmonyPostfix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(Dam_PlayerDamageLocal.ReceiveTentacleAttackDamage))]
-        static void Post_Tentacle(pMediumDamageData data, Dam_PlayerDamageLocal __instance)
+        private static void Post_Tentacle(pMediumDamageData data, Dam_PlayerDamageLocal __instance)
         {
             if (data.source.TryGet(out var inflictor))
             {

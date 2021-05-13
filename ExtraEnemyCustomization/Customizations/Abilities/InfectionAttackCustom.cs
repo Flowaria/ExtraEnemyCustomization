@@ -1,11 +1,10 @@
 ﻿using Agents;
-using Enemies;
+using EECustom.Events;
 using EECustom.Utils;
+using Enemies;
 using Player;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using EECustom.Events;
 
 namespace EECustom.Customizations.Abilities
 {

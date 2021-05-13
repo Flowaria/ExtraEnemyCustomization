@@ -1,7 +1,5 @@
 ﻿using EECustom.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,7 +35,6 @@ namespace EECustom.Utils
                         var propName = reader.GetString();
                         reader.Read();
 
-
                         switch (propName.ToLower())
                         {
                             case "value":
@@ -45,7 +42,7 @@ namespace EECustom.Utils
                                 break;
 
                             case "mode":
-                                if(Enum.TryParse<ValueMode>(reader.GetString(), out var valueMode))
+                                if (Enum.TryParse<ValueMode>(reader.GetString(), out var valueMode))
                                 {
                                     valueBase.Mode = valueMode;
                                 }

@@ -1,15 +1,15 @@
-﻿using Enemies;
-using EECustom.Utils;
+﻿using EECustom.Utils;
+using Enemies;
 using System;
 
 namespace EECustom.Customizations.Strikers
 {
-	using EaseFunc = Func<float, float, float, float, float>;
+    using EaseFunc = Func<float, float, float, float, float>;
 
-	public class StrikerTentacleCustom : EnemyCustomBase
+    public class StrikerTentacleCustom : EnemyCustomBase
     {
         public GPUCurvyType[] TentacleTypes = new GPUCurvyType[0];
-		public TentacleSettingData[] TentacleSettings = new TentacleSettingData[0];
+        public TentacleSettingData[] TentacleSettings = new TentacleSettingData[0];
 
         public override string GetProcessName()
         {
@@ -17,6 +17,7 @@ namespace EECustom.Customizations.Strikers
         }
 
         public override bool HasPostspawnBody => true;
+
         public override void Postspawn(EnemyAgent agent)
         {
             var tentacleComps = agent.GetComponentsInChildren<MovingEnemyTentacleBase>(true);
@@ -50,24 +51,24 @@ namespace EECustom.Customizations.Strikers
 
     public class TentacleSettingData
     {
-		public eEasingType InEaseType = eEasingType.EaseInExpo;
+        public eEasingType InEaseType = eEasingType.EaseInExpo;
         public eEasingType OutEaseType = eEasingType.EaseOutCirc;
 
-		public ValueBase InDuration = ValueBase.Unchanged;
-		public ValueBase OutDuration = ValueBase.Unchanged;
-		public ValueBase HangDuration = ValueBase.Unchanged;
+        public ValueBase InDuration = ValueBase.Unchanged;
+        public ValueBase OutDuration = ValueBase.Unchanged;
+        public ValueBase HangDuration = ValueBase.Unchanged;
 
-		public EaseFunc GetInEaseFunction()
+        public EaseFunc GetInEaseFunction()
         {
-			return GetEaseFunction(InEaseType);
+            return GetEaseFunction(InEaseType);
         }
 
-		public EaseFunc GetOutEaseFunction()
-		{
-			return GetEaseFunction(OutEaseType);
-		}
+        public EaseFunc GetOutEaseFunction()
+        {
+            return GetEaseFunction(OutEaseType);
+        }
 
-		public static EaseFunc GetEaseFunction(eEasingType easeType)
+        public static EaseFunc GetEaseFunction(eEasingType easeType)
         {
             return easeType switch
             {

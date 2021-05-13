@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using UnhollowerBaseLib;
 using UnityEngine;
 
 namespace EECustom.Managers
@@ -21,7 +18,7 @@ namespace EECustom.Managers
                 return;
 
             var files = Directory.GetFiles(BaseSpritePath, "*.png", SearchOption.AllDirectories);
-            foreach(var file in files)
+            foreach (var file in files)
             {
                 TryCacheTexture2D(file);
             }
@@ -33,9 +30,8 @@ namespace EECustom.Managers
                 return;
 
             var fileNameWOExt = Path.GetFileNameWithoutExtension(file).ToLower();
-            if(!_TextureCache.ContainsKey(fileNameWOExt))
+            if (!_TextureCache.ContainsKey(fileNameWOExt))
             {
-                
                 var fileData = File.ReadAllBytes(file);
                 var texture2D = new Texture2D(2, 2);
                 if (!ImageConversion.LoadImage(texture2D, fileData))

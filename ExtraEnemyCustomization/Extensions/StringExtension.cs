@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EECustom.Extensions
 {
@@ -14,7 +12,7 @@ namespace EECustom.Extensions
         public static bool EqualsAny(this string input, bool ignoreCase, params string[] args)
         {
             var comparisonMode = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            foreach(var arg in args)
+            foreach (var arg in args)
             {
                 if (input.Equals(arg, comparisonMode))
                     return true;

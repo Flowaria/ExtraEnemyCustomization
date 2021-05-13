@@ -1,11 +1,9 @@
-﻿using Enemies;
-using EECustom.Customizations.Abilities;
-using EECustom.Customizations.Abilities.Managers;
+﻿using EECustom.Customizations.Abilities.Managers;
 using EECustom.Utils;
-using System;
+using Enemies;
 using System.Linq;
-using UnityEngine;
 using System.Text.Json.Serialization;
+using UnityEngine;
 
 namespace EECustom.Customizations.Shooters
 {

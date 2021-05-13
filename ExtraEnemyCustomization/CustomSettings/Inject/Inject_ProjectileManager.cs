@@ -6,12 +6,12 @@ using UnityEngine;
 namespace EECustom.CustomSettings.Inject
 {
     [HarmonyPatch(typeof(ProjectileManager))]
-    class Inject_ProjectileManager
+    internal class Inject_ProjectileManager
     {
         [HarmonyPostfix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(ProjectileManager.LoadAssets))]
-        static void Post_LoadAsset()
+        private static void Post_LoadAsset()
         {
             foreach (var proj in ConfigManager.Current.ProjectileCustom.ProjectileDefinitions)
             {
@@ -22,7 +22,7 @@ namespace EECustom.CustomSettings.Inject
         [HarmonyPrefix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(ProjectileManager.SpawnProjectileType))]
-        static bool Pre_SpawnProjectile(ref GameObject __result, ref ProjectileType type, Vector3 pos, Quaternion rot)
+        private static bool Pre_SpawnProjectile(ref GameObject __result, ref ProjectileType type, Vector3 pos, Quaternion rot)
         {
             if (Enum.IsDefined(typeof(ProjectileType), (byte)type))
             {

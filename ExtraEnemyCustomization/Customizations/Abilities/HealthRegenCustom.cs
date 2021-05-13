@@ -1,11 +1,6 @@
-﻿using Enemies;
-using EECustom.Customizations.Abilities;
-using EECustom.Customizations.Abilities.Managers;
+﻿using EECustom.Customizations.Abilities.Managers;
 using EECustom.Utils;
-using SNetwork;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Enemies;
 
 namespace EECustom.Customizations.Abilities
 {
@@ -24,7 +19,7 @@ namespace EECustom.Customizations.Abilities
         {
             if (agent.Damage != null)
             {
-                foreach(var regenData in RegenDatas)
+                foreach (var regenData in RegenDatas)
                 {
                     var ability = agent.gameObject.AddComponent<HealthRegenManager>();
                     ability.DamageBase = agent.Damage;

@@ -1,18 +1,16 @@
 ﻿using EECustom.Managers;
 using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EECustom.CustomSettings.Inject
 {
     [HarmonyPatch(typeof(GPUCurvyManager))]
-    class Inject_GPUCurvyManager
+    internal class Inject_GPUCurvyManager
     {
         [HarmonyPostfix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(GPUCurvyManager.Setup))]
-        static void Post_Setup()
+        private static void Post_Setup()
         {
             foreach (var tentDef in ConfigManager.Current.TentacleCustom.TentacleDefinitions)
             {
@@ -23,7 +21,7 @@ namespace EECustom.CustomSettings.Inject
         [HarmonyPrefix]
         [HarmonyWrapSafe]
         [HarmonyPatch(nameof(GPUCurvyManager.TryAllocateGPUCurvy))]
-        static bool Pre_Allocate(GPUCurvyType type, ref GPUCurvy gpuCurvy)
+        private static bool Pre_Allocate(GPUCurvyType type, ref GPUCurvy gpuCurvy)
         {
             var id = (int)type;
             if (Enum.IsDefined(typeof(GPUCurvyType), id))

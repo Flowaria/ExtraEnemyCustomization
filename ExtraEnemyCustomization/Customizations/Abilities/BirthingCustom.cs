@@ -1,5 +1,5 @@
-﻿using Enemies;
-using EECustom.Utils;
+﻿using EECustom.Utils;
+using Enemies;
 using GameData;
 
 namespace EECustom.Customizations.Abilities

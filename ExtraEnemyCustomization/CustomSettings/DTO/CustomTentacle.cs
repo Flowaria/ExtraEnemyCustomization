@@ -1,11 +1,4 @@
-﻿using EECustom.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using UnityEngine;
-
-namespace EECustom.CustomSettings.DTO
+﻿namespace EECustom.CustomSettings.DTO
 {
     public class CustomTentacle
     {

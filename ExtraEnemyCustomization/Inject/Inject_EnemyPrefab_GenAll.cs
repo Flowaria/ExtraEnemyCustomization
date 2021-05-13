@@ -1,11 +1,9 @@
-﻿using Enemies;
-using EECustom.Customizations;
+﻿using EECustom.Customizations.Models;
+using EECustom.Managers;
+using Enemies;
 using HarmonyLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using EECustom.Customizations.Models;
-using EECustom.Managers;
-using System;
 
 namespace EECustom.Inject
 {

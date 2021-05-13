@@ -1,9 +1,6 @@
 ﻿using EECustom.Customizations;
 using GameData;
 using LevelGeneration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EECustom.CustomSettings.DTO
 {
@@ -24,7 +21,7 @@ namespace EECustom.CustomSettings.DTO
                 _ => "?"
             };
 
-            foreach(var target in Targets)
+            foreach (var target in Targets)
             {
                 if (target.Equals("*"))
                     return true;
