@@ -8,8 +8,8 @@ namespace EECustom.Customizations.Strikers
 
     public class StrikerTentacleCustom : EnemyCustomBase
     {
-        public GPUCurvyType[] TentacleTypes = new GPUCurvyType[0];
-        public TentacleSettingData[] TentacleSettings = new TentacleSettingData[0];
+        public GPUCurvyType[] TentacleTypes { get; set; } = new GPUCurvyType[0];
+        public TentacleSettingData[] TentacleSettings { get; set; } = new TentacleSettingData[0];
 
         public override string GetProcessName()
         {
@@ -51,12 +51,12 @@ namespace EECustom.Customizations.Strikers
 
     public class TentacleSettingData
     {
-        public eEasingType InEaseType = eEasingType.EaseInExpo;
-        public eEasingType OutEaseType = eEasingType.EaseOutCirc;
+        public eEasingType InEaseType { get; set; } = eEasingType.EaseInExpo;
+        public eEasingType OutEaseType { get; set; } = eEasingType.EaseOutCirc;
 
-        public ValueBase InDuration = ValueBase.Unchanged;
-        public ValueBase OutDuration = ValueBase.Unchanged;
-        public ValueBase HangDuration = ValueBase.Unchanged;
+        public ValueBase InDuration { get; set; } = ValueBase.Unchanged;
+        public ValueBase OutDuration { get; set; } = ValueBase.Unchanged;
+        public ValueBase HangDuration { get; set; } = ValueBase.Unchanged;
 
         public EaseFunc GetInEaseFunction()
         {

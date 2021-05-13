@@ -5,17 +5,17 @@ namespace EECustom.Customizations.Abilities
 {
     public class FogSphereCustom : EnemyCustomBase
     {
-        public Color ColorMin = Color.white;
-        public Color ColorMax = Color.clear;
-        public float IntensityMin = 1.0f;
-        public float IntensityMax = 5.0f;
-        public float RangeMin = 1.0f;
-        public float RangeMax = 3.0f;
-        public float DensityMin = 1.0f;
-        public float DensityMax = 5.0f;
-        public float DensityAmountMin = 0.0f;
-        public float DensityAmountMax = 5.0f;
-        public float Duration = 30.0f;
+        public Color ColorMin { get; set; } = Color.white;
+        public Color ColorMax { get; set; } = Color.clear;
+        public float IntensityMin { get; set; } = 1.0f;
+        public float IntensityMax { get; set; } = 5.0f;
+        public float RangeMin { get; set; } = 1.0f;
+        public float RangeMax { get; set; } = 3.0f;
+        public float DensityMin { get; set; } = 1.0f;
+        public float DensityMax { get; set; } = 5.0f;
+        public float DensityAmountMin { get; set; } = 0.0f;
+        public float DensityAmountMax { get; set; } = 5.0f;
+        public float Duration { get; set; } = 30.0f;
 
         public override string GetProcessName()
         {

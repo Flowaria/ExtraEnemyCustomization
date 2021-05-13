@@ -8,7 +8,7 @@ namespace EECustom.Customizations.Models
 {
     public class LimbCustom : EnemyCustomBase
     {
-        public List<LimbData> Limbs = new List<LimbData>();
+        public LimbData[] Limbs { get; set; } = new LimbData[0];
 
         public override string GetProcessName()
         {

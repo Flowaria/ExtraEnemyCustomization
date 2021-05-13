@@ -8,9 +8,9 @@ namespace EECustom.Customizations
 {
     public abstract class EnemyCustomBase
     {
-        public string DebugName = string.Empty;
-        public bool Enabled = true;
-        public TargetSetting Target;
+        public string DebugName { get; set; } = string.Empty;
+        public bool Enabled { get; set; } = true;
+        public TargetSetting Target { get; set; } = new TargetSetting();
 
         public virtual void Initialize()
         {
@@ -74,10 +74,10 @@ namespace EECustom.Customizations
 
     public class TargetSetting
     {
-        public TargetMode Mode = TargetMode.PersistentID;
-        public uint[] persistentIDs = new uint[1] { 0 };
-        public string nameParam = string.Empty;
-        public bool nameIgnoreCase = false;
+        public TargetMode Mode { get; set; } = TargetMode.PersistentID;
+        public uint[] persistentIDs { get; set; } = new uint[1] { 0 };
+        public string nameParam { get; set; } = string.Empty;
+        public bool nameIgnoreCase { get; set; } = false;
 
         public bool IsMatch(EnemyAgent agent)
         {

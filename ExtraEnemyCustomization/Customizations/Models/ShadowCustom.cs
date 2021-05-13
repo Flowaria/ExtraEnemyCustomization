@@ -5,8 +5,8 @@ namespace EECustom.Customizations.Models
 {
     public class ShadowCustom : EnemyCustomBase
     {
-        public bool IncludeEggSack = false;
-        public bool RequireTagForDetection = true;
+        public bool IncludeEggSack { get; set; } = false;
+        public bool RequireTagForDetection { get; set; } = true;
 
         public override string GetProcessName()
         {

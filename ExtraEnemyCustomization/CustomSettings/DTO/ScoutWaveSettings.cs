@@ -6,8 +6,8 @@ namespace EECustom.CustomSettings.DTO
 {
     public class ExpeditionScoutSetting
     {
-        public string[] Targets = new string[0]; //A* //*1 //A1
-        public ScoutWaveSet[] ScoutSettings = new ScoutWaveSet[0];
+        public string[] Targets { get; set; } = new string[0]; //A* //*1 //A1
+        public ScoutWaveSet[] ScoutSettings { get; set; } = new ScoutWaveSet[0];
 
         public bool IsMatch(eRundownTier tier, int index)
         {
@@ -69,31 +69,29 @@ namespace EECustom.CustomSettings.DTO
 
     public class ScoutWaveSet
     {
-        public string TargetSetting;
-        public string WaveSetting;
+        public string TargetSetting { get; set; }
+        public string WaveSetting { get; set; }
     }
 
     public class ScoutTargetSetting
     {
-        public string Name;
-
-        public TargetSetting Target;
+        public string Name { get; set; }
+        public TargetSetting Target { get; set; }
     }
 
     public class ScoutWaveSetting
     {
-        public string Name;
-
-        public WaveSetting[][] Waves = new WaveSetting[0][];
-        public float[] WeightsOverride = new float[0];
+        public string Name { get; set; }
+        public WaveSetting[][] Waves { get; set; } = new WaveSetting[0][];
+        public float[] WeightsOverride { get; set; } = new float[0];
     }
 
     public class WaveSetting
     {
-        public uint WaveSettingID = 0u;
-        public uint WavePopulationID = 0u;
-        public float Delay = 0.0f;
-        public bool StopWaveOnDeath = false;
+        public uint WaveSettingID { get; set; } = 0u;
+        public uint WavePopulationID { get; set; } = 0u;
+        public float Delay { get; set; } = 0.0f;
+        public bool StopWaveOnDeath { get; set; } = false;
 
         public SpawnNodeSetting SpawnSetting = new SpawnNodeSetting()
         {
@@ -104,11 +102,11 @@ namespace EECustom.CustomSettings.DTO
 
     public class SpawnNodeSetting
     {
-        public WaveSpawnType SpawnType = WaveSpawnType.ClosestAlive;
-        public SpawnNodeType NodeType = SpawnNodeType.Scout;
-        public LG_LayerType Layer = LG_LayerType.MainLayer;
-        public eLocalZoneIndex LocalIndex = eLocalZoneIndex.Zone_0;
-        public int AreaIndex = 0;
+        public WaveSpawnType SpawnType { get; set; } = WaveSpawnType.ClosestAlive;
+        public SpawnNodeType NodeType { get; set; } = SpawnNodeType.Scout;
+        public LG_LayerType Layer { get; set; } = LG_LayerType.MainLayer;
+        public eLocalZoneIndex LocalIndex { get; set; } = eLocalZoneIndex.Zone_0;
+        public int AreaIndex { get; set; } = 0;
     }
 
     public enum WaveSpawnType

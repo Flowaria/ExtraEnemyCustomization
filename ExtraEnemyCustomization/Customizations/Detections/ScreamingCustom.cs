@@ -6,8 +6,8 @@ namespace EECustom.Customizations.Detections
     {
         //TODO: Implement me Daddy
 
-        public DetectedBehaviourType DetectedBehaviour = DetectedBehaviourType.DoPropagateScream;
-        public bool ImmortalDuringScream = true;
+        public DetectedBehaviourType DetectedBehaviour { get; set; } = DetectedBehaviourType.DoPropagateScream;
+        public bool ImmortalDuringScream { get; set; } = true;
 
         public override string GetProcessName()
         {

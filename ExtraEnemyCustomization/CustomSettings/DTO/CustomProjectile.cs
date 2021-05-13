@@ -5,14 +5,14 @@ namespace EECustom.CustomSettings.DTO
 {
     public class CustomProjectile
     {
-        public string DebugName = string.Empty;
-        public byte ID = 10;
-        public ProjectileType BaseProjectile = ProjectileType.TargetingSmall;
-        public ValueBase Speed = ValueBase.Unchanged;
-        public ValueBase HomingStrength = ValueBase.Unchanged;
-        public Color GlowColor = Color.yellow;
-        public ValueBase GlowRange = ValueBase.Unchanged;
-        public ValueBase Damage = ValueBase.Unchanged;
-        public ValueBase Infection = ValueBase.Unchanged;
+        public string DebugName { get; set; } = string.Empty;
+        public byte ID { get; set; } = 10;
+        public ProjectileType BaseProjectile { get; set; } = ProjectileType.TargetingSmall;
+        public ValueBase Speed { get; set; } = ValueBase.Unchanged;
+        public ValueBase HomingStrength { get; set; } = ValueBase.Unchanged;
+        public Color GlowColor { get; set; } = Color.yellow;
+        public ValueBase GlowRange { get; set; } = ValueBase.Unchanged;
+        public ValueBase Damage { get; set; } = ValueBase.Unchanged;
+        public ValueBase Infection { get; set; } = ValueBase.Unchanged;
     }
 }

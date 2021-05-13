@@ -8,19 +8,19 @@ namespace EECustom.Customizations.Detections
 {
     public class FeelerCustom : EnemyCustomBase
     {
-        public ValueBase TendrilCount = ValueBase.Unchanged;
-        public float TendrilAngleOffset = 0.0f;
-        public ValueBase TendrilStepAngle = ValueBase.Unchanged;
-        public ValueBase TendrilMinYSpread = ValueBase.Unchanged;
-        public ValueBase TendrilMaxYSpread = ValueBase.Unchanged;
-        public ValueBase TendrilOutTimer = ValueBase.Unchanged;
+        public ValueBase TendrilCount { get; set; } = ValueBase.Unchanged;
+        public float TendrilAngleOffset { get; set; } = 0.0f;
+        public ValueBase TendrilStepAngle { get; set; } = ValueBase.Unchanged;
+        public ValueBase TendrilMinYSpread { get; set; } = ValueBase.Unchanged;
+        public ValueBase TendrilMaxYSpread { get; set; } = ValueBase.Unchanged;
+        public ValueBase TendrilOutTimer { get; set; } = ValueBase.Unchanged;
 
-        public ValueBase Distance = ValueBase.Unchanged;
-        public ValueBase StepDistance = ValueBase.Unchanged;
-        public ValueBase RetractTime = ValueBase.Unchanged;
-        public ValueBase RetractTimeDetected = ValueBase.Unchanged;
-        public Color NormalColor = Color.black;
-        public Color DetectColor = Color.red;
+        public ValueBase Distance { get; set; } = ValueBase.Unchanged;
+        public ValueBase StepDistance { get; set; } = ValueBase.Unchanged;
+        public ValueBase RetractTime { get; set; } = ValueBase.Unchanged;
+        public ValueBase RetractTimeDetected { get; set; } = ValueBase.Unchanged;
+        public Color NormalColor { get; set; } = Color.black;
+        public Color DetectColor { get; set; } = Color.red;
 
         public override string GetProcessName()
         {

@@ -7,8 +7,8 @@ namespace EECustom.Configs.Customizations
 {
     public class TentacleCustomConfig : CustomizationConfig
     {
-        public StrikerTentacleCustom[] StrikerTentacleCustom = new StrikerTentacleCustom[0];
-        public CustomTentacle[] TentacleDefinitions = new CustomTentacle[0];
+        public StrikerTentacleCustom[] StrikerTentacleCustom { get; set; } = new StrikerTentacleCustom[0];
+        public CustomTentacle[] TentacleDefinitions { get; set; } = new CustomTentacle[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {

@@ -7,8 +7,8 @@ namespace EECustom.Configs.Customizations
 {
     public class ProjectileCustomConfig : CustomizationConfig
     {
-        public ShooterFireCustom[] ShooterFireCustom = new ShooterFireCustom[0];
-        public CustomProjectile[] ProjectileDefinitions = new CustomProjectile[0];
+        public ShooterFireCustom[] ShooterFireCustom { get; set; } = new ShooterFireCustom[0];
+        public CustomProjectile[] ProjectileDefinitions { get; set; } = new CustomProjectile[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {

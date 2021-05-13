@@ -2,13 +2,13 @@
 {
     public class CustomTentacle
     {
-        public string DebugName = string.Empty;
-        public int ID = 15;
-        public GPUCurvyType BodyPrefab = GPUCurvyType.Striker;
-        public GPUCurvyType BodyMaterial = GPUCurvyType.Striker;
-        public GPUCurvyType HeadPrefab = GPUCurvyType.Striker;
-        public GPUCurvyType HeadMaterial = GPUCurvyType.Striker;
-        public GPUCurvyType Shape = GPUCurvyType.Striker;
-        public int MaxCount = 50;
+        public string DebugName { get; set; } = string.Empty;
+        public int ID { get; set; } = 15;
+        public GPUCurvyType BodyPrefab { get; set; } = GPUCurvyType.Striker;
+        public GPUCurvyType BodyMaterial { get; set; } = GPUCurvyType.Striker;
+        public GPUCurvyType HeadPrefab { get; set; } = GPUCurvyType.Striker;
+        public GPUCurvyType HeadMaterial { get; set; } = GPUCurvyType.Striker;
+        public GPUCurvyType Shape { get; set; } = GPUCurvyType.Striker;
+        public int MaxCount { get; set; } = 50;
     }
 }

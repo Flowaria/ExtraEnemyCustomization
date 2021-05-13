@@ -6,10 +6,10 @@ namespace EECustom.Configs.Customizations
 {
     public class AbilityCustomConfig : CustomizationConfig
     {
-        public BirthingCustom[] BirthingCustom = new BirthingCustom[0];
-        public FogSphereCustom[] FogSphereCustom = new FogSphereCustom[0];
-        public HealthRegenCustom[] HealthRegenCustom = new HealthRegenCustom[0];
-        public InfectionAttackCustom[] InfectionAttackCustom = new InfectionAttackCustom[0];
+        public BirthingCustom[] BirthingCustom { get; set; } = new BirthingCustom[0];
+        public FogSphereCustom[] FogSphereCustom { get; set; } = new FogSphereCustom[0];
+        public HealthRegenCustom[] HealthRegenCustom { get; set; } = new HealthRegenCustom[0];
+        public InfectionAttackCustom[] InfectionAttackCustom { get; set; } = new InfectionAttackCustom[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {

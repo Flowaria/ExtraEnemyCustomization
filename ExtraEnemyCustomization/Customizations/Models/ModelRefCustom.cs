@@ -5,7 +5,7 @@ namespace EECustom.Customizations.Models
 {
     public class ModelRefCustom : EnemyCustomBase
     {
-        public ModelRefData[] ModelRefs;
+        public ModelRefData[] ModelRefs { get; set; } = new ModelRefData[0];
 
         public override string GetProcessName()
         {
@@ -125,6 +125,28 @@ namespace EECustom.Customizations.Models
         }
     }
 
+    public class ModelRefData
+    {
+        public BaseModelRefType Type { get; set; } = BaseModelRefType.None;
+        public BaseModelRefType CopyFrom { get; set; } = BaseModelRefType.None;
+        public string CreateFromPath { get; set; } = string.Empty;
+        public Vector3 Offset { get; set; } = Vector3.zero;
+        public Vector3 RotateOffset { get; set; } = Vector3.zero;
+    }
+
+    public enum BaseModelRefType
+    {
+        None,
+        Tentacle,
+        Tentacle2,
+        Tentacle3,
+        TentacleNoHead,
+        TentacleNoCheat,
+        ShooterFire,
+        ScoutFeeler,
+        BioMarker
+    }
+
     public struct ModelRefCache
     {
         public Transform m_tentacleAlign;
@@ -159,27 +181,5 @@ namespace EECustom.Customizations.Models
             modelRef.m_detectAbilityAlign = m_detectAbilityAlign;
             modelRef.m_markerTagAlign = m_markerTagAlign.gameObject;
         }
-    }
-
-    public class ModelRefData
-    {
-        public BaseModelRefType Type = BaseModelRefType.None;
-        public BaseModelRefType CopyFrom = BaseModelRefType.None;
-        public string CreateFromPath = string.Empty;
-        public Vector3 Offset = Vector3.zero;
-        public Vector3 RotateOffset = Vector3.zero;
-    }
-
-    public enum BaseModelRefType
-    {
-        None,
-        Tentacle,
-        Tentacle2,
-        Tentacle3,
-        TentacleNoHead,
-        TentacleNoCheat,
-        ShooterFire,
-        ScoutFeeler,
-        BioMarker
     }
 }

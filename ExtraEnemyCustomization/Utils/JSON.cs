@@ -8,7 +8,8 @@ namespace EECustom.Utils
         private readonly static JsonSerializerOptions _Setting = new JsonSerializerOptions()
         {
             ReadCommentHandling = JsonCommentHandling.Skip,
-            IncludeFields = true
+            IncludeFields = false,
+            PropertyNameCaseInsensitive = true
         };
 
         static JSON()

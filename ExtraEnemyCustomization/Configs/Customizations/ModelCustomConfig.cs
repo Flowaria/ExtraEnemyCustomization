@@ -6,19 +6,21 @@ namespace EECustom.Configs.Customizations
 {
     public class ModelCustomConfig : CustomizationConfig
     {
-        public bool CacheAllMaterials = false;
+        public bool CacheAllMaterials { get; set; } = false;
 
-        public ShadowCustom[] ShadowCustom = new ShadowCustom[0];
-        public MaterialCustom[] MaterialCustom = new MaterialCustom[0];
-        public LimbCustom[] LimbCustom = new LimbCustom[0];
-        public ModelRefCustom[] ModelRefCustom = new ModelRefCustom[0];
-        public MarkerCustom[] MarkerCustom = new MarkerCustom[0];
+        public ShadowCustom[] ShadowCustom { get; set; } = new ShadowCustom[0];
+        public MaterialCustom[] MaterialCustom { get; set; } = new MaterialCustom[0];
+        public GlowCustom[] GlowCustom { get; set; } = new GlowCustom[0];
+        public LimbCustom[] LimbCustom { get; set; } = new LimbCustom[0];
+        public ModelRefCustom[] ModelRefCustom { get; set; } = new ModelRefCustom[0];
+        public MarkerCustom[] MarkerCustom { get; set; } = new MarkerCustom[0];
 
         public override EnemyCustomBase[] GetAllSettings()
         {
             var list = new List<EnemyCustomBase>();
             list.AddRange(ShadowCustom);
             list.AddRange(MaterialCustom);
+            list.AddRange(GlowCustom);
             list.AddRange(LimbCustom);
             list.AddRange(ModelRefCustom);
             list.AddRange(MarkerCustom);

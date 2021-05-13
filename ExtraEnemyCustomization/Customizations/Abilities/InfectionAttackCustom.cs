@@ -10,8 +10,8 @@ namespace EECustom.Customizations.Abilities
 {
     public class InfectionAttackCustom : EnemyCustomBase
     {
-        public InfectionAttackData MeleeData = new InfectionAttackData();
-        public InfectionAttackData TentacleData = new InfectionAttackData();
+        public InfectionAttackData MeleeData { get; set; } = new InfectionAttackData();
+        public InfectionAttackData TentacleData { get; set; } = new InfectionAttackData();
 
         private readonly List<ushort> _EnemyList = new List<ushort>();
 

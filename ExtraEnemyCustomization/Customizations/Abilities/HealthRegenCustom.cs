@@ -6,7 +6,7 @@ namespace EECustom.Customizations.Abilities
 {
     public class HealthRegenCustom : EnemyCustomBase
     {
-        public HealthRegenData[] RegenDatas = new HealthRegenData[0];
+        public HealthRegenData[] RegenDatas { get; set; } = new HealthRegenData[0];
 
         public override string GetProcessName()
         {
@@ -31,10 +31,10 @@ namespace EECustom.Customizations.Abilities
 
     public class HealthRegenData
     {
-        public float RegenInterval = 1.0f;
-        public float DelayUntilRegenStart = 5.0f;
-        public bool CanDamageInterruptRegen = true;
-        public ValueBase RegenAmount = ValueBase.Zero;
-        public ValueBase RegenCap = ValueBase.Zero;
+        public float RegenInterval { get; set; } = 1.0f;
+        public float DelayUntilRegenStart { get; set; } = 5.0f;
+        public bool CanDamageInterruptRegen { get; set; } = true;
+        public ValueBase RegenAmount { get; set; } = ValueBase.Zero;
+        public ValueBase RegenCap { get; set; } = ValueBase.Zero;
     }
 }

@@ -6,13 +6,13 @@ namespace EECustom.Customizations.Abilities
 {
     public class BirthingCustom : EnemyCustomBase
     {
-        public uint EnemyGroupToSpawn;
-        public ValueBase ChildrenCost = ValueBase.Unchanged;
-        public ValueBase ChildrenPerBirth = ValueBase.Unchanged;
-        public ValueBase ChildrenPerBirthMin = ValueBase.Unchanged;
-        public ValueBase ChildrenMax = ValueBase.Unchanged;
-        public ValueBase MinDelayUntilNextBirth = ValueBase.Unchanged;
-        public ValueBase MaxDelayUntilNextBirth = ValueBase.Unchanged;
+        public uint EnemyGroupToSpawn { get; set; }
+        public ValueBase ChildrenCost { get; set; } = ValueBase.Unchanged;
+        public ValueBase ChildrenPerBirth { get; set; } = ValueBase.Unchanged;
+        public ValueBase ChildrenPerBirthMin { get; set; } = ValueBase.Unchanged;
+        public ValueBase ChildrenMax { get; set; } = ValueBase.Unchanged;
+        public ValueBase MinDelayUntilNextBirth { get; set; } = ValueBase.Unchanged;
+        public ValueBase MaxDelayUntilNextBirth { get; set; } = ValueBase.Unchanged;
 
         public override string GetProcessName()
         {

@@ -9,14 +9,16 @@ namespace EECustom.Customizations.Shooters
 {
     public class ShooterFireCustom : EnemyCustomBase
     {
-        public FireSetting[] FireSettings = new FireSetting[0];
-
-        [JsonIgnore]
-        private FireSetting[] _SortedFireSettings = null;
+        public FireSetting[] FireSettings { get; set; } = new FireSetting[0];
 
         public override string GetProcessName()
         {
             return "ShooterFire";
+        }
+
+        public override void Initialize()
+        {
+            FireSettings = FireSettings.OrderByDescending(f => f.FromDistance).ToArray();
         }
 
         public override bool HasPostspawnBody => true;
@@ -42,12 +44,7 @@ namespace EECustom.Customizations.Shooters
                     var ability = agent.gameObject.AddComponent<ShooterDistSettingManager>();
                     ability.DefaultValue = clone;
                     ability.EAB_Shooter = projectileSetting;
-
-                    if (_SortedFireSettings == null)
-                    {
-                        _SortedFireSettings = FireSettings.OrderByDescending(f => f.FromDistance).ToArray();
-                    }
-                    ability.FireSettings = _SortedFireSettings;
+                    ability.FireSettings = FireSettings;
                 }
                 else if (FireSettings.Length == 1)
                 {
@@ -59,19 +56,19 @@ namespace EECustom.Customizations.Shooters
 
     public class FireSetting
     {
-        public float FromDistance = -1.0f;
+        public float FromDistance { get; set; } = -1.0f;
 
-        public bool OverrideProjectileType = true;
-        public ProjectileType ProjectileType = ProjectileType.TargetingLarge;
-        public ValueBase BurstCount = ValueBase.Unchanged;
-        public ValueBase BurstDelay = ValueBase.Unchanged;
-        public ValueBase ShotDelayMin = ValueBase.Unchanged;
-        public ValueBase ShotDelayMax = ValueBase.Unchanged;
-        public ValueBase InitialFireDelay = ValueBase.Unchanged;
-        public ValueBase ShotSpreadXMin = ValueBase.Unchanged;
-        public ValueBase ShotSpreadXMax = ValueBase.Unchanged;
-        public ValueBase ShotSpreadYMin = ValueBase.Unchanged;
-        public ValueBase ShotSpreadYMax = ValueBase.Unchanged;
+        public bool OverrideProjectileType { get; set; } = true;
+        public ProjectileType ProjectileType { get; set; } = ProjectileType.TargetingLarge;
+        public ValueBase BurstCount { get; set; } = ValueBase.Unchanged;
+        public ValueBase BurstDelay { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotDelayMin { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotDelayMax { get; set; } = ValueBase.Unchanged;
+        public ValueBase InitialFireDelay { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotSpreadXMin { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotSpreadXMax { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotSpreadYMin { get; set; } = ValueBase.Unchanged;
+        public ValueBase ShotSpreadYMax { get; set; } = ValueBase.Unchanged;
 
         public void ApplyToEAB(EAB_ProjectileShooter eab, EAB_ProjectileShooter defValue = null)
         {

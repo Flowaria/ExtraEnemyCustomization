@@ -15,7 +15,7 @@ namespace EECustom.Customizations.Models
                 _MatDict.Add(matName, mat);
         }
 
-        public MaterialSwapSet[] MaterialSets = new MaterialSwapSet[0];
+        public MaterialSwapSet[] MaterialSets { get; set; } = new MaterialSwapSet[0];
 
         public override string GetProcessName()
         {
@@ -51,7 +51,7 @@ namespace EECustom.Customizations.Models
 
     public class MaterialSwapSet
     {
-        public string From = "";
-        public string To = "";
+        public string From { get; set; } = "";
+        public string To { get; set; } = "";
     }
 }
