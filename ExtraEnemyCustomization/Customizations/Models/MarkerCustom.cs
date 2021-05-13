@@ -72,7 +72,7 @@ namespace EECustom.Customizations.Models
             {
                 if (BlinkMinDelay >= 0.0f && BlinkMinDelay < BlinkMaxDelay)
                 {
-                    float duration = Mathf.Min(BlinkDuration, agent.EnemyBalancingData.TagTime);
+                    float duration = Math.Min(BlinkDuration, agent.EnemyBalancingData.TagTime);
                     float time = 0.4f + UnityEngine.Random.RandomRange(BlinkMinDelay, BlinkMaxDelay);
                     for (; time <= duration; time += UnityEngine.Random.RandomRange(BlinkMinDelay, BlinkMaxDelay))
                     {

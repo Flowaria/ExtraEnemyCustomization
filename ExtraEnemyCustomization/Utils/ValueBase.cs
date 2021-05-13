@@ -44,12 +44,12 @@ namespace EECustom.Utils
 
         public int GetAbsValue(int maxValue, int currentValue)
         {
-            return Mathf.RoundToInt(GetAbsValue((float)maxValue, currentValue));
+            return (int)Math.Round(GetAbsValue((float)maxValue, currentValue));
         }
 
         public int GetAbsValue(int baseValue)
         {
-            return Mathf.RoundToInt(GetAbsValue((float)baseValue));
+            return (int)Math.Round(GetAbsValue((float)baseValue));
         }
 
         public override string ToString()
