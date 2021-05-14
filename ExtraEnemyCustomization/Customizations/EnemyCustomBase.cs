@@ -75,20 +75,20 @@ namespace EECustom.Customizations
     public class TargetSetting
     {
         public TargetMode Mode { get; set; } = TargetMode.PersistentID;
-        public uint[] persistentIDs { get; set; } = new uint[1] { 0 };
-        public string nameParam { get; set; } = string.Empty;
-        public bool nameIgnoreCase { get; set; } = false;
+        public uint[] PersistentIDs { get; set; } = new uint[1] { 0 };
+        public string NameParam { get; set; } = string.Empty;
+        public bool NameIgnoreCase { get; set; } = false;
 
         public bool IsMatch(EnemyAgent agent)
         {
             var enemyData = GameDataBlockBase<EnemyDataBlock>.GetBlock(agent.EnemyDataID);
-            var comparisonMode = nameIgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            var comparisonMode = NameIgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
             return Mode switch
             {
-                TargetMode.PersistentID => persistentIDs.Contains(agent.EnemyDataID),
-                TargetMode.NameEquals => enemyData?.name?.Equals(nameParam, comparisonMode) ?? false,
-                TargetMode.NameContains => enemyData?.name?.Contains(nameParam, comparisonMode) ?? false,
+                TargetMode.PersistentID => PersistentIDs.Contains(agent.EnemyDataID),
+                TargetMode.NameEquals => enemyData?.name?.Equals(NameParam, comparisonMode) ?? false,
+                TargetMode.NameContains => enemyData?.name?.Contains(NameParam, comparisonMode) ?? false,
                 TargetMode.Everything => true,
                 _ => false,
             };
@@ -96,7 +96,7 @@ namespace EECustom.Customizations
 
         public string ToDebugString()
         {
-            return $"TargetDebug, Mode: {Mode}, persistentIDs: [{string.Join(", ", persistentIDs)}], nameParam: {nameParam}";
+            return $"TargetDebug, Mode: {Mode}, persistentIDs: [{string.Join(", ", PersistentIDs)}], nameParam: {NameParam}";
         }
     }
 

@@ -2,6 +2,7 @@
 using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using EECustom.Customizations.Abilities.Managers;
+using EECustom.Customizations.Models.Managers;
 using EECustom.Managers;
 using EECustom.Utils;
 using HarmonyLib;
@@ -12,7 +13,7 @@ namespace EECustom
     //TODO: Refactor the CustomBase to support Phase Setting
     //TODO: Scout WaveSetting Custom
 
-    [BepInPlugin("GTFO.EECustomization", "EECustomization", "0.5.0")]
+    [BepInPlugin("GTFO.EECustomization", "EECustom", "0.5.0")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency(MTFOPartialDataUtil.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
@@ -22,6 +23,7 @@ namespace EECustom
         {
             ClassInjector.RegisterTypeInIl2Cpp<ShooterDistSettingManager>();
             ClassInjector.RegisterTypeInIl2Cpp<HealthRegenManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<PulseManager>();
 
             Logger.LogInstance = Log;
 

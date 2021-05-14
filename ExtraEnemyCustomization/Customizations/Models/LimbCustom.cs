@@ -70,10 +70,10 @@ namespace EECustom.Customizations.Models
 
     public class LimbData
     {
-        public string LimbName = "Head";
-        public LimbDamageType LimbType = LimbDamageType.Weakspot;
-        public float CustomMulti = 1.0f;
-        public ValueBase Health = ValueBase.Unchanged;
+        public string LimbName { get; set; } = "Head";
+        public LimbDamageType LimbType { get; set; } = LimbDamageType.Weakspot;
+        public float CustomMulti { get; set; } = 1.0f;
+        public ValueBase Health { get; set; } = ValueBase.Unchanged;
     }
 
     public enum LimbDamageType

@@ -94,9 +94,9 @@ namespace EECustom.Customizations.Abilities
 
     public class InfectionAttackData
     {
-        public ValueBase Infection = ValueBase.Zero;
-        public uint SoundEventID = 0u;
-        public bool UseEffect = false;
-        public float ScreenLiquidRange = 0.0f;
+        public ValueBase Infection { get; set; } = ValueBase.Zero;
+        public uint SoundEventID { get; set; } = 0u;
+        public bool UseEffect { get; set; } = false;
+        public float ScreenLiquidRange { get; set; } = 0.0f;
     }
 }
