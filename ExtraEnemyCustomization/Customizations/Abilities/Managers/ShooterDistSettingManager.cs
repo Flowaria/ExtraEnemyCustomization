@@ -23,7 +23,10 @@ namespace EECustom.Customizations.Abilities.Managers
             if (Clock.Time < _timerToUpdate)
                 return;
 
-            _timerToUpdate = Clock.Time + 0.5f;
+            if (EAB_Shooter.m_owner.Locomotion.CurrentStateEnum == Enemies.ES_StateEnum.ShooterAttack)
+                return;
+
+            _timerToUpdate = Clock.Time + 0.125f;
 
             if (!EAB_Shooter.m_owner.AI.IsTargetValid)
                 return;
