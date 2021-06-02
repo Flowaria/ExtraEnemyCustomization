@@ -9,6 +9,7 @@ namespace EECustom.Customizations.Models.Managers
     public class GlowManager : MonoBehaviour
     {
         
+
         public GlowManager(IntPtr ptr) : base(ptr)
         {
             
@@ -16,7 +17,7 @@ namespace EECustom.Customizations.Models.Managers
 
         internal void Start()
         {
-           
+            
         }
 
         internal void Update()

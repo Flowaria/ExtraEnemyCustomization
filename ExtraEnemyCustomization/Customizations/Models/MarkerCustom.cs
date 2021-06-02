@@ -1,4 +1,5 @@
 ﻿using EECustom.Events;
+using EECustom.Extensions;
 using EECustom.Managers;
 using Enemies;
 using System;
@@ -11,6 +12,7 @@ namespace EECustom.Customizations.Models
     {
         public string SpriteName { get; set; } = string.Empty;
         public Color MarkerColor { get; set; } = Color.red;
+        public string MarkerText { get; set; } = string.Empty;
         public bool BlinkIn { get; set; } = false;
         public bool Blink { get; set; } = false;
         public float BlinkDuration { get; set; } = 30.0f;
@@ -19,10 +21,26 @@ namespace EECustom.Customizations.Models
 
         private Sprite _Sprite = null;
         private bool _PrespawnOnce = false;
+        private bool _HasText = false;
+        private bool _TextRequiresAutoUpdate = false;
 
         public override string GetProcessName()
         {
             return "Marker";
+        }
+
+        public override void Initialize()
+        {
+            //TODO: Implement it someday
+            if (string.IsNullOrEmpty(MarkerText))
+                return;
+
+            _HasText = true;
+
+            if (MarkerText.ContainsAnyIgnoreCase("[HP_MAX]", "[HP]", "[HP_PERCENT]", "[HP_PERCENT_INT]"))
+            {
+                _TextRequiresAutoUpdate = true;
+            }
         }
 
         public override bool HasPrespawnBody => true;
@@ -31,11 +49,13 @@ namespace EECustom.Customizations.Models
         {
             if (!_PrespawnOnce)
             {
-                if (!string.IsNullOrEmpty(SpriteName) && !SpriteManager.TryGetSpriteCache(SpriteName, 64.0f, out _Sprite))
-                {
-                    _Sprite = SpriteManager.GenerateSprite(SpriteName);
-                }
                 _PrespawnOnce = true;
+
+                if (string.IsNullOrEmpty(SpriteName))
+                    return;
+
+                if (!SpriteManager.TryGetSpriteCache(SpriteName, 64.0f, out _Sprite))
+                    _Sprite = SpriteManager.GenerateSprite(SpriteName);
             }
         }
 

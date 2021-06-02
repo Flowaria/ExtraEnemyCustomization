@@ -11,7 +11,6 @@ using UnhollowerRuntimeLib;
 namespace EECustom
 {
     //TODO: Refactor the CustomBase to support Phase Setting
-    //TODO: Scout WaveSetting Custom
 
     [BepInPlugin("GTFO.EECustomization", "EECustom", "0.5.0")]
     [BepInProcess("GTFO.exe")]

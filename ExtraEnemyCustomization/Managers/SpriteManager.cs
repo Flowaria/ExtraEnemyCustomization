@@ -13,6 +13,9 @@ namespace EECustom.Managers
 
         public static void Initialize()
         {
+            if (string.IsNullOrEmpty(ConfigManager.BasePath))
+                return;
+                
             BaseSpritePath = Path.Combine(ConfigManager.BasePath, "icons");
             if (!Directory.Exists(BaseSpritePath))
                 return;
@@ -53,13 +56,16 @@ namespace EECustom.Managers
                 return sprite;
 
             var newSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+            newSprite.name = spriteKey;
+
             var antiDestroy = new GameObject();
             var spriteRenderer = antiDestroy.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = newSprite;
             UnityEngine.Object.DontDestroyOnLoad(antiDestroy);
             antiDestroy.name = "PluginGenerated_CustomSpriteHolder_" + spriteKey;
             antiDestroy.SetActive(false);
-            _SpriteCache.Add(spriteKey, sprite);
+            _SpriteCache.Add(spriteKey, newSprite);
+            Logger.Debug($"GeneratedSprite: {spriteKey}");
 
             return newSprite;
         }
