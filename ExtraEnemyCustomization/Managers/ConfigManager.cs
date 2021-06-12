@@ -51,6 +51,9 @@ namespace EECustom.Managers
                         CustomScoutWaveManager.AddTargetSetting(scoutWaveConfig.TargetSettings);
                         CustomScoutWaveManager.AddWaveSetting(scoutWaveConfig.WaveSettings);
                     }
+                    Logger.Debug("Loading SpawnCost.json...");
+                    if (TryLoadConfig(BasePath, "SpawnCost.json", out SpawnCostCustomConfig spawnCostConfig))
+                        Current.SpawnCostCustom = spawnCostConfig;
                 }
                 catch (Exception e)
                 {
@@ -97,6 +100,7 @@ namespace EECustom.Managers
         public ProjectileCustomConfig ProjectileCustom { get; private set; } = new ProjectileCustomConfig();
         public TentacleCustomConfig TentacleCustom { get; private set; } = new TentacleCustomConfig();
         public DetectionCustomConfig DetectionCustom { get; private set; } = new DetectionCustomConfig();
+        public SpawnCostCustomConfig SpawnCostCustom { get; private set; } = new SpawnCostCustomConfig();
 
         private readonly List<EnemyCustomBase> _CustomizationBuffer = new List<EnemyCustomBase>();
 
@@ -108,6 +112,7 @@ namespace EECustom.Managers
             _CustomizationBuffer.AddRange(ProjectileCustom.GetAllSettings());
             _CustomizationBuffer.AddRange(TentacleCustom.GetAllSettings());
             _CustomizationBuffer.AddRange(DetectionCustom.GetAllSettings());
+            _CustomizationBuffer.AddRange(SpawnCostCustom.GetAllSettings());
             foreach (var custom in _CustomizationBuffer)
             {
                 custom.Initialize();
