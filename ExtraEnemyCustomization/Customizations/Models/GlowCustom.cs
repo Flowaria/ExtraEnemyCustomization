@@ -84,12 +84,10 @@ namespace EECustom.Customizations.Models
         {
             if (color == DefaultPropaWakeColor)
             {
-                LogDev("Change Color; Propa Wakeup");
                 return PropagateWakeupColor;
             }
             else if (color == (Color)agent.Locomotion.Hibernate.m_detectingColorVec)
             {
-                LogDev("Change Color; Detecting");
                 return new Color(DetectionColor.r, DetectionColor.g, DetectionColor.b, color.a);
             }
 
