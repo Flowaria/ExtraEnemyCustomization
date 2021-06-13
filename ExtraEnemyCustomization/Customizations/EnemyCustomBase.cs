@@ -16,8 +16,6 @@ namespace EECustom.Customizations
         {
         }
 
-        //TODO: Add more Descriptive and specific overides, "OnPrefabBuilt", "OnSpawned", "OnDespawned", "OnConfigLoad"
-
         public abstract string GetProcessName();
 
         public void LogVerbose(string str)

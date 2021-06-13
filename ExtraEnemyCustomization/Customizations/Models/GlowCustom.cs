@@ -1,4 +1,5 @@
-﻿using EECustom.Customizations.Models.Managers;
+﻿using EECustom.Customizations.Models.Inject;
+using EECustom.Customizations.Models.Managers;
 using EECustom.Events;
 using Enemies;
 using System;
@@ -11,6 +12,8 @@ namespace EECustom.Customizations.Models
 {
     public class GlowCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
+        private readonly static Color DefaultPropaWakeColor = ES_HibernateWakeUp.m_propagatedWakeupColor;
+        private readonly static Vector4 DefaultPropaWakeLocation = ES_HibernateWakeUp.m_propagatedWakeupLocation;
         private readonly static System.Random _Random = new System.Random();
 
         public Color DefaultColor { get; set; } = Color.black;
@@ -70,9 +73,27 @@ namespace EECustom.Customizations.Models
                 }
             }
 
+            GlowEvents.RegisterOnGlow(agent, OnGlow);
+
             //And this is static LMAO
             //ES_HibernateWakeUp.m_propagatedWakeupColor = PropagateWakeupColor
             //ES_Hibernate.s_closestDistanceDetectionColorVec = HibernateColor
+        }
+
+        public Color OnGlow(EnemyAgent agent, Color color, Vector4 location)
+        {
+            if (color == DefaultPropaWakeColor)
+            {
+                LogDev("Change Color; Propa Wakeup");
+                return PropagateWakeupColor;
+            }
+            else if (color == (Color)agent.Locomotion.Hibernate.m_detectingColorVec)
+            {
+                LogDev("Change Color; Detecting");
+                return new Color(DetectionColor.r, DetectionColor.g, DetectionColor.b, color.a);
+            }
+
+            return color;
         }
     }
 

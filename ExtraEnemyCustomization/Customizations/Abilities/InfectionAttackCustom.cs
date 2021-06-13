@@ -43,7 +43,6 @@ namespace EECustom.Customizations.Abilities
             _EnemyList.Remove(agent.GlobalID);
         }
 
-
         public void OnMelee(PlayerAgent player, Agent inflictor, float damage)
         {
             if (_EnemyList.Contains(inflictor.GlobalID))
