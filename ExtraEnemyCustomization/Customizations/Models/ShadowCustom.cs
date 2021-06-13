@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Models
 {
-    public class ShadowCustom : EnemyCustomBase
+    public class ShadowCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public bool IncludeEggSack { get; set; } = false;
         public bool RequireTagForDetection { get; set; } = true;
@@ -13,9 +13,7 @@ namespace EECustom.Customizations.Models
             return "Shadow";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             agent.RequireTagForDetection = RequireTagForDetection;
             agent.MovingCuller.m_disableAnimatorCullingWhenRenderingShadow = true;

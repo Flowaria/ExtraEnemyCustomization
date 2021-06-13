@@ -2,7 +2,7 @@
 
 namespace EECustom.Customizations.Detections
 {
-    public class ScreamingCustom : EnemyCustomBase
+    public class ScreamingCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         //TODO: Implement me Daddy
 
@@ -14,9 +14,7 @@ namespace EECustom.Customizations.Detections
             return "Screaming";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
         }
     }

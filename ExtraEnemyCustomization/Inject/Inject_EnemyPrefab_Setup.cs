@@ -17,7 +17,7 @@ namespace EECustom.Inject
                 Logger.Error($"Agent is null! : {__result.name}");
                 return;
             }
-            ConfigManager.Current.Customize_Prespawn(__result.GetComponent<EnemyAgent>());
+            ConfigManager.Current.FirePrefabBuiltEvent(__result.GetComponent<EnemyAgent>());
         }
     }
 }

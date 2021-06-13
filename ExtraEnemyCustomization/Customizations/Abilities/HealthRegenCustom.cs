@@ -4,7 +4,7 @@ using Enemies;
 
 namespace EECustom.Customizations.Abilities
 {
-    public class HealthRegenCustom : EnemyCustomBase
+    public class HealthRegenCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public HealthRegenData[] RegenDatas { get; set; } = new HealthRegenData[0];
 
@@ -13,9 +13,7 @@ namespace EECustom.Customizations.Abilities
             return "HealthRegen";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             if (agent.Damage != null)
             {

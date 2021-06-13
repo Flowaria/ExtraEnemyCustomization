@@ -14,7 +14,7 @@ namespace EECustom.Inject
             {
                 return;
             }
-            ConfigManager.Current.Customize_Postspawn(__instance);
+            ConfigManager.Current.FireSpawnedEvent(__instance);
         }
     }
 }

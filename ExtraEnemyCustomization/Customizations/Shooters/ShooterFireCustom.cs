@@ -1,12 +1,12 @@
-﻿using EECustom.Utils;
+﻿using EECustom.Customizations.Shooters.Managers;
+using EECustom.Utils;
 using Enemies;
 using System.Linq;
-using System.Text.Json.Serialization;
 using UnityEngine;
 
 namespace EECustom.Customizations.Shooters
 {
-    public class ShooterFireCustom : EnemyCustomBase
+    public class ShooterFireCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public FireSetting[] FireSettings { get; set; } = new FireSetting[0];
 
@@ -15,14 +15,12 @@ namespace EECustom.Customizations.Shooters
             return "ShooterFire";
         }
 
-        public override void Initialize()
+        public override void OnConfigLoaded()
         {
             FireSettings = FireSettings.OrderByDescending(f => f.FromDistance).ToArray();
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var projectileSetting = agent.GetComponentInChildren<EAB_ProjectileShooter>(true);
             if (projectileSetting != null)

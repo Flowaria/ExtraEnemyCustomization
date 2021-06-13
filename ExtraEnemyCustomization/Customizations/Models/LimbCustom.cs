@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace EECustom.Customizations.Models
 {
-    public class LimbCustom : EnemyCustomBase
+    public class LimbCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public LimbData[] Limbs { get; set; } = new LimbData[0];
 
@@ -15,9 +15,7 @@ namespace EECustom.Customizations.Models
             return "Limb";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var allLimbData = Limbs.SingleOrDefault(x => x.LimbName.Equals("All", StringComparison.OrdinalIgnoreCase));
 

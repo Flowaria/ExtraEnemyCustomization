@@ -6,7 +6,7 @@ namespace EECustom.Customizations.Strikers
 {
     using EaseFunc = Func<float, float, float, float, float>;
 
-    public class StrikerTentacleCustom : EnemyCustomBase
+    public class StrikerTentacleCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public GPUCurvyType[] TentacleTypes { get; set; } = new GPUCurvyType[0];
         public TentacleSettingData[] TentacleSettings { get; set; } = new TentacleSettingData[0];
@@ -16,9 +16,7 @@ namespace EECustom.Customizations.Strikers
             return "Tentacle";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var tentacleComps = agent.GetComponentsInChildren<MovingEnemyTentacleBase>(true);
             var isTypeEnabled = TentacleTypes.Length > 0;

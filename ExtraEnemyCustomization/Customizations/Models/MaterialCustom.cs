@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Models
 {
-    public class MaterialCustom : EnemyCustomBase
+    public class MaterialCustom : EnemyCustomBase, IEnemyPrefabBuiltEvent
     {
         private readonly static Dictionary<string, Material> _MatDict = new Dictionary<string, Material>();
 
@@ -22,9 +22,7 @@ namespace EECustom.Customizations.Models
             return "Material";
         }
 
-        public override bool HasPrespawnBody => true;
-
-        public override void Prespawn(EnemyAgent agent)
+        public void OnPrefabBuilt(EnemyAgent agent)
         {
             var charMats = agent.GetComponentInChildren<CharacterMaterialHandler>().m_materialRefs;
             foreach (var mat in charMats)

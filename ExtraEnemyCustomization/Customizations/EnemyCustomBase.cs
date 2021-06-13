@@ -12,22 +12,13 @@ namespace EECustom.Customizations
         public bool Enabled { get; set; } = true;
         public TargetSetting Target { get; set; } = new TargetSetting();
 
-        public virtual void Initialize()
+        public virtual void OnConfigLoaded()
         {
         }
 
-        public virtual void Prespawn(EnemyAgent agent)
-        {
-        }
-
-        public virtual void Postspawn(EnemyAgent agent)
-        {
-        }
+        //TODO: Add more Descriptive and specific overides, "OnPrefabBuilt", "OnSpawned", "OnDespawned", "OnConfigLoad"
 
         public abstract string GetProcessName();
-
-        public virtual bool HasPrespawnBody { get { return false; } }
-        public virtual bool HasPostspawnBody { get { return false; } }
 
         public void LogVerbose(string str)
         {

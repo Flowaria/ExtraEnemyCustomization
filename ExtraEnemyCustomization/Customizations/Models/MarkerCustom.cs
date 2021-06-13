@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Models
 {
-    public class MarkerCustom : EnemyCustomBase
+    public class MarkerCustom : EnemyCustomBase, IEnemyPrefabBuiltEvent, IEnemySpawnedEvent
     {
         public string SpriteName { get; set; } = string.Empty;
         public Color MarkerColor { get; set; } = Color.red;
@@ -29,7 +29,7 @@ namespace EECustom.Customizations.Models
             return "Marker";
         }
 
-        public override void Initialize()
+        public override void OnConfigLoaded()
         {
             //TODO: Implement it someday
             if (string.IsNullOrEmpty(MarkerText))
@@ -43,9 +43,7 @@ namespace EECustom.Customizations.Models
             }
         }
 
-        public override bool HasPrespawnBody => true;
-
-        public override void Prespawn(EnemyAgent agent)
+        public void OnPrefabBuilt(EnemyAgent agent)
         {
             if (!_PrespawnOnce)
             {
@@ -59,9 +57,7 @@ namespace EECustom.Customizations.Models
             }
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             EnemyMarkerEvents.RegisterOnMarked(agent, OnMarked);
         }

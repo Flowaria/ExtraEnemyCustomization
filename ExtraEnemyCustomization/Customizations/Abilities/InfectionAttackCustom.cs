@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace EECustom.Customizations.Abilities
 {
-    public class InfectionAttackCustom : EnemyCustomBase
+    public class InfectionAttackCustom : EnemyCustomBase, IEnemySpawnedEvent, IEnemyDespawnedEvent
     {
         public InfectionAttackData MeleeData { get; set; } = new InfectionAttackData();
         public InfectionAttackData TentacleData { get; set; } = new InfectionAttackData();
@@ -20,15 +20,13 @@ namespace EECustom.Customizations.Abilities
             return "InfectionAttack";
         }
 
-        public override void Initialize()
+        public override void OnConfigLoaded()
         {
             PlayerDamageEvents.OnMeleeDamage += OnMelee;
             PlayerDamageEvents.OnTentacleDamage += OnTentacle;
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var id = agent.GlobalID;
             if (id == ushort.MaxValue)
@@ -37,9 +35,14 @@ namespace EECustom.Customizations.Abilities
             if (!_EnemyList.Contains(id))
             {
                 _EnemyList.Add(id);
-                agent.add_OnDeadCallback(new Action(() => { OnDead(id); }));
             }
         }
+
+        public void OnDespawned(EnemyAgent agent)
+        {
+            _EnemyList.Remove(agent.GlobalID);
+        }
+
 
         public void OnMelee(PlayerAgent player, Agent inflictor, float damage)
         {
@@ -84,11 +87,6 @@ namespace EECustom.Customizations.Abilities
                 effect = pInfectionEffect.None,
                 mode = pInfectionMode.Add
             }, true, true);
-        }
-
-        public void OnDead(ushort id)
-        {
-            _EnemyList.Remove(id);
         }
     }
 

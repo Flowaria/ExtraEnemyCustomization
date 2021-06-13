@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Abilities
 {
-    public class FogSphereCustom : EnemyCustomBase
+    public class FogSphereCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public Color ColorMin { get; set; } = Color.white;
         public Color ColorMax { get; set; } = Color.clear;
@@ -22,9 +22,7 @@ namespace EECustom.Customizations.Abilities
             return "FogSphere";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var eabFog = agent.GetComponentInChildren<EAB_FogSphere>(true);
             var fog = eabFog.m_fogSpherePrefab.GetComponent<FogSphereHandler>();

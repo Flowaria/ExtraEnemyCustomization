@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Detections
 {
-    public class FeelerCustom : EnemyCustomBase
+    public class FeelerCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         public ValueBase TendrilCount { get; set; } = ValueBase.Unchanged;
         public float TendrilAngleOffset { get; set; } = 0.0f;
@@ -27,9 +27,7 @@ namespace EECustom.Customizations.Detections
             return "Feeler";
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             var onDetectionSpawn = new Action<EnemyAgent, ScoutAntennaDetection>((EnemyAgent eventAgent, ScoutAntennaDetection detection) =>
             {

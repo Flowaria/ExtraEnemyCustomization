@@ -115,39 +115,55 @@ namespace EECustom.Managers
             _CustomizationBuffer.AddRange(SpawnCostCustom.GetAllSettings());
             foreach (var custom in _CustomizationBuffer)
             {
-                custom.Initialize();
-                custom.LogDev("Init!");
+                custom.OnConfigLoaded();
+                custom.LogDev("Initialized:");
                 custom.LogVerbose(custom.Target.ToDebugString());
             }
         }
 
-        public void Customize_Prespawn(EnemyAgent agent)
+        public void FirePrefabBuiltEvent(EnemyAgent agent)
         {
             foreach (var custom in _CustomizationBuffer)
             {
                 if (!custom.Enabled)
                     continue;
 
-                if (custom.Target.IsMatch(agent) && custom.HasPrespawnBody)
+                if (custom is IEnemyPrefabBuiltEvent builtEvent && custom.Target.IsMatch(agent))
                 {
-                    custom.LogDev($"Prespawn effect to {agent.name}");
-                    custom.Prespawn(agent);
+                    custom.LogDev($"Apply PrefabBuilt Event: {agent.name}");
+                    builtEvent.OnPrefabBuilt(agent);
                     custom.LogVerbose($"Finished!");
                 }
             }
         }
 
-        public void Customize_Postspawn(EnemyAgent agent)
+        public void FireSpawnedEvent(EnemyAgent agent)
         {
             foreach (var custom in _CustomizationBuffer)
             {
                 if (!custom.Enabled)
                     continue;
 
-                if (custom.Target.IsMatch(agent) && custom.HasPostspawnBody)
+                if (custom is IEnemySpawnedEvent spawnedEvent && custom.Target.IsMatch(agent))
                 {
-                    custom.LogDev($"Postspawn effect to {agent.name}");
-                    custom.Postspawn(agent);
+                    custom.LogDev($"Apply Spawned Event: {agent.name}");
+                    spawnedEvent.OnSpawned(agent);
+                    custom.LogVerbose($"Finished!");
+                }
+            }
+        }
+
+        public void FireDespawnedEvent(EnemyAgent agent)
+        {
+            foreach (var custom in _CustomizationBuffer)
+            {
+                if (!custom.Enabled)
+                    continue;
+
+                if (custom is IEnemyDespawnedEvent despawnedEvent && custom.Target.IsMatch(agent))
+                {
+                    custom.LogDev($"Apply Despawned Event: {agent.name}");
+                    despawnedEvent.OnDespawned(agent);
                     custom.LogVerbose($"Finished!");
                 }
             }

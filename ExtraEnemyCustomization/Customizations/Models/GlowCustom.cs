@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Models
 {
-    public class GlowCustom : EnemyCustomBase
+    public class GlowCustom : EnemyCustomBase, IEnemySpawnedEvent
     {
         private readonly static System.Random _Random = new System.Random();
 
@@ -31,7 +31,7 @@ namespace EECustom.Customizations.Models
             return "Glow";
         }
 
-        public override void Initialize()
+        public override void OnConfigLoaded()
         {
             for(int i = 0; i < PulseEffects.Length; i++)
             {
@@ -48,9 +48,7 @@ namespace EECustom.Customizations.Models
             }
         }
 
-        public override bool HasPostspawnBody => true;
-
-        public override void Postspawn(EnemyAgent agent)
+        public void OnSpawned(EnemyAgent agent)
         {
             //Those are fine
             agent.MaterialHandler.m_defaultGlowColor = DefaultColor;

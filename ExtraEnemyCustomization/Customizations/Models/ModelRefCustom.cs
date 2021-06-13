@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EECustom.Customizations.Models
 {
-    public class ModelRefCustom : EnemyCustomBase
+    public class ModelRefCustom : EnemyCustomBase, IEnemyPrefabBuiltEvent
     {
         public ModelRefData[] ModelRefs { get; set; } = new ModelRefData[0];
 
@@ -12,9 +12,7 @@ namespace EECustom.Customizations.Models
             return "MedelRef";
         }
 
-        public override bool HasPrespawnBody => true;
-
-        public override void Prespawn(EnemyAgent agent)
+        public void OnPrefabBuilt(EnemyAgent agent)
         {
             var modelRef = agent.ModelRef;
             var changeCache = new ModelRefCache();
