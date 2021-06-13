@@ -1,9 +1,8 @@
-﻿using EECustom.Customizations.Shooters;
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 
-namespace EECustom.Customizations.Abilities.Managers
+namespace EECustom.Customizations.Shooters.Managers
 {
     public class ShooterDistSettingManager : MonoBehaviour
     {
